@@ -2,6 +2,33 @@
 
 ---
 
+## Canonical Codex workflow doctrine
+
+Per Atakan 2026-06-02:
+
+### Step 1 — Plan
+Before starting work, run `/plan` to document the work. Codex produces a written plan.
+
+### Step 2 — Goal
+Start implementation per the plan doc with `/goal`. Tell codex to begin the work described in the plan documentation.
+
+### Step 3 — Milestone review (mandatory at every milestone)
+Whenever you reach a milestone, run `$codex-review`, address findings, then continue with the implementation.
+
+### Step 4 — Final review (mandatory when done)
+When you're done, run another set of reviews with subagents by using `$review` skill.
+
+### Step 5 — Optional: babysit PR
+You may optionally run `/goal babysit PR` to check copilot / review bot comments, iterate on them, and before pushing run `$codex-review` again. When all discussions are resolved, merge the PR.
+
+### Rules
+- Never skip the milestone `$codex-review` (rounds capped at 3).
+- Never self-review own changes — `$review` runs as a separate subagent invocation.
+- Never push without milestone + final reviews passing.
+- Never use OpenAI API directly — OAuth ChatGPT subscription only (embedding endpoints excepted).
+
+---
+
 ## /plan
 
 **Purpose:** Prepare a written plan before touching any code or file.

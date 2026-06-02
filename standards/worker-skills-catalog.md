@@ -4,6 +4,20 @@ This file enumerates every skill available across role packs, identifies its sou
 
 ---
 
+## Codex worker doctrine (Atakan-canonical, 2026-06-02)
+
+The full Codex workflow chain that every worker must follow:
+
+1. `/plan` (documentation pass)
+2. `/goal` (implementation per plan)
+3. Milestone trigger → `$codex-review` → fix → continue (max 3 rounds per milestone)
+4. Done trigger → `$review` (final ship-gate, subagent-based, ship-it/needs-review/blocked verdict)
+5. Optional: `/goal babysit PR` (PR comment iteration loop with `$codex-review` before push, then merge)
+
+See `roles/worker/skills.md` for the full doctrine statement.
+
+---
+
 ## Install instructions
 
 Skills are installed via `skills.sh` (the uinaf skills marketplace) or via the Codex CLI plugin system.
