@@ -19,9 +19,9 @@ Atomic checklist CC runs every time a new Paperclip company is created. Complete
 
 ---
 
-## Create all 4 standard agents
+## Create all 5 standard agents
 
-Reference `config/models.json` for all model and adapter values.
+Reference `config/models.json` and `config/roles.json` for all model, adapter, and role values. As of v0.2.0, five agent slots are mandatory per company (including the Reviewer).
 
 - [ ] Create **CEO** agent:
   - Model: `claude-opus-4-8`
@@ -35,6 +35,7 @@ Reference `config/models.json` for all model and adapter values.
   - Auth: ChatGPT subscription OAuth
   - `dangerouslyBypassApprovalsAndSandbox: true`
   - AGENTS.md: include Codex workflow (`/plan -> /goal -> $codex-review -> $review`), brain-first rule.
+  - Skills: install `uinaf/codex-review`.
 
 - [ ] Create **Knowledge Keeper** agent:
   - Model: `claude-sonnet-latest`
@@ -49,6 +50,15 @@ Reference `config/models.json` for all model and adapter values.
   - Auth: ChatGPT subscription OAuth
   - Heartbeat: OFF.
   - AGENTS.md: include research workflow, output format, brain-first rule.
+
+- [ ] Create **Reviewer** agent (mandatory as of v0.2.0):
+  - Model: `gpt-5.5`
+  - Adapter: `codex_local`
+  - Auth: ChatGPT subscription OAuth
+  - Purpose note: `review-only; never self-review`
+  - `self_review_prohibited: true`
+  - AGENTS.md: include review workflow, verdict format, self-review prohibition.
+  - Skills: install `uinaf/autoreview`, `uinaf/codex-review`, `uinaf/review-gang`.
 
 ---
 
@@ -93,7 +103,7 @@ Reference `config/required-tools.json` for tool list.
 
 ## Final verification
 
-- [ ] All 4 agents created and configured.
+- [ ] All 5 agents created and configured (CEO, Worker, Knowledge Keeper, Researcher, Reviewer).
 - [ ] Tool stack validated (pass on all 4 tools).
 - [ ] Delegation chain validated.
 - [ ] Knowledge company notified.

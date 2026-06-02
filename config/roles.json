@@ -1,0 +1,69 @@
+{
+  "version": "0.2.0",
+  "description": "Five role definitions per Paperclip company. Agent slot counts and model assignments.",
+  "roles": [
+    {
+      "role": "ceo",
+      "display": "CEO",
+      "purpose": "Orchestrates all work via sub-issues. Never executes directly.",
+      "model": "claude-opus-4-8",
+      "adapter": "claude_local",
+      "auth": "claude_ai_subscription_oauth",
+      "slots_per_company": 1,
+      "role_pack": "roles/ceo/",
+      "anti_self_execution": true
+    },
+    {
+      "role": "worker",
+      "display": "Worker",
+      "purpose": "Executes tasks: code, file operations, research tasks delegated by CEO.",
+      "model": "gpt-5.5",
+      "adapter": "codex_local",
+      "auth": "chatgpt_subscription_oauth",
+      "dangerouslyBypassApprovalsAndSandbox": true,
+      "slots_per_company": 1,
+      "role_pack": "roles/worker/",
+      "required_skills": ["uinaf/codex-review"]
+    },
+    {
+      "role": "researcher",
+      "display": "Researcher",
+      "purpose": "Sector scans, frontier patterns, gold-standard vetting. Hands findings to Knowledge Keeper.",
+      "model": "gpt-5.5",
+      "adapter": "codex_local",
+      "auth": "chatgpt_subscription_oauth",
+      "slots_per_company": 1,
+      "role_pack": "roles/researcher/"
+    },
+    {
+      "role": "knowledge_keeper",
+      "display": "Knowledge Keeper",
+      "purpose": "Company-internal KB curation, decision capture, weekly delta to Knowledge central.",
+      "model": "claude-sonnet-latest",
+      "adapter": "claude_local",
+      "auth": "claude_ai_subscription_oauth",
+      "slots_per_company": 1,
+      "role_pack": "roles/knowledge-keeper/"
+    },
+    {
+      "role": "reviewer",
+      "display": "Reviewer",
+      "purpose": "Independent quality gate. Reviews all deliverables before CEO reports done. Never self-reviews.",
+      "model": "gpt-5.5",
+      "adapter": "codex_local",
+      "auth": "chatgpt_subscription_oauth",
+      "purpose_note": "review-only; never self-review",
+      "slots_per_company": 1,
+      "role_pack": "roles/reviewer/",
+      "required_skills": ["uinaf/autoreview", "uinaf/codex-review", "uinaf/review-gang"],
+      "self_review_prohibited": true
+    }
+  ],
+  "total_slots_per_company": 5,
+  "policy": {
+    "api_direct_use_forbidden": true,
+    "exception": "embedding endpoints only",
+    "reviewer_must_exist": true,
+    "reviewer_verdict_required_before_done": true
+  }
+}
