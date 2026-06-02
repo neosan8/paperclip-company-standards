@@ -35,7 +35,7 @@ The Knowledge Keeper is the memory layer inside a company. Its job is to make su
 
 Company CEO.
 
-Output flows to: central **Knowledge company** (KNO) via weekly aggregation (see `docs/flows/weekly-knowledge-aggregation.md`).
+Output flows to: central **Knowledge company** (KNO) via weekly aggregation (see `../flows/weekly-knowledge-aggregation.md`).
 
 ---
 

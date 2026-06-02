@@ -74,7 +74,7 @@ Every CEO AGENTS.md must include references to:
 
 ## First issue at company creation
 
-After tool stack validation passes (see `docs/stack-standard.md`), the CEO's second issue is:
+After tool stack validation passes (see `stack-standard.md`), the CEO's second issue is:
 
 > "Self-test: create a sample sub-issue, assign to Worker, verify Worker picks it up, close the loop. Confirm CEO-Worker delegation chain is functioning."
 

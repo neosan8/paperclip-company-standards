@@ -38,7 +38,7 @@ Candidate mechanisms:
 
 **Impact:** determines whether version compliance can be automated or stays manual.
 
-**Workaround:** CC runs `docs/flows/new-company-checklist.md` manually on each version bump until an automated mechanism is decided and built.
+**Workaround:** CC runs `flows/new-company-checklist.md` manually on each version bump until an automated mechanism is decided and built.
 
 ---
 

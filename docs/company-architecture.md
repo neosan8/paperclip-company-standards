@@ -77,4 +77,4 @@ Central companies (Art, Animation, SFX, Analytics, Test) receive cross-company i
 
 ## Creating a new game company
 
-Follow `docs/flows/new-company-checklist.md`. Validate against `config/models.json` and `config/required-tools.json` before marking the company ready.
+Follow `flows/new-company-checklist.md`. Validate against `config/models.json` and `config/required-tools.json` before marking the company ready.
