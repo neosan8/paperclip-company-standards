@@ -2,6 +2,7 @@
 # sync-bootstrap.sh
 # Merges _shared + per-role docs into ~/.codex/AGENTS.md and verifies ~/.claude/CLAUDE.md symlink.
 # Idempotent: safe to re-run on bootstrap and on every standards-repo update.
+# Provenance: role-pack distribution pattern adapted from uinaf/agents sync-bootstrap approach.
 #
 # Usage:
 #   bash sync-bootstrap.sh --role=<role> [--company=<company-slug>]
