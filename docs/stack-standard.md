@@ -12,7 +12,7 @@ Every Paperclip company and every human team Claude Code install must have the f
 
 **Vault path:** `~/Docs/paperclipcompanies/_knowledge-base/`
 
-All 11 production Paperclip companies share this vault. AGENTS.md in each company must reference the vault path explicitly.
+All production Paperclip companies share this vault. AGENTS.md in each company must reference the vault path explicitly.
 
 **Validation check:** agent can open a note and run a wiki search before starting any significant task.
 
