@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "description": "Required tools for every Paperclip company AND every human team Claude Code install.",
+  "tools": [
+    {
+      "name": "LLM Wiki + Obsidian",
+      "purpose": "second brain (Karpathy pattern)",
+      "vault": "~/Docs/paperclipcompanies/_knowledge-base/"
+    },
+    {
+      "name": "gbrain",
+      "purpose": "semantic search; brain-first lookup",
+      "note": "macOS 26.3+ use bun wrapper on src/cli.ts"
+    },
+    {
+      "name": "gstack",
+      "purpose": "QA real-browser verification, AI slop detection, autoplan patterns"
+    },
+    {
+      "name": "graphify",
+      "purpose": "GRAPH_REPORT.md reference; graph before grep"
+    },
+    {
+      "name": "Karpathy discipline",
+      "purpose": "Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution"
+    },
+    {
+      "name": "TokenJuice",
+      "purpose": "token-efficient tool wrappers; bash compaction"
+    }
+  ]
+}

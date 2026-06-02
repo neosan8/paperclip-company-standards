@@ -1,0 +1,85 @@
+# Stack Standard
+
+Every Paperclip company and every human team Claude Code install must have the following tools configured and validated. No exceptions.
+
+---
+
+## Required tools
+
+### 1. LLM Wiki + Obsidian
+
+**Purpose:** Second brain. Persistent long-term memory across sessions. Karpathy pattern: build the corpus before you code.
+
+**Vault path:** `~/Docs/paperclipcompanies/_knowledge-base/`
+
+All 11 production Paperclip companies share this vault. AGENTS.md in each company must reference the vault path explicitly.
+
+**Validation check:** agent can open a note and run a wiki search before starting any significant task.
+
+---
+
+### 2. gbrain
+
+**Purpose:** Semantic search across the studio knowledge base. Rule: brain-first lookup before any external web search.
+
+**macOS 26.3+ workaround:** compiled binary fails due to PGLite issue. Use bun wrapper:
+```
+bun run ~/path/to/gbrain/src/cli.ts <args>
+```
+
+**Validation check:** `gbrain query "paperclip heartbeat policy"` returns a result from the vault.
+
+---
+
+### 3. gstack
+
+**Purpose:** Three patterns every company uses:
+
+- **QA real-browser verification** — spin up a real Chrome instance and verify UI/game output before closing an issue.
+- **AI slop detection** — catch low-quality output (repetition, padding, hallucinated citations) before it ships.
+- **autoplan** — structured plan decomposition before execution (mirrors `/plan` in Codex workflow).
+
+**Validation check:** `gstack autoplan` produces a structured step list for a sample task.
+
+---
+
+### 4. graphify
+
+**Purpose:** Knowledge graph. Every company's AGENTS.md must reference `GRAPH_REPORT.md`. Rule: graph before grep — use graphify to navigate relationships before scanning files linearly.
+
+**Validation check:** `graphify query` returns a graph node for the company's primary domain.
+
+---
+
+### 5. Karpathy coding discipline
+
+**Purpose:** Behavioral discipline applied across all agents and human developers.
+
+Four rules:
+
+1. **Think Before Coding** — state assumptions before implementing. Surface tradeoffs. Ask if unclear.
+2. **Simplicity First** — minimum code that solves the problem. No speculative abstractions.
+3. **Surgical Changes** — touch only what the task requires. Do not improve adjacent unrelated code.
+4. **Goal-Driven Execution** — define verifiable success criteria before starting. Loop until verified.
+
+**Applied to:** every CEO prompt, every Worker task description, every CC subagent spawn.
+
+---
+
+### 6. TokenJuice
+
+**Purpose:** Token-efficient tool wrappers. Bash compaction. Reduces context burn on routine operations (file reads, grep, list queries).
+
+**Validation check:** TokenJuice wrappers are available in the agent's tool config.
+
+---
+
+## Validation at company creation
+
+When creating a new company, after configuring all tools, the CEO's first issue must be:
+
+> "Validate tool stack: test gbrain query, graphify query, gstack autoplan, and confirm Obsidian vault access. Report pass/fail for each."
+
+This issue must close as `ship it` before any production work begins in the company.
+
+See `docs/flows/new-company-checklist.md` for the full atomic checklist.
