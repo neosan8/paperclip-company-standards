@@ -23,16 +23,20 @@ Atomic checklist CC runs every time a new Paperclip company is created. Complete
 
 Reference `config/models.json` and `config/roles.json` for all model, adapter, and role values. As of v0.2.0, five agent slots are mandatory per company (including the Reviewer).
 
+**API enum note:** The Paperclip API enforces a fixed role enum. Use the `paperclip_api_role` values from `config/roles.json` when calling `paperclip_create_agent` — not the spec display names. Key mappings: Worker → `engineer`, Knowledge Keeper → `pm`, Reviewer → `qa`. `self_review_prohibited` is not a platform field; embed it as instruction text in the Reviewer's capabilities.
+
 - [ ] Create **CEO** agent:
   - Model: `claude-opus-4-8`
   - Adapter: `claude_local`
   - Auth: Claude.ai subscription OAuth
+  - API role: `ceo`
   - AGENTS.md: include gbrain/graphify syntax, vault path, this standards repo URL, orchestrator-only rule.
 
 - [ ] Create **Worker** agent:
   - Model: `gpt-5.5`
   - Adapter: `codex_local`
   - Auth: ChatGPT subscription OAuth
+  - API role: `engineer` (spec name is Worker; API enum is engineer)
   - `dangerouslyBypassApprovalsAndSandbox: true`
   - AGENTS.md: include Codex workflow (`/plan -> /goal -> $codex-review -> $review`), brain-first rule.
   - Skills: install `uinaf/codex-review`.
@@ -41,6 +45,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - Model: `claude-sonnet-latest`
   - Adapter: `claude_local`
   - Auth: Claude.ai subscription OAuth
+  - API role: `pm` (spec name is Knowledge Keeper; API enum is pm)
   - Heartbeat: daily scheduled.
   - AGENTS.md: include vault conventions, weekly delta format.
 
@@ -48,6 +53,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - Model: `gpt-5.5`
   - Adapter: `codex_local`
   - Auth: ChatGPT subscription OAuth
+  - API role: `researcher`
   - Heartbeat: OFF.
   - AGENTS.md: include research workflow, output format, brain-first rule.
 
@@ -55,8 +61,8 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - Model: `gpt-5.5`
   - Adapter: `codex_local`
   - Auth: ChatGPT subscription OAuth
-  - Purpose note: `review-only; never self-review`
-  - `self_review_prohibited: true`
+  - API role: `qa`
+  - Purpose note: `review-only; never self-review` (include in capabilities text — platform does not enforce)
   - AGENTS.md: include review workflow, verdict format, self-review prohibition.
   - Skills: install `uinaf/autoreview`, `uinaf/codex-review`, `uinaf/review-gang`.
 
@@ -98,6 +104,46 @@ Reference `config/required-tools.json` for tool list.
 
 - [ ] Notify the Knowledge company CEO: new company `<name>` (prefix `<PREFIX>`) is active. Provide company UUID.
 - [ ] Confirm Knowledge Keeper's first weekly delta target is set (next Monday or next scheduled window).
+
+---
+
+## Researcher-first specialist provisioning sequence
+
+Before adding any specialist worker agents beyond the core 5, the company
+MUST complete this research-driven loop. This prevents premature specialization
+based on assumed needs rather than evidence.
+
+### Step A — VISION + SOUL
+CEO bootstrap first-issue produces:
+- `VISION.md` (per `templates/VISION.md` schema): mission, target outcome, target customer/consumer, growth strategy, org structure, CEO mandate, guiding principles, anti-patterns
+- `SOUL.md` (CEO identity, per `roles/ceo/SOUL.md` template)
+
+### Step B — Researcher mission
+CEO opens a Researcher issue with subject: "Survey best-in-class organizations in <company-domain> for hybrid casual mobile games. Identify: org structure, roles, tooling, gold-standard outputs, common failure modes."
+Researcher produces a research brief at `~/Docs/paperclipcompanies/<company-name>/_knowledge-base/research/<domain>-best-in-class-orgs.md`.
+
+### Step C — Knowledge Keeper synthesis
+Knowledge Keeper reads the Researcher brief, builds the company wiki at
+`~/Docs/paperclipcompanies/<company-name>/_knowledge-base/` covering:
+- domain vocabulary (canonical terms; cross-reference standards CONTEXT.md)
+- gold-standard org structure recommendation for this company specifically
+- specialist role recommendations with rationale (link back to research evidence)
+- tool stack additions specific to this domain (beyond the universal stack)
+
+### Step D — Specialist roster decision
+CEO + Atakan + CC review the wiki recommendation. Decision goes into
+`docs/decisions/specialist-roster-v1.md` inside the company's repo (or
+equivalent location). No specialist agents are created before this decision.
+
+### Step E — Specialist provisioning
+CEO creates specialist agents per the agreed roster. Each new specialist gets
+a capability brief referencing the wiki section that justifies their role.
+
+### Anti-patterns to avoid
+- Creating specialists before VISION.md exists ("guessing the team")
+- Creating specialists before Researcher brief ("guessing the gold standard")
+- Skipping Knowledge Keeper synthesis ("research → action without curation")
+- Using CC suggestions as the roster without Researcher evidence
 
 ---
 

@@ -1,5 +1,7 @@
 # Worker Heartbeat
 
+> **API provisioning note:** When creating this agent via the Paperclip API, set `role: 'engineer'` — that is the API enum that maps to our Worker spec name. The display name in capabilities should still read "Worker."
+
 Worker heartbeat is simpler than CEO heartbeat. The Worker picks up `todo` issues, executes, self-checks, reports.
 
 ---
