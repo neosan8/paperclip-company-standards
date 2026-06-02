@@ -33,14 +33,10 @@ Candidate mechanisms:
 
 ## KI-PS-3 — Central company UUIDs in config/central-companies.json are placeholders
 
-**Status:** OPEN  
+**Status:** RESOLVED  
 **Opened:** 2026-06-02  
-
-**Details:** `config/central-companies.json` does not include real Paperclip UUIDs. The last verified UUID snapshot was 2026-04-26 and may be stale.
-
-**Resolution:** Run `paperclip_list_companies` via the Paperclip MCP and update the `uuid` field for each entry in `config/central-companies.json`. Commit as a patch bump.
-
-**Impact:** agents that need to reference a company by UUID (e.g. for cross-company issue creation) must run `paperclip_list_companies` at runtime rather than reading from config until this is resolved.
+**Closed:** 2026-06-02  
+**Resolution:** All 13 UUIDs populated in v0.2.1 via `paperclip_list_companies` audit 2026-06-02. Creatives and Knowledge UUIDs verified but marked `_archived: true` (Phase B unarchive pending). `_warning` field updated to reflect verified state. Also documented in the v0.2.1 release.
 
 ---
 
@@ -66,9 +62,32 @@ Candidate mechanisms:
 
 **Details:** v0.2.0 adds the Reviewer as a mandatory 5th agent slot per company. None of the 13 central companies or current game companies have a Reviewer agent configured. Until Reviewer agents are created and bootstrapped, the quality gate described in `standards/reviewer-pattern.md` cannot run.
 
+**Progress (2026-06-02):** SFX & Haptic created 2026-06-02 as Phase A test case (company UUID `0f518a7a-18d6-472f-af47-5e4e514b6c53`). Reviewer agent (UUID `88482941-7317-4ac1-96f3-18b5467994bd`) created with all 5 slots. Phase B bulk-fix on 11 existing companies still pending.
+
 **Resolution:** After v0.2.0 tag on main branch, CC bulk-creates Reviewer agent slots across all 13 central companies and existing game companies. Each Reviewer must run through the bootstrap activation checklist (`templates/CEO_BOOTSTRAP.md` Step 7). Estimated: 13+ Reviewer agents to create.
 
 **Impact:** Until resolved, all companies are operating with a 4-slot model. Worker Done reports cannot have a Reviewer verdict. CEOs must note this in their Done reports to CC.
+
+---
+
+## KI-PS-7 — SFX & Haptic full bootstrap pending
+
+**Status:** OPEN
+**Opened:** 2026-06-02
+
+**Details:** SFX & Haptic company (UUID `0f518a7a-18d6-472f-af47-5e4e514b6c53`) was created Phase A with all 5 agent slots. Full bootstrap is still pending:
+- VISION.md (per `templates/VISION.md` schema)
+- SOUL.md (CEO identity)
+- Company folder at `~/Docs/paperclipcompanies/sfx-haptic/_knowledge-base/`
+- First CEO issue (tool stack validation)
+- sync-bootstrap.sh dry-run (KI-PS-6 gate)
+- Researcher mission (Step B of Researcher-first provisioning sequence)
+- Knowledge Keeper wiki synthesis (Step C)
+- Specialist roster decision (Step D)
+
+**Resolution:** Close once the Researcher-first specialist provisioning sequence completes Step D (specialist roster decision documented in `docs/decisions/specialist-roster-v1.md`).
+
+**Impact:** SFX & Haptic is provisioned but not operationally bootstrapped. No issues should be assigned until tool stack validation passes.
 
 ---
 

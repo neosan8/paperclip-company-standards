@@ -1,5 +1,7 @@
 # Worker Skills
 
+> **API provisioning note:** When provisioning via Paperclip API, set `role: 'engineer'` (the API enum that maps to our Worker spec name).
+
 ---
 
 ## Canonical Codex workflow doctrine

@@ -1,5 +1,7 @@
 # Reviewer Skills
 
+> **API provisioning note:** Provision with `role: 'qa'` via Paperclip API. Note: `self_review_prohibited` is enforced via the capability brief text, NOT a platform-enforced field.
+
 ---
 
 ## autoreview
