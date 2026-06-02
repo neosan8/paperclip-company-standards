@@ -18,8 +18,22 @@ Agents and developers should read this file before any other doc in this repo. I
 
 - **CEO** — orchestrator only. Never executes tasks directly. Creates sub-issues and delegates to workers. Model: claude-opus-4-8. If a CEO is seen writing code or running CLI commands itself, that is a bug.
 - **Worker** — executes tasks (code, research, file operations). Model: gpt-5.5 via Codex OAuth. Follows `/plan -> /goal -> $codex-review -> $review` workflow.
-- **Knowledge Keeper** — per-company specialist. Maintains the company-internal wiki/KB. Captures decisions. Sends weekly delta to central Knowledge. Model: claude-sonnet-latest.
 - **Researcher** — per-company specialist. Finds gold standards, frontier patterns, sector best-practices for the company domain. Hands findings to Knowledge Keeper. Model: gpt-5.5 via Codex OAuth.
+- **Knowledge Keeper** — per-company specialist. Maintains the company-internal wiki/KB. Captures decisions. Sends weekly delta to central Knowledge. Model: claude-sonnet-latest.
+- **Reviewer** — per-company specialist. Independent quality gate. Reviews all Worker deliverables before CEO reports Done. Issues a verdict (`ship it` / `needs review` / `blocked`). Never reviews own work. Model: gpt-5.5 via Codex OAuth. Mandatory 5th slot as of v0.2.0.
+
+## Role pack
+
+- **Role pack** — the set of documents a role needs to operate: skills, heartbeat, tools, identity docs. Lives in `roles/<role>/`. Distributed to agents via `standards/sync-bootstrap.sh`.
+
+## Quality gate concepts
+
+- **VISION.md** — per-company machine-readable constitution. CEO reads it every heartbeat before any other action. Schema at `templates/VISION.md`. Mandatory per company as of v0.2.0.
+- **SOUL.md** — CEO identity document. Defines the quality-gate obligation ("I personally verify every deliverable before reporting to the Founder. A bad 'done' report is worse than a late one.") and Giant Aicado-specific anti-patterns.
+- **DoD** — Definition of Done. Five-item self-check all Workers run before reporting done, plus Reviewer's independent verification. See `roles/_shared/DEFINITION-OF-DONE.md`.
+- **autoreview** — branch-diff advisory review tool from `uinaf/agents`. Reviewer runs it on every deliverable. Never run on your own changes (self-review prohibition).
+- **review-gang** — parallel multi-persona review pattern. Multiple Reviewer personas each check one dimension (correctness, karpathy, security, performance, a11y).
+- **Sync bootstrap** — `standards/sync-bootstrap.sh`. Idempotent script that merges `roles/_shared/` + per-role docs into `~/.codex/AGENTS.md` and verifies `~/.claude/CLAUDE.md` symlink.
 
 ## Heartbeat policy
 
