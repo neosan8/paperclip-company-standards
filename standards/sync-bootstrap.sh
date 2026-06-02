@@ -196,6 +196,27 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# For Claude-backed roles (ceo, knowledge-keeper), also write to ~/CLAUDE.md
+# so that Claude agents (which read CLAUDE.md, not AGENTS.md) receive the
+# role pack. This is separate from the symlink check below.
+# ---------------------------------------------------------------------------
+CLAUDE_ROLES="ceo knowledge-keeper"
+IS_CLAUDE_ROLE=0
+for cr in $CLAUDE_ROLES; do
+  [[ "$ROLE" == "$cr" ]] && IS_CLAUDE_ROLE=1
+done
+
+if [[ "$IS_CLAUDE_ROLE" -eq 1 ]]; then
+  CLAUDE_MD_TARGET="$HOME/CLAUDE.md"
+  if [[ -f "$CLAUDE_MD_TARGET" ]] && diff -q "$TMPFILE" "$CLAUDE_MD_TARGET" > /dev/null 2>&1; then
+    echo "    No change: $CLAUDE_MD_TARGET is already up to date."
+  else
+    cp "$TMPFILE" "$CLAUDE_MD_TARGET"
+    echo "    Written:  $CLAUDE_MD_TARGET (Claude-backed role: $ROLE)"
+  fi
+fi
+
+# ---------------------------------------------------------------------------
 # Done
 # ---------------------------------------------------------------------------
 echo ""

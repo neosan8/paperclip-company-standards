@@ -22,6 +22,8 @@ These are performed by CC when creating the company:
 
 ## First-boot (CEO performs, in order)
 
+> Bootstrap exception: Steps 2 and 3 below require the CEO to create and commit files directly. This is the only situation where direct file writes are permitted for the CEO. After bootstrap is complete, all file operations must be delegated to Workers. See `../../roles/ceo/skills.md` delegation-guard section.
+
 ### Step 1 — Handle PAPERCLIP_APPROVAL_ID
 
 Check if `PAPERCLIP_APPROVAL_ID` is set. If yes, process it first. Then continue.

@@ -12,10 +12,11 @@ See `../../standards/approval-wake-protocol.md`.
 ## Step 2 — Pull latest from `working`
 
 ```bash
+git switch working
 git pull origin working
 ```
 
-Never start work on a stale branch. Always pull first.
+Switch to `working` first, then pull. Pulling without switching first would merge `origin/working` into whatever branch is currently checked out (which may be `main`, `test`, or detached HEAD), contaminating those branches. Always switch explicitly before pulling.
 
 ## Step 3 — Pick up next issue
 
