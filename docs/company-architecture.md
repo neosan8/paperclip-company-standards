@@ -50,7 +50,7 @@ Each game company contains:
 
 The Reviewer is a mandatory 5th slot as of v0.2.0. No company (central or game) is considered bootstrapped without an active Reviewer agent. See `../standards/reviewer-pattern.md` for the full gate flow.
 
-**Open (KI-PS-1):** The five-slot model above is the v0.2.0 standard. The question of whether game companies should be lean (CEO + Worker only) or full-mirror is resolved in favor of the five-slot model per Atakan decision 2026-06-02.
+**Resolved (KI-PS-1):** The five-slot model above is the v0.2.0 standard. The question of whether game companies should be lean (CEO + Worker only) or full-mirror is resolved in favor of the five-slot model per Atakan decision 2026-06-02. KI-PS-1 is closed.
 **Open (KI-PS-5):** Reviewer agent slot does not yet exist in any of the 13 existing companies; bulk create pending v0.2.0 landing.
 
 ---

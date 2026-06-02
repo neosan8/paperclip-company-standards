@@ -6,21 +6,10 @@ Open questions and gaps tracked here. Check this file before making decisions th
 
 ## KI-PS-1 — Game-company internal structure tier
 
-**Status:** OPEN  
+**Status:** RESOLVED  
 **Opened:** 2026-06-02  
-**Pending:** Atakan answer (Q3 2026)
-
-**Question:** What is the correct internal agent structure for a per-game company?
-
-Three candidate models:
-
-- **Lean** — game company has CEO + Worker only; all specialist work (art, animation, SFX, test) stays in central companies via cross-company issues.
-- **Full-mirror** — game company replicates all 13 central roles internally; fully self-contained.
-- **Tiered** — game company has CEO + Worker + Knowledge Keeper + Researcher internally; everything else (art, SFX, test) is still handled by central handoff.
-
-**Impact:** determines how many agents are created per new game company and how cross-company issue routing is configured.
-
-**Workaround until resolved:** use the tiered model (CEO + Worker + Knowledge Keeper + Researcher) as the safe default. Do not spin up art/animation/SFX/test agents inside game companies without Atakan confirmation.
+**Closed:** 2026-06-02  
+**Resolution:** Atakan decision 2026-06-02 — all companies (central and game) use the full five-slot model: CEO + Worker + Researcher + Knowledge Keeper + Reviewer. No lean or full-mirror variants. See `docs/company-architecture.md` and `config/roles.json`.
 
 ---
 

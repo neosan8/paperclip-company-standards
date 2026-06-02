@@ -61,7 +61,7 @@ Confirm each tool is installed and accessible for the company:
 - [ ] gbrain: `gbrain query "test"` returns (no error).
 - [ ] gstack: `gstack --version` returns (no error).
 - [ ] graphify: `graphify status` returns (no error).
-- [ ] Karpathy discipline: in company AGENTS.md (copy from `$STANDARDS_REPO/AGENTS.md` Karpathy section).
+- [ ] Karpathy discipline: in company AGENTS.md (copy the Karpathy section from `$STANDARDS_REPO/roles/_shared/CONTRIBUTING.md`).
 
 If any tool is missing: create a setup issue; do not proceed to Step 5 until all tools verified.
 
