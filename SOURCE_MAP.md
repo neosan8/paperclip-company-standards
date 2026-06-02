@@ -37,8 +37,34 @@ Recommended read order for any agent or developer picking up this repo.
 13. `docs/governance/paperclip-version-policy.md` — semver policy; when to bump major/minor/patch
 14. `docs/governance/model-topology.md` — prose mirror of config/models.json; explains model choices
 
-## 8. Machine-readable config (canonical values)
+## 8. Role packs (v0.2.0 — new)
 
-15. `config/models.json` — canonical model assignments per agent role
-16. `config/required-tools.json` — required tools with purpose and notes
-17. `config/central-companies.json` — 13 central companies with prefix and role
+15. `roles/_shared/CONTEXT.md` — canonical vocabulary for all roles; read before any role doc
+16. `roles/_shared/CONTRIBUTING.md` — commit format, secrets rule, no-push-without-review
+17. `roles/_shared/DEFINITION-OF-DONE.md` — DoD checklist: Worker self-check + Reviewer verification
+18. `roles/_shared/PROJECT-INVENTORY.md` — template: CEO reads before delegating each heartbeat
+19. `roles/ceo/` — CEO role pack: README, skills, heartbeat (12-step), tools, SOUL, autoreview-invocation
+20. `roles/worker/` — Worker role pack: README, skills, heartbeat (Step 8 DoD mandatory), tools
+21. `roles/researcher/` — Researcher role pack: README, skills, research-pattern, handoff-to-keeper, tools
+22. `roles/knowledge-keeper/` — Keeper role pack: README, skills, wiki-pattern, weekly-aggregation-handoff, tools
+23. `roles/reviewer/` — Reviewer role pack: README, skills (autoreview + review-gang), review-pattern, verdict-format, tools
+
+## 9. Templates (v0.2.0 — new)
+
+24. `templates/VISION.md` — per-company constitution schema (CEO reads every heartbeat)
+25. `templates/CEO_BOOTSTRAP.md` — one-time per-company first-boot checklist (9 steps)
+
+## 10. Standards (v0.2.0 — new)
+
+26. `standards/reviewer-pattern.md` — end-to-end gate flow: worker done → reviewer → verdict → Done to CC
+27. `standards/sync-bootstrap.sh` — idempotent merge to ~/.codex/AGENTS.md + ~/.claude/CLAUDE.md symlink
+28. `standards/approval-wake-protocol.md` — PAPERCLIP_APPROVAL_ID handling; checkout-before-work; 409 rule
+29. `standards/worker-skills-catalog.md` — cross-role index of all skills, sources, target roles
+
+## 11. Machine-readable config (canonical values)
+
+30. `config/models.json` — canonical model assignments per agent role (includes reviewer as of v0.2.0)
+31. `config/roles.json` — 5 role definitions + agent slot counts + model assignments (v0.2.0)
+32. `config/skills-manifest.json` — all skills, source repos, target roles, versions (v0.2.0)
+33. `config/required-tools.json` — required tools with purpose and notes
+34. `config/central-companies.json` — 13 central companies with prefix and role (5-slot note added v0.2.0)

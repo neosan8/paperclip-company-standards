@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Canonical model assignments per agent role across Paperclip companies.",
   "ceo": {
     "model": "claude-opus-4-8",
@@ -21,6 +21,13 @@
     "model": "gpt-5.5",
     "adapter": "codex_local",
     "auth": "chatgpt_subscription_oauth"
+  },
+  "reviewer": {
+    "model": "gpt-5.5",
+    "adapter": "codex_local",
+    "auth": "chatgpt_subscription_oauth",
+    "purpose": "review-only; never self-review",
+    "self_review_prohibited": true
   },
   "policy": {
     "api_direct_use_forbidden": true,

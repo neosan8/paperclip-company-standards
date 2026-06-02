@@ -44,10 +44,14 @@ Each game company contains:
 |-------|------|-------|
 | CEO | Orchestrates all work inside the game company | claude-opus-4-8 |
 | Worker | Executes tasks (code, research, file ops) | gpt-5.5 via Codex |
-| Knowledge Keeper | Maintains company-internal KB; weekly delta to Knowledge central | claude-sonnet-latest |
 | Researcher | Finds gold standards and frontier patterns for the game's domain | gpt-5.5 via Codex |
+| Knowledge Keeper | Maintains company-internal KB; weekly delta to Knowledge central | claude-sonnet-latest |
+| Reviewer | Independent quality gate; reviews all deliverables before CEO reports done | gpt-5.5 via Codex |
 
-**Open (KI-PS-1):** The above is the current safe default (tiered model). The question of whether game companies should be lean (CEO + Worker only) or full-mirror (all 13 roles internal) is pending Atakan answer in Q3 2026.
+The Reviewer is a mandatory 5th slot as of v0.2.0. No company (central or game) is considered bootstrapped without an active Reviewer agent. See `../standards/reviewer-pattern.md` for the full gate flow.
+
+**Resolved (KI-PS-1):** The five-slot model above is the v0.2.0 standard. The question of whether game companies should be lean (CEO + Worker only) or full-mirror is resolved in favor of the five-slot model per Atakan decision 2026-06-02. KI-PS-1 is closed.
+**Open (KI-PS-5):** Reviewer agent slot does not yet exist in any of the 13 existing companies; bulk create pending v0.2.0 landing.
 
 ---
 

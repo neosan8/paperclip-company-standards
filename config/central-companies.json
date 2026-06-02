@@ -1,6 +1,8 @@
 {
-  "version": "0.1.0",
-  "description": "13 central Paperclip companies (template/standards tier). UUIDs verified 2026-04-26 may be stale — re-run paperclip_list_companies to refresh.",
+  "version": "0.2.0",
+  "description": "13 central Paperclip companies (template/standards tier). UUIDs verified 2026-04-26 may be stale — re-run paperclip_list_companies to refresh. As of v0.2.0 every company has 5 agent slots: CEO + Worker + Researcher + Knowledge Keeper + Reviewer.",
+  "agent_slots_per_company": 5,
+  "agent_slot_note": "Every company (central and game) must have exactly 5 agent slots. See config/roles.json and docs/company-architecture.md.",
   "_warning": "UUIDs are null placeholders; KI-PS-3 tracks refresh. Run paperclip_list_companies and populate uuid fields before using this file for cross-company issue creation.",
   "companies": [
     {
