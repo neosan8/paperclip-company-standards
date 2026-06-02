@@ -1,0 +1,86 @@
+{
+  "version": "0.1.0",
+  "description": "13 central Paperclip companies (template/standards tier). UUIDs verified 2026-04-26 may be stale — re-run paperclip_list_companies to refresh.",
+  "_warning": "UUIDs are null placeholders; KI-PS-3 tracks refresh. Run paperclip_list_companies and populate uuid fields before using this file for cross-company issue creation.",
+  "companies": [
+    {
+      "name": "Market",
+      "prefix": "GAM",
+      "uuid": null,
+      "role": "Idea discovery, competitor analysis, deconstruction"
+    },
+    {
+      "name": "Product Design",
+      "prefix": "PROA",
+      "uuid": null,
+      "role": "Template-level architect: GDD/level/economy/monetization templates; handoff to game-company PD"
+    },
+    {
+      "name": "Dev",
+      "prefix": "GIAAAAAA",
+      "uuid": null,
+      "role": "Template-level HTML engineering patterns; handoff to game-company dev"
+    },
+    {
+      "name": "Creatives",
+      "prefix": "CRE",
+      "uuid": null,
+      "role": "CTR creative production: video, banners, ads"
+    },
+    {
+      "name": "Marketing",
+      "prefix": "MAR",
+      "uuid": null,
+      "role": "Campaign management, ASO, social"
+    },
+    {
+      "name": "Art",
+      "prefix": "ART",
+      "uuid": null,
+      "role": "Figma GUI Kit, UI asset production"
+    },
+    {
+      "name": "Animation",
+      "prefix": "ANI",
+      "uuid": null,
+      "role": "Game + UI + FX animations"
+    },
+    {
+      "name": "SFX & Haptic",
+      "prefix": "SFX",
+      "uuid": null,
+      "role": "Sound design + haptic feedback templates (NEW 2026-06-02)"
+    },
+    {
+      "name": "Analytics",
+      "prefix": "ANA",
+      "uuid": null,
+      "role": "Data pipeline; feeds everyone"
+    },
+    {
+      "name": "Test",
+      "prefix": "TES",
+      "uuid": null,
+      "role": "QA, test reports, delivery to Giant Avocado"
+    },
+    {
+      "name": "Lab",
+      "prefix": "GIAAAAAAA",
+      "uuid": null,
+      "role": "R&D, AI tool scouting, frontier scan"
+    },
+    {
+      "name": "Website",
+      "prefix": "GIAAAAAAAA",
+      "uuid": null,
+      "role": "giantavocado.games ops (only /giantaicado/* paths)"
+    },
+    {
+      "name": "Knowledge",
+      "prefix": "KNO",
+      "uuid": null,
+      "role": "Hermes review gate; owns this standards repo; weekly aggregation of per-company KBs",
+      "outside_production_swarm": true
+    }
+  ]
+}
