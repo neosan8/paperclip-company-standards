@@ -30,7 +30,8 @@ Check if `PAPERCLIP_APPROVAL_ID` is set. If yes, process it first. Then continue
 
 ### Step 2 — Create VISION.md
 
-Copy `../../templates/VISION.md` to the company root.
+Copy `VISION.md` from the standards repo `templates/` directory to the company root.
+Path reference: `$STANDARDS_REPO/templates/VISION.md` where `$STANDARDS_REPO` is the local checkout path (typically `~/code/paperclip-company-standards`). Relative paths like `../../templates/VISION.md` depend on the working directory and may not resolve; use the absolute path.
 Fill in all `[REQUIRED]` fields:
 - Company name, prefix, type, date established.
 - Mission (one sentence).
@@ -45,7 +46,7 @@ Commit: `ceo: create VISION.md for <company-name> bootstrap (PREFIX-1)`
 
 ### Step 3 — Create PROJECT-INVENTORY.md
 
-Copy `../../roles/_shared/PROJECT-INVENTORY.md` to the company root.
+Copy `PROJECT-INVENTORY.md` from `$STANDARDS_REPO/roles/_shared/PROJECT-INVENTORY.md` to the company root.
 Fill in company name, prefix, VISION.md location.
 Sprint goal: same as VISION.md.
 Issue table: empty (no issues yet).
@@ -60,7 +61,7 @@ Confirm each tool is installed and accessible for the company:
 - [ ] gbrain: `gbrain query "test"` returns (no error).
 - [ ] gstack: `gstack --version` returns (no error).
 - [ ] graphify: `graphify status` returns (no error).
-- [ ] Karpathy discipline: in company AGENTS.md (copy from `../../AGENTS.md` Karpathy section).
+- [ ] Karpathy discipline: in company AGENTS.md (copy from `$STANDARDS_REPO/AGENTS.md` Karpathy section).
 
 If any tool is missing: create a setup issue; do not proceed to Step 5 until all tools verified.
 
@@ -82,7 +83,7 @@ Commit the README.md with company name, prefix, empty tag set, today's date as f
 ### Step 6 — Run sync-bootstrap.sh
 
 ```bash
-bash ../../standards/sync-bootstrap.sh --role=ceo --company=<company-slug>
+bash $STANDARDS_REPO/standards/sync-bootstrap.sh --role=ceo --company=<company-slug>
 ```
 
 Confirm output: `~/.codex/AGENTS.md` updated. `~/.claude/CLAUDE.md` symlink created or verified.

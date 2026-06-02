@@ -58,13 +58,18 @@ If you discover a committed secret, open a standards issue immediately. Do not a
 
 ## No push without Reviewer verdict
 
-Before any agent marks an issue Done and reports to CEO:
+The review gate applies at the CEO close step, not the Worker done step:
+
+- **Worker done flow:** Worker completes work, posts a done comment, moves the issue to `review` status. At this point no Reviewer verdict exists yet — that is correct. The Worker does NOT wait for Reviewer; the CEO triggers it.
+- **CEO close flow:** After the Worker posts done, the CEO creates a `[review] PREFIX-NN` sub-issue and assigns it to the Reviewer. The CEO then waits for the Reviewer verdict.
+
+Before the CEO closes the parent issue and reports to CC:
 
 1. Reviewer must have issued a verdict of `ship it`.
 2. The verdict must be attached to the Paperclip issue as a comment or linked sub-issue.
 3. CEO reads the verdict before closing the issue and reporting to CC.
 
-Bypassing the Reviewer step is a workflow violation. The CEO must reject any Done report that lacks a Reviewer verdict.
+Bypassing the Reviewer step is a workflow violation. The CEO must reject any Done report that lacks a Reviewer verdict. Workers do not gate themselves on Reviewer — only the CEO does.
 
 ---
 

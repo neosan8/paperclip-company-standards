@@ -172,9 +172,10 @@ fi
 # ---------------------------------------------------------------------------
 CLAUDE_DIR="$HOME/.claude"
 if [[ ! -d "$CLAUDE_DIR" ]]; then
-  echo "    WARNING: $CLAUDE_DIR does not exist. CLAUDE.md symlink not created."
-  echo "             Run: mkdir -p $CLAUDE_DIR && ln -sf $CLAUDE_MD_TARGET $CLAUDE_MD_SYMLINK"
-elif [[ -L "$CLAUDE_MD_SYMLINK" ]]; then
+  mkdir -p "$CLAUDE_DIR"
+  echo "    Created:  $CLAUDE_DIR"
+fi
+if [[ -L "$CLAUDE_MD_SYMLINK" ]]; then
   CURRENT_TARGET="$(readlink "$CLAUDE_MD_SYMLINK")"
   if [[ "$CURRENT_TARGET" == "$CLAUDE_MD_TARGET" ]]; then
     echo "    Verified: $CLAUDE_MD_SYMLINK -> $CLAUDE_MD_TARGET (ok)"

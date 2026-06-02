@@ -32,7 +32,7 @@ If any item fails: post a comment explaining the blocker; do not proceed until i
 
 ### Round 1
 
-1. Fetch the branch diff: `gh diff main...working -- <deliverable paths>` or `git diff main..working`.
+1. Fetch the branch diff: `gh pr diff` (when a PR exists) or `git diff main...working -- <deliverable paths>` (three-dot syntax; excludes commits added to main after divergence).
 2. Run `autoreview`. Read every finding.
 3. Run mandatory `correctness` persona from review-gang.
 4. Run applicable additional personas (karpathy always; security/performance/accessibility if in scope per `skills.md`).
