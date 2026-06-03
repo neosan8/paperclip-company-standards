@@ -1,5 +1,7 @@
 # Knowledge Keeper Role — Overview
 
+> **API provisioning note:** Provision with `role: 'pm'` via Paperclip API (the API enum that maps to our Knowledge Keeper spec name).
+
 ## Purpose
 
 The Knowledge Keeper maintains the company-internal knowledge base. It ingests research briefs from the Researcher, captures decisions from closed issues, manages KB taxonomy, and sends a weekly delta to the central Knowledge company.

@@ -1,10 +1,12 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Five role definitions per Paperclip company. Agent slot counts and model assignments.",
+  "_api_enum_compatibility": "The Paperclip API restricts 'role' to a fixed enum. Spec names (Worker, Knowledge Keeper) don't match. Use paperclip_api_role when calling paperclip_create_agent. self_review_prohibited is not a platform field; embed it as instruction text in Reviewer's capabilities.",
   "roles": [
     {
       "role": "ceo",
       "display": "CEO",
+      "paperclip_api_role": "ceo",
       "purpose": "Orchestrates all work via sub-issues. Never executes directly.",
       "model": "claude-opus-4-8",
       "adapter": "claude_local",
@@ -16,6 +18,7 @@
     {
       "role": "worker",
       "display": "Worker",
+      "paperclip_api_role": "engineer",
       "purpose": "Executes tasks: code, file operations, research tasks delegated by CEO.",
       "model": "gpt-5.5",
       "adapter": "codex_local",
@@ -28,6 +31,7 @@
     {
       "role": "researcher",
       "display": "Researcher",
+      "paperclip_api_role": "researcher",
       "purpose": "Sector scans, frontier patterns, gold-standard vetting. Hands findings to Knowledge Keeper.",
       "model": "gpt-5.5",
       "adapter": "codex_local",
@@ -38,6 +42,7 @@
     {
       "role": "knowledge_keeper",
       "display": "Knowledge Keeper",
+      "paperclip_api_role": "pm",
       "purpose": "Company-internal KB curation, decision capture, weekly delta to Knowledge central.",
       "model": "claude-sonnet-latest",
       "adapter": "claude_local",
@@ -48,6 +53,7 @@
     {
       "role": "reviewer",
       "display": "Reviewer",
+      "paperclip_api_role": "qa",
       "purpose": "Independent quality gate. Reviews all deliverables before CEO reports done. Never self-reviews.",
       "model": "gpt-5.5",
       "adapter": "codex_local",

@@ -34,6 +34,20 @@ for arg in "$@"; do
   esac
 done
 
+# ---------------------------------------------------------------------------
+# API enum mapping note (v0.2.1)
+# The Paperclip API does not accept spec names directly for the 'role' field.
+# Use the paperclip_api_role values from config/roles.json when calling
+# paperclip_create_agent. Current mappings:
+#   spec "worker"           → API role "engineer"
+#   spec "knowledge-keeper" → API role "pm"
+#   spec "researcher"       → API role "researcher"
+#   spec "reviewer"         → API role "qa"
+#   spec "ceo"              → API role "ceo"
+# self_review_prohibited is NOT a platform-enforced field; it must be
+# stated in the Reviewer agent's capabilities/AGENTS.md text.
+# ---------------------------------------------------------------------------
+
 VALID_ROLES="ceo worker researcher knowledge-keeper reviewer"
 if [[ -z "$ROLE" ]]; then
   echo "ERROR: --role is required. Valid roles: $VALID_ROLES" >&2
