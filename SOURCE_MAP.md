@@ -57,9 +57,10 @@ Recommended read order for any agent or developer picking up this repo.
 ## 10. Standards (v0.2.0 — new)
 
 26. `standards/reviewer-pattern.md` — end-to-end gate flow: worker done → reviewer → verdict → Done to CC
-27. `standards/sync-bootstrap.sh` — idempotent merge to ~/.codex/AGENTS.md + ~/.claude/CLAUDE.md symlink
+27. `standards/sync-bootstrap.sh` — idempotent merge to company-scoped AGENTS.md; never touches CC host CLAUDE.md
 28. `standards/approval-wake-protocol.md` — PAPERCLIP_APPROVAL_ID handling; checkout-before-work; 409 rule
-29. `standards/worker-skills-catalog.md` — cross-role index of all skills, sources, target roles
+29. `standards/cc-paperclip-communication-protocol.md` — canonical CC-to-CEO-only rule; stack diagram; SFX-2 lesson
+30. `standards/worker-skills-catalog.md` — cross-role index of all skills, sources, target roles
 
 ## 11. Machine-readable config (canonical values)
 

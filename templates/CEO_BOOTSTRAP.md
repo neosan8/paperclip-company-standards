@@ -86,7 +86,7 @@ Commit the README.md with company name, prefix, empty tag set, today's date as f
 bash $STANDARDS_REPO/standards/sync-bootstrap.sh --role=ceo --company=<company-slug>
 ```
 
-Confirm output: `~/.codex/AGENTS.md` updated. `~/.claude/CLAUDE.md` symlink created or verified.
+Confirm output: `~/Docs/paperclipcompanies/<company-slug>/AGENTS.md` written. Set `instructionsFilePath` in Paperclip agent config to this path.
 
 ### Step 7 — Create bootstrap issues for remaining agents
 

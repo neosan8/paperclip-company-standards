@@ -33,7 +33,11 @@ Agents and developers should read this file before any other doc in this repo. I
 - **DoD** — Definition of Done. Five-item self-check all Workers run before reporting done, plus Reviewer's independent verification. See `roles/_shared/DEFINITION-OF-DONE.md`.
 - **autoreview** — branch-diff advisory review tool from `uinaf/agents`. Reviewer runs it on every deliverable. Never run on your own changes (self-review prohibition).
 - **review-gang** — parallel multi-persona review pattern. Multiple Reviewer personas each check one dimension (correctness, karpathy, security, performance, a11y).
-- **Sync bootstrap** — `standards/sync-bootstrap.sh`. Idempotent script that merges `roles/_shared/` + per-role docs into `~/.codex/AGENTS.md` and verifies `~/.claude/CLAUDE.md` symlink.
+- **Sync bootstrap** — `standards/sync-bootstrap.sh`. Idempotent script that merges `roles/_shared/` + per-role docs into a company-scoped `~/Docs/paperclipcompanies/<company>/AGENTS.md`. Never touches CC's host CLAUDE.md.
+
+## Communication rules
+
+- **CC-to-CEO-only rule** — CC never talks to Workers, Researchers, Knowledge Keepers, or Reviewers directly. All CC-created issues must be assigned to the company CEO. CEO delegates to specialists via sub-issues. See `standards/cc-paperclip-communication-protocol.md`. Atakan-canonical 2026-06-03.
 
 ## Approval handling
 
