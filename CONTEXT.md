@@ -35,6 +35,10 @@ Agents and developers should read this file before any other doc in this repo. I
 - **review-gang** — parallel multi-persona review pattern. Multiple Reviewer personas each check one dimension (correctness, karpathy, security, performance, a11y).
 - **Sync bootstrap** — `standards/sync-bootstrap.sh`. Idempotent script that merges `roles/_shared/` + per-role docs into `~/.codex/AGENTS.md` and verifies `~/.claude/CLAUDE.md` symlink.
 
+## Communication rules
+
+- **CC-to-CEO-only rule** — CC never talks to Workers, Researchers, Knowledge Keepers, or Reviewers directly. All CC-created issues must be assigned to the company CEO. CEO delegates to specialists via sub-issues. See `standards/cc-paperclip-communication-protocol.md`. Atakan-canonical 2026-06-03.
+
 ## Approval handling
 
 - **Approval ID** (`PAPERCLIP_APPROVAL_ID`) — env var injected by the Paperclip platform when an agent wakes to handle a pending approval. Every agent must check this first, before any other heartbeat action. See `standards/approval-wake-protocol.md`.
