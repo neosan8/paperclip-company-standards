@@ -75,29 +75,46 @@ Candidate mechanisms:
 **Status:** OPEN
 **Opened:** 2026-06-02
 
-**Details:** SFX & Haptic company (UUID `0f518a7a-18d6-472f-af47-5e4e514b6c53`) was created Phase A with all 5 agent slots. Full bootstrap is still pending:
-- VISION.md (per `templates/VISION.md` schema)
-- SOUL.md (CEO identity)
-- Company folder at `~/Docs/paperclipcompanies/sfx-haptic/_knowledge-base/`
-- First CEO issue (tool stack validation)
-- sync-bootstrap.sh dry-run (KI-PS-6 gate)
-- Researcher mission (Step B of Researcher-first provisioning sequence)
-- Knowledge Keeper wiki synthesis (Step C)
-- Specialist roster decision (Step D)
+**Details:** SFX & Haptic company (UUID `0f518a7a-18d6-472f-af47-5e4e514b6c53`) was created Phase A with all 5 agent slots.
 
-**Resolution:** Close once the Researcher-first specialist provisioning sequence completes Step D (specialist roster decision documented in `docs/decisions/specialist-roster-v1.md`).
+**Progress (2026-06-03 — Steps A + B COMPLETE):**
+- VISION.md created
+- SOUL.md created
+- Company folder at `~/Docs/paperclipcompanies/sfx-haptic/_knowledge-base/` created
+- CEO bootstrap issue SFX-1 created
+- Researcher brief delivered to `~/Docs/paperclipcompanies/sfx-haptic/_knowledge-base/research/`
+- Issues SFX-3 (Researcher), SFX-4 (Keeper), SFX-5 (Reviewer) created
 
-**Impact:** SFX & Haptic is provisioned but not operationally bootstrapped. No issues should be assigned until tool stack validation passes.
+**Remaining (Steps C + D + E):**
+- Step C: Knowledge Keeper wiki synthesis (blocked on SFX-3 close)
+- Step D: CEO specialist roster recommendation → CC + Atakan decision
+- Step E: Specialist provisioning based on roster decision
+
+**Resolution:** Close once Step D specialist roster is documented in `docs/decisions/specialist-roster-v1.md` and Step E provisioning is complete.
+
+**Impact:** SFX & Haptic is Phase A bootstrapped. Phase B (Steps C-E) pending.
 
 ---
 
-## KI-PS-6 — sync-bootstrap.sh not yet validated in production
+## KI-PS-6 — sync-bootstrap.sh dry-run gate
 
-**Status:** OPEN
-**Opened:** 2026-06-02
+**Status:** RESOLVED  
+**Opened:** 2026-06-02  
+**Closed:** 2026-06-03  
+**Resolution:** RESOLVED in v0.2.2 — script rewritten with `--dry-run` flag + company-scoped paths only + CC host CLAUDE.md never touched. Output target is now `~/Docs/paperclipcompanies/<company-name>/AGENTS.md` (configurable via `--target`). Old writes to `~/CLAUDE.md` and `~/.claude/CLAUDE.md` removed entirely.
 
-**Details:** `standards/sync-bootstrap.sh` is scaffolded and passes `bash -n` syntax check, but has not been run against a real Paperclip company environment. File paths, vault locations, and symlink behavior need a dry-run on a sandbox company.
+---
 
-**Resolution:** Before using in production bootstrap: CC runs `bash standards/sync-bootstrap.sh --role=ceo --company=sandbox-test` on a test company. Verify `~/.codex/AGENTS.md` is written correctly and `~/.claude/CLAUDE.md` symlink is verified. Document any path adjustments needed. Update script and close this KI.
+## KI-PS-8 — SFX-2 rogue issue: CC created Researcher-direct issue
 
-**Impact:** Do not use `sync-bootstrap.sh` in production until this is validated. Manual AGENTS.md assembly is the fallback (follow the script's logic manually).
+**Status:** RESOLVED  
+**Opened:** 2026-06-03  
+**Closed:** 2026-06-03  
+
+**Details:** CC created issue SFX-2 assigned directly to the Researcher agent of SFX & Haptic, bypassing the CEO. This violated the CC-to-CEO-only rule.
+
+**How caught:** Atakan flagged it directly: *"paperclip sirketlerini yonetirken sadece ceo ile konusman lazim biliyorsun zaten"*.
+
+**Resolution:** CC wrote the CC-to-CEO-only rule into `~/CLAUDE.md` (loaded every CC session). `standards/cc-paperclip-communication-protocol.md` added in v0.2.2 so the Knowledge company can validate conformance. SFX-2 is retained as a historical record (task was already completed by Researcher); no retroactive cleanup needed.
+
+**Impact for future companies:** All CC-created issues must be assigned to the company CEO. CEO delegates to specialists via sub-issues.

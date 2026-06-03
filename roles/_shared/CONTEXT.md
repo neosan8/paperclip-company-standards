@@ -52,7 +52,7 @@ See `../../config/models.json` for machine-readable assignments.
 | **Source of truth** | GitHub (approved branches only). Notion and Obsidian are secondary mirrors. Agents never push unverified work to `main`. |
 | **Sync ladder** | The promotion path for knowledge: company KB → weekly delta → Knowledge central → shared vault. |
 | **OAuth-only rule** | All Claude models auth via Claude.ai subscription. All GPT/Codex models auth via ChatGPT subscription. Direct API keys forbidden. |
-| **Sync bootstrap** | `standards/sync-bootstrap.sh` — merges _shared + per-role docs into `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`. |
+| **Sync bootstrap** | `standards/sync-bootstrap.sh` — merges _shared + per-role docs into company-scoped `~/Docs/paperclipcompanies/<company>/AGENTS.md`. Never touches CC's host CLAUDE.md. |
 
 ---
 
