@@ -43,7 +43,7 @@ See `../../config/models.json`: `reviewer` block.
 An issue status of `done` means the **review task completed** — it does not mean the verdict was `ship it`. These are two separate things:
 
 - **Issue status `done`**: the Reviewer finished its work and posted a comment.
-- **Verdict**: the explicit label in the comment body — one of `ship it`, `changes requested`, or `blocked`.
+- **Verdict**: the explicit label in the comment body — one of `ship it`, `needs review`, or `blocked`.
 
 The CEO closes the parent (reviewed) issue **only** after an explicit `ship it` verdict. Closing on task `done` status alone is a protocol violation. The Reviewer must always include the verdict label as a bolded `**Verdict:**` line at the top of its comment — never omit it, never bury it.
 
