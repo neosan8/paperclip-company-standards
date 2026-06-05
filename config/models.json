@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "Canonical model assignments per agent role across Paperclip companies.",
   "ceo": {
     "model": "claude-opus-4-8",
@@ -13,7 +13,7 @@
     "dangerouslyBypassApprovalsAndSandbox": true
   },
   "knowledge_keeper": {
-    "model": "claude-sonnet-latest",
+    "model": "claude-sonnet-4-6",
     "adapter": "claude_local",
     "auth": "claude_ai_subscription_oauth"
   },

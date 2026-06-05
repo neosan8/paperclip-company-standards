@@ -42,7 +42,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - Skills: install `uinaf/codex-review`.
 
 - [ ] Create **Knowledge Keeper** agent:
-  - Model: `claude-sonnet-latest`
+  - Model: `claude-sonnet-4-6`
   - Adapter: `claude_local`
   - Auth: Claude.ai subscription OAuth
   - API role: `pm` (spec name is Knowledge Keeper; API enum is pm)
