@@ -36,6 +36,20 @@ See `../../config/models.json`: `ceo` block.
 | `SOUL.md` | CEO identity: quality-gate obligation and anti-patterns |
 | `autoreview-invocation.md` | How and when to invoke the Reviewer agent |
 
+## Downstream agent heartbeat lifecycle
+
+When the CEO assigns work to a specialist agent, it owns that agent's heartbeat lifecycle:
+
+- **At assignment time**: enable the assigned agent's heartbeat (`PATCH /api/agents/{agentId}` with `{"heartbeatEnabled": true}`).
+- **After verdict lands**: disable the agent's heartbeat once the work cycle closes.
+
+Examples:
+- Knowledge Keeper heartbeat ON at Step C kickoff → OFF after Reviewer issues `ship it` on the Keeper's deliverable.
+- Reviewer heartbeat ON when CEO opens a review issue → OFF after verdict comment is posted.
+- Worker heartbeat ON when a `todo` sub-issue is assigned → OFF after Worker reports done.
+
+CC is **not** responsible for downstream heartbeat lifecycle. CC controls only the CEO's own heartbeat. The CEO owns every agent beneath it.
+
 ## Anti-patterns
 
 - Executing tasks directly instead of creating sub-issues.
@@ -44,3 +58,5 @@ See `../../config/models.json`: `ceo` block.
 - Pushing directly to `main` or `test` without CC review.
 - Using OpenAI API directly (OAuth only — see `../../config/models.json` policy field).
 - Starting a heartbeat loop with no work in queue.
+- Leaving a downstream agent's heartbeat running after its work cycle completes.
+- Expecting CC to manage Worker/Researcher/Keeper/Reviewer heartbeats.
