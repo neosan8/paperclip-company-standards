@@ -7,7 +7,7 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ## v0.2.3 — 2026-06-05
 
-Five process lessons surfaced during the SFX & Haptic company autonomous flow execution.
+Four process lessons surfaced during the SFX & Haptic company autonomous flow execution.
 
 ### 1. Reviewer task-done vs. verdict ship-it clarification
 **Files:** `roles/reviewer/README.md`
@@ -24,12 +24,7 @@ When the CEO assigns work, it must enable the assigned agent's heartbeat at assi
 
 New doc covering: symptom detection (status `error` or stale `executionLockedAt` > 30 min), diagnosis steps, recovery sequence (`PATCH` agent to `idle` → reset issue to `todo` → scope residual work in a comment → re-fire heartbeat), and common anti-patterns (invoking while in error state, skipping the residual-work comment, clearing lock after re-firing heartbeat).
 
-### 4. Knowledge Keeper model updated to `claude-sonnet-4-6`
-**Files:** `config/models.json`, `docs/flows/new-company-checklist.md`
-
-`claude-sonnet-latest` produced access errors in production today. The working canonical model is `claude-sonnet-4-6`. Updated both the model registry and the new-company checklist agent provisioning step.
-
-### 5. Branch workflow standard
+### 4. Branch workflow standard
 **Files:** `docs/flows/branch-workflow.md` *(new)*
 
 New doc deprecating `working` and `test` branches. Every change branches off `origin/main`, targets `main` in the PR, and is deleted after merge. One PR = one logical change. Includes type taxonomy (`spec/feature/fix/docs`) and a remediation procedure for existing PRs on deprecated branches.

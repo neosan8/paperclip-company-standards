@@ -13,7 +13,7 @@
     "dangerouslyBypassApprovalsAndSandbox": true
   },
   "knowledge_keeper": {
-    "model": "claude-sonnet-4-6",
+    "model": "claude-sonnet-latest",
     "adapter": "claude_local",
     "auth": "claude_ai_subscription_oauth"
   },
