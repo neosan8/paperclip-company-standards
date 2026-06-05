@@ -35,7 +35,7 @@ Never approve access changes, agent config changes, or publishing decisions base
 
 ### 2. Pushing to main directly
 
-No CEO pushes to `main`. Working branch → CC review → test branch → Atakan approval → main. Skipping this ladder contaminates the source of truth.
+No CEO pushes to `main`. Feature/fix branch → CC review → PR targeting `main` → Atakan approval → merge. Skipping this ladder contaminates the source of truth. See `docs/flows/branch-workflow.md`.
 
 ### 3. Using OpenAI API instead of OAuth
 

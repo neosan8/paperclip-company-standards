@@ -20,14 +20,15 @@ Install the `uinaf/codex-review` skill and the `uinaf/autoreview` skill (advisor
 
 ## git / GitHub CLI (`gh`)
 
-**Purpose:** Commit and push deliverables to `working` branch.
+**Purpose:** Commit and push deliverables on a short-lived branch, then open a PR to `main`.
 
 Worker-permitted operations:
-- `git add`, `git commit`, `git push origin working`
+- `git add`, `git commit`, `git push origin <branch>`
+- `gh pr create --base main` (open PR targeting main)
 - `gh pr view` (read-only, for checking PR status)
 
 Worker-forbidden operations:
-- `git push origin test` or `git push origin main`
+- `git push origin main` (direct push)
 - `git push --force` (any branch)
 - `gh pr merge`
 

@@ -17,7 +17,7 @@ Examples:
 - Changing the OAuth-only rule (e.g. permitting direct API keys for a role).
 
 **Process for major bump:**
-1. Working branch change, reviewed on test by CC + Knowledge CEO.
+1. Branch off `main` (`spec/<topic>` or `fix/<topic>`), open PR targeting `main`; CC + Knowledge CEO review.
 2. Atakan approves merge to main.
 3. CC creates a validation issue in every active company to verify compatibility.
 4. All companies must acknowledge the new version before the old version is considered retired.
@@ -33,7 +33,7 @@ Examples:
 - Formalizing a new flow that all companies must run.
 
 **Process for minor bump:**
-1. Working -> test -> main (standard PR flow).
+1. Branch off `main`, PR targeting `main` (standard PR flow).
 2. CC creates adoption issues in all active companies for the new requirement.
 3. Knowledge company tracks adoption status until all companies are compliant.
 
@@ -47,7 +47,7 @@ Bump patch for:
 - Adding examples or anti-patterns to existing docs.
 
 **Process for patch bump:**
-1. Working -> test -> main (standard PR flow).
+1. Branch off `main`, PR targeting `main` (standard PR flow).
 2. No adoption issues needed — passive update.
 
 ---

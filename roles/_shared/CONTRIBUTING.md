@@ -35,9 +35,10 @@ reviewer: confirm BFS-44 passes DoD — ship it (BFS-44)
 
 ## Branch policy
 
-- **`working`** — agents and humans push freely here. It may be broken at any point.
-- **`test`** — only push to `test` after CC + company CEO have reviewed the working branch. No direct commits to `test` without passing `working` review.
+- **`spec/<topic>` / `feature/<topic>` / `fix/<topic>` / `docs/<topic>`** — short-lived branches cut from `main`. All work happens here; open a PR targeting `main`; delete branch after merge.
 - **`main`** — Atakan approves all merges. Never push directly to `main`. CC never pushes to `main` without explicit Atakan approval.
+
+> `working` and `test` branches are deprecated. See `docs/flows/branch-workflow.md` for the authoritative workflow.
 
 ---
 

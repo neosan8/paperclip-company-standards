@@ -54,8 +54,8 @@ Knowledge Keeper does not restructure the graph. Graph topology changes require 
 Knowledge Keeper has direct read/write access to the KB vault via file system tools.
 
 Rules:
-- Always commit KB changes to `working` branch with format: `knowledge-keeper: <description> (PREFIX-NN)`.
-- Never commit to `test` or `main` directly.
+- Always commit KB changes to a `docs/<topic>` branch with format: `knowledge-keeper: <description> (PREFIX-NN)`, then open a PR targeting `main`.
+- Never commit directly to `main`.
 - Batch small changes (multiple brief ingestions from one week) into a single commit.
 
 ---

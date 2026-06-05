@@ -11,14 +11,14 @@ Worker heartbeat is simpler than CEO heartbeat. The Worker picks up `todo` issue
 Same as CEO: if `PAPERCLIP_APPROVAL_ID` is set, handle the approval before anything else.
 See `../../standards/approval-wake-protocol.md`.
 
-## Step 2 — Pull latest from `working`
+## Step 2 — Pull latest from `main`
 
 ```bash
-git switch working
-git pull origin working
+git fetch origin
+git checkout -b <type>/<topic> origin/main
 ```
 
-Switch to `working` first, then pull. Pulling without switching first would merge `origin/working` into whatever branch is currently checked out (which may be `main`, `test`, or detached HEAD), contaminating those branches. Always switch explicitly before pulling.
+Branch off the latest `main` before starting work. Use branch type `fix/`, `feature/`, `spec/`, or `docs/` as appropriate (see `docs/flows/branch-workflow.md`). Never push directly to `main`.
 
 ## Step 3 — Pick up next issue
 
@@ -88,7 +88,7 @@ Post a comment on the Paperclip issue:
 Done. DoD self-check passed.
 Deliverable: <file path or URL>
 Commit: <sha>
-Branch: working
+Branch: <branch-name>
 $review findings: <"none" or list accepted/deferred findings with rationale>
 ```
 
