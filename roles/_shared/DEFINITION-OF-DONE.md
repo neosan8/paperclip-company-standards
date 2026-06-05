@@ -14,7 +14,7 @@ Run through all five items in order. Do not skip.
 ### Step 1 — Deliverable exists
 
 - [ ] The primary deliverable (file, commit, doc, report, comment) exists in the agreed location.
-- [ ] If the deliverable is a file, it is committed and pushed to `working`.
+- [ ] If the deliverable is a file, it is committed and pushed to the issue's branch (a `spec/`, `feature/`, `fix/`, or `docs/` branch off `main`).
 - [ ] If the deliverable is a Paperclip comment or update, it is posted on the issue thread.
 
 ### Step 2 — Deliverable is accessible

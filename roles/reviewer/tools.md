@@ -7,7 +7,7 @@
 **Purpose:** Primary branch-diff review tool. Installed via codex skill install.
 
 ```bash
-autoreview --base=main --head=working --issue=PREFIX-NN
+autoreview --base=main --head=<branch> --issue=PREFIX-NN
 ```
 
 Output: structured finding list with severity classifications.
@@ -36,7 +36,7 @@ Scope is the current branch diff against `main`.
 
 ```bash
 gh pr diff        # if a PR exists
-git diff main...working -- <paths>   # branch diff without a PR
+git diff origin/main...HEAD -- <paths>   # branch diff without a PR
 ```
 
 Always read the actual diff. Do not review from memory or from the Worker's done comment description alone.

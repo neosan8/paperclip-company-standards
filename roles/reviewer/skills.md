@@ -18,7 +18,7 @@
 
 **How to invoke:**
 ```bash
-autoreview --base=main --head=working --issue=PREFIX-NN
+autoreview --base=main --head=<branch> --issue=PREFIX-NN
 ```
 
 **Self-review prohibition:** autoreview must not be invoked by the agent that authored the changes under review. If the Reviewer is the same session that produced the deliverable, escalate to CEO for an alternate review path.
@@ -53,7 +53,7 @@ autoreview --base=main --head=working --issue=PREFIX-NN
 
 **Pattern:**
 ```
-review-gang --issue=PREFIX-NN --branch=working --personas=correctness,karpathy
+review-gang --issue=PREFIX-NN --branch=<branch> --personas=correctness,karpathy
 ```
 
 Each persona returns its own finding list. The Reviewer synthesizes all personas into a single verdict.

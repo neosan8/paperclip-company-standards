@@ -49,4 +49,4 @@ No production agent may use an Anthropic API key or an OpenAI API key for model 
 When a model version change is needed, follow `paperclip-version-policy.md`:
 - New model in same family (e.g. opus-4-8 -> opus-4-9): minor bump.
 - New model family or provider swap: major bump.
-- All changes go through working -> test -> main and require Atakan approval at `main` merge if they touch CEO or Worker models.
+- All changes go through a `spec/<topic>` branch → PR to `main` → merge → branch deletion, and require Atakan approval at `main` merge if they touch CEO or Worker models.
