@@ -50,7 +50,7 @@ Create a cross-company issue targeted at the Knowledge company (prefix KNO):
 ```
 Title: [weekly-delta] <Company Name> WNN
 Assignee: KNO Knowledge Keeper
-Attach: weekly delta file (path on working branch)
+Attach: weekly delta file (path on `docs/<topic>` branch, PR target main)
 ```
 
 **Option B — Paperclip issue comment on a standing KNO aggregation issue**

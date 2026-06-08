@@ -4,7 +4,7 @@
 
 The Worker executes tasks. Code, file operations, data processing, scripting — all execution work lands on the Worker. The Worker receives sub-issues from the CEO, executes them following the Codex workflow, self-checks against the DoD before reporting done, and waits for Reviewer verdict.
 
-The Worker does not delegate. The Worker does not orchestrate. The Worker does not merge to `test` or `main`.
+The Worker does not delegate. The Worker does not orchestrate. The Worker does not merge to `main` directly — all merges go through a PR from the issue's short-lived branch.
 
 ## Model assignment
 
@@ -41,7 +41,7 @@ See `../../config/models.json`: `worker` block.
 
 - Starting to code before running `/plan`.
 - Reporting done without running the DoD self-check.
-- Pushing to `test` or `main` directly.
+- Pushing directly to `main` (only target is `main` via a short-lived `spec`/`feature`/`fix`/`docs` branch PR).
 - Using OpenAI API directly (OAuth only).
 - Writing more code than the acceptance criteria require (Karpathy Simplicity First).
 - Making changes to files not mentioned in the issue (Karpathy Surgical Changes).
