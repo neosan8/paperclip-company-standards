@@ -59,6 +59,14 @@ If Knowledge central has a standing "weekly aggregation" issue, post the delta a
 
 ---
 
+## 403 error on cross-company POST
+
+If the cross-company issue creation (Option A above) returns the error `403 Agent key cannot access another company`, the most likely cause is the Knowledge company being archived -- not a permissions issue with the agent key. Do not retry the POST. Do not spawn indefinite coord chains waiting for the call to succeed.
+
+**Escalation path:** Create a coord sub-issue on the local company CEO with title: `[escalate] Knowledge company unreachable -- 403 on cross-company POST`. The CEO forwards it to CC. CC verifies the Knowledge company status and unarchives if needed.
+
+---
+
 ## What happens after sending
 
 The Knowledge CEO (KNO) acknowledges receipt on the cross-company issue. The local Knowledge Keeper archives the delta file to `weekly-deltas/YYYY-WNN.md` in the local KB and closes the issue.

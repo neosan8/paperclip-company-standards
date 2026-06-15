@@ -104,6 +104,7 @@ Reference `config/required-tools.json` for tool list.
 
 - [ ] Notify the Knowledge company CEO: new company `<name>` (prefix `<PREFIX>`) is active. Provide company UUID.
 - [ ] Confirm Knowledge Keeper's first weekly delta target is set (next Monday or next scheduled window).
+- [ ] **Verify Knowledge company status is `active`.** The Knowledge company must remain `active` at all times. It is the ingest target for all production companies. Archiving the Knowledge company creates a silent fleet-wide blocker: the Paperclip API rejects cross-company API calls to archived companies with HTTP 403. CEOs and Routines must not change the Knowledge company status. If the Knowledge company needs to be paused for any reason, escalate to CC.
 
 ---
 
