@@ -5,6 +5,22 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ---
 
+## v0.2.4 — 2026-06-15
+
+Knowledge company never-archived guard + Wiki Feed Protocol 403 escalation rule. Root cause: cross-company Knowledge ingest bug surfaced 2026-06-15 from accidental Knowledge archive during the Animation + Analytics company bootstrap. All production companies POST their weekly delta to the Knowledge company issues endpoint; when Knowledge is archived, the Paperclip API returns HTTP 403 with message `Agent key cannot access another company`. Agents misread this as a permissions failure and retried indefinitely.
+
+### 1. Knowledge company never-archived guard
+**File:** `docs/flows/new-company-checklist.md`
+
+Added a mandatory check under "Register with Knowledge company": verify the Knowledge company status is `active` before completing company registration. Documents that CEOs and Routines must never change Knowledge company status and that any required pause must be escalated to CC.
+
+### 2. Wiki Feed Protocol 403 escalation rule
+**File:** `roles/knowledge-keeper/weekly-aggregation-handoff.md`
+
+Added "403 error on cross-company POST" section. Documents the correct interpretation of the 403 error (archived company, not bad agent key), the no-retry / no-coord-chain rule, and the escalation path via a coord sub-issue to CEO to CC.
+
+---
+
 ## v0.2.3 — 2026-06-05
 
 Four process lessons surfaced during the SFX & Haptic company autonomous flow execution.
