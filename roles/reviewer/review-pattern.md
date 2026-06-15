@@ -20,7 +20,7 @@ The Reviewer does NOT run:
 Before running autoreview, the Reviewer confirms:
 
 - [ ] Review issue has a deliverable location (file path or commit SHA).
-- [ ] Deliverable branch is `working` and has been pushed (not just local).
+- [ ] Deliverable branch is a `spec/<topic>`, `feature/<topic>`, `fix/<topic>`, or `docs/<topic>` branch off `main` and has been pushed (not just local).
 - [ ] The Reviewer did not contribute to the deliverable.
 - [ ] Review round counter for this issue is below 3.
 
@@ -32,7 +32,7 @@ If any item fails: post a comment explaining the blocker; do not proceed until i
 
 ### Round 1
 
-1. Fetch the branch diff: `gh pr diff` (when a PR exists) or `git diff main...working -- <deliverable paths>` (three-dot syntax; excludes commits added to main after divergence).
+1. Fetch the branch diff: `gh pr diff` (when a PR exists) or `git diff origin/main...HEAD -- <deliverable paths>` (three-dot syntax; excludes commits added to main after divergence).
 2. Run `autoreview`. Read every finding.
 3. Run mandatory `correctness` persona from review-gang.
 4. Run applicable additional personas (karpathy always; security/performance/accessibility if in scope per `skills.md`).

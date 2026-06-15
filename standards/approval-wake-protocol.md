@@ -42,8 +42,8 @@ Based on the approval context:
 
 | Role | Can approve autonomously | Must escalate |
 |------|------------------------|---------------|
-| CEO | Issue status changes, sub-issue creation, role-scope tool use | Merges to test/main, new agent creation, publishing, config changes |
-| Worker | File writes on working branch, codex skill installs | Anything outside working branch |
+| CEO | Issue status changes, sub-issue creation, role-scope tool use | Merges to main, new agent creation, publishing, config changes |
+| Worker | File writes on the issue's `spec/<topic>` (or `feature`/`fix`/`docs`) branch, codex skill installs | Anything outside the issue branch; merges target main only |
 | Reviewer | Verdict issuance on assigned review issues | Changes to deliverables |
 | Researcher | Acknowledging research assignments | Any execution action |
 | Knowledge Keeper | KB writes, gbrain sync | Anything outside KB vault |

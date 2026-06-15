@@ -18,9 +18,10 @@ Tagged with semver (e.g. `v0.1.0`). When a new tag is published:
 
 ## Branch model
 
-- **`working`** — CC and agents push freely; may be incomplete.
-- **`test`** — locally reviewed; CC + Knowledge CEO gate.
+- **`spec/<topic>` / `feature/<topic>` / `fix/<topic>` / `docs/<topic>`** — short-lived branches cut from `main`; PR targets `main`; deleted after merge.
 - **`main`** — canonical source of truth; external agents and human team consume only this; tagged with semver; Atakan approves merge.
+
+> `working` and `test` branches are deprecated. See `docs/flows/branch-workflow.md` for the authoritative workflow.
 
 ## Quick navigation
 

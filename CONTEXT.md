@@ -75,9 +75,10 @@ Every company and every human team CC install must have:
 
 ## Branch model (every canonical repo)
 
-- **`working`** — agents push freely; may be broken.
-- **`test`** — locally approved; CC + company CEO review gate.
+- **`spec/<topic>` / `feature/<topic>` / `fix/<topic>` / `docs/<topic>`** — short-lived branches cut from `main`; PR targets `main`; deleted after merge.
 - **`main`** — canonical source of truth; tagged with semver; Atakan approves merge.
+
+> `working` and `test` branches are deprecated. See `docs/flows/branch-workflow.md` for the authoritative workflow.
 
 ## Related repos
 

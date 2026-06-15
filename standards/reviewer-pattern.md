@@ -72,11 +72,12 @@ Each re-run of the Reviewer on the same issue is a new round. Maximum 3 rounds.
 After CEO reports Done to CC, the CC-to-Neosan handoff is:
 
 1. CC tells Neosan: "PREFIX-NN is Done. Reviewer `ship it`. Deliverable at [location]."
-2. Neosan approves the merge from `working` to `test`.
-3. CC runs the `test` → `main` promotion after Atakan approval.
-4. Neosan syncs the relevant artifact to Notion (documentation, design decisions).
+2. CEO opens a PR from the issue's `spec/<topic>` (or `feature`/`fix`/`docs`) branch to `main`.
+3. Neosan reviews and approves the PR. CC merges to `main` after approval.
+4. Branch is deleted after merge.
+5. Neosan syncs the relevant artifact to Notion (documentation, design decisions).
 
-CC never merges to `test` or `main` without Neosan's explicit approval.
+CC never merges to `main` without Neosan's explicit approval.
 Neosan never merges to `main` without Atakan's explicit approval.
 
 ---

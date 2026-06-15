@@ -11,7 +11,7 @@ Trigger the Reviewer after every Worker completion, before closing any issue.
 Specific triggers:
 1. Worker posts a "done" comment on an issue.
 2. Worker updates issue status to `review`.
-3. CEO observes a new commit on `working` branch linked to an issue that was in `in-progress`.
+3. CEO observes a new commit on the Worker's branch linked to an issue that was in `in-progress`.
 
 Do not wait for the Worker to explicitly ask for review. The CEO proactively triggers the Reviewer on every completion.
 
@@ -28,7 +28,7 @@ Title: [review] PREFIX-NN — <parent issue title>
 Assignee: Reviewer agent
 Description:
   Parent issue: PREFIX-NN
-  Branch: working
+  Branch: <spec/feature/fix/docs branch name>
   Deliverable location: <path or URL from Worker's done comment>
   Review type: autoreview + DoD check
   Retry cap: 3 rounds

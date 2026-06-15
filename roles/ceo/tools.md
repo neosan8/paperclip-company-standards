@@ -52,9 +52,9 @@ The GRAPH_REPORT.md referenced in AGENTS.md is generated from graphify. Keep it 
 **Purpose:** Branch inspection, PR creation, diff review.
 
 CEO uses `gh` to:
-- Check `working` branch status before triggering Reviewer.
+- Check the Worker's feature/fix branch status before triggering Reviewer.
 - Verify that deliverable commits are pushed.
-- Create PRs from `working` to `test` after CC review gate.
+- Create PRs from the Worker's branch to `main` after CC review gate.
 
 CEO does NOT use `gh` to:
 - Commit code.

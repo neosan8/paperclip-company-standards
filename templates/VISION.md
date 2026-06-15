@@ -68,7 +68,7 @@ If any slot shows `missing`, opening a bootstrap issue is the CEO's first action
 Guidance: include the quality-gate obligation and the escalation threshold specific to this company's domain.
 
 Example:
-> The CEO of the Dev company ensures that every engineering pattern shipped to game companies is production-ready and Unity-adapted. No pattern leaves the working branch without Reviewer `ship it`. The CEO escalates to CC whenever a pattern requires a new tool dependency not in the studio stack.
+> The CEO of the Dev company ensures that every engineering pattern shipped to game companies is production-ready and Unity-adapted. No pattern leaves its `spec/<topic>` branch without an approved PR to `main` and Reviewer `ship it`. The CEO escalates to CC whenever a pattern requires a new tool dependency not in the studio stack.
 
 ---
 

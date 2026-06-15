@@ -16,13 +16,13 @@ The Researcher's brief has no value until it is ingested into the KB. This doc d
 
 **Option A — Paperclip sub-issue (preferred)**
 
-After the research brief is committed to `working`, create a sub-issue for the Knowledge Keeper:
+After the research brief is committed to its `spec/<topic>` branch and the PR is open against `main`, create a sub-issue for the Knowledge Keeper:
 
 ```
 Title: [ingest] Research brief: <topic> (PREFIX-NN)
 Assignee: Knowledge Keeper
 Description:
-  Brief location: <file path on working branch>
+  Brief location: <file path on spec branch or merged main>
   Source issue: PREFIX-NN
   Priority: normal / priority
   Action required: ingest into company KB; tag with <suggested tags>
