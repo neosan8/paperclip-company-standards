@@ -8,7 +8,7 @@ Configuration and behavioral contract for the Worker agent in any Paperclip comp
 
 | Field | Value |
 |-------|-------|
-| Model | `gpt-5.5` |
+| Model | `gpt-5.6-sol` |
 | Adapter | `codex_local` |
 | Auth | ChatGPT subscription OAuth |
 | `dangerouslyBypassApprovalsAndSandbox` | `true` |

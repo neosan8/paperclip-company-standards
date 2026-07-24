@@ -26,11 +26,11 @@ Every Paperclip company — central and game — must contain exactly these five
 
 | Role | Purpose | Model |
 |------|---------|-------|
-| **CEO** | Orchestrates all work via sub-issues. Never executes directly. | claude-opus-4-8 |
-| **Worker** | Executes tasks: code, files, research tasks delegated by CEO. | gpt-5.5 / Codex OAuth |
-| **Researcher** | Sector scans, frontier patterns, gold-standard vetting. Hands to Knowledge Keeper. | gpt-5.5 / Codex OAuth |
-| **Knowledge Keeper** | Company-internal KB curation, decision capture, weekly delta to Knowledge central. | claude-sonnet-latest |
-| **Reviewer** | Independent quality gate. Reviews all deliverables before CEO reports done to CC. Never reviews own work. | gpt-5.5 / Codex OAuth |
+| **CEO** | Orchestrates all work via sub-issues. Never executes directly. | claude-opus-4-7 |
+| **Worker** | Executes tasks: code, files, research tasks delegated by CEO. | gpt-5.6-sol / Codex OAuth |
+| **Researcher** | Sector scans, frontier patterns, gold-standard vetting. Hands to Knowledge Keeper. | gpt-5.6-sol / Codex OAuth |
+| **Knowledge Keeper** | Company-internal KB curation, decision capture, weekly delta to Knowledge central. | claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |
+| **Reviewer** | Independent quality gate. Reviews all deliverables before CEO reports done to CC. Never reviews own work. | gpt-5.6-sol / Codex OAuth |
 
 See `../../config/models.json` for machine-readable assignments.
 

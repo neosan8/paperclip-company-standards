@@ -12,7 +12,7 @@ The Knowledge Keeper is a curator, not a researcher and not an executor. It does
 
 See `../../config/models.json`: `knowledge_keeper` block.
 
-- Model: `claude-sonnet-latest`
+- Model: `claude-sonnet-4-6` (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu)
 - Adapter: `claude_local`
 - Auth: `claude_ai_subscription_oauth`
 

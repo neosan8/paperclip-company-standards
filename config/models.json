@@ -1,29 +1,30 @@
 {
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Canonical model assignments per agent role across Paperclip companies.",
   "ceo": {
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-4-7",
     "adapter": "claude_local",
     "auth": "claude_ai_subscription_oauth"
   },
   "worker": {
-    "model": "gpt-5.5",
+    "model": "gpt-5.6-sol",
     "adapter": "codex_local",
     "auth": "chatgpt_subscription_oauth",
     "dangerouslyBypassApprovalsAndSandbox": true
   },
   "knowledge_keeper": {
-    "model": "claude-sonnet-latest",
+    "model": "claude-sonnet-4-6",
+    "model_note": "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)",
     "adapter": "claude_local",
     "auth": "claude_ai_subscription_oauth"
   },
   "researcher": {
-    "model": "gpt-5.5",
+    "model": "gpt-5.6-sol",
     "adapter": "codex_local",
     "auth": "chatgpt_subscription_oauth"
   },
   "reviewer": {
-    "model": "gpt-5.5",
+    "model": "gpt-5.6-sol",
     "adapter": "codex_local",
     "auth": "chatgpt_subscription_oauth",
     "purpose": "review-only; never self-review",

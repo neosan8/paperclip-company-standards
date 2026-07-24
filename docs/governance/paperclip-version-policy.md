@@ -11,7 +11,7 @@ This repo uses semantic versioning (`MAJOR.MINOR.PATCH`). Tags on `main` are the
 Bump major when a change would require every running company to reconfigure its agents.
 
 Examples:
-- Switching CEO model from `claude-opus-4-8` to a different provider/model family.
+- Switching CEO model from `claude-opus-4-7` to a different provider/model family.
 - Changing the mandatory adapter (e.g. `claude_local` -> something else).
 - Removing a mandatory agent role (e.g. eliminating Knowledge Keeper as a requirement).
 - Changing the OAuth-only rule (e.g. permitting direct API keys for a role).

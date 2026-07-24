@@ -10,7 +10,7 @@ The Worker does not delegate. The Worker does not orchestrate. The Worker does n
 
 See `../../config/models.json`: `worker` block.
 
-- Model: `gpt-5.5`
+- Model: `gpt-5.6-sol`
 - Adapter: `codex_local`
 - Auth: `chatgpt_subscription_oauth`
 - `dangerouslyBypassApprovalsAndSandbox: true` (Worker executes in a sandboxed repo environment; this flag is pre-approved)

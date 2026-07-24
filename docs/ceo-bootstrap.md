@@ -8,7 +8,7 @@ Configuration and behavioral contract for the CEO agent in any Paperclip company
 
 | Field | Value |
 |-------|-------|
-| Model | `claude-opus-4-8` |
+| Model | `claude-opus-4-7` |
 | Adapter | `claude_local` |
 | Auth | Claude.ai subscription OAuth |
 | API direct use | Forbidden |

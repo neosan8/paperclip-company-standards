@@ -10,7 +10,7 @@ The Researcher is an intelligence function, not an execution function. A Researc
 
 See `../../config/models.json`: `researcher` block.
 
-- Model: `gpt-5.5`
+- Model: `gpt-5.6-sol`
 - Adapter: `codex_local`
 - Auth: `chatgpt_subscription_oauth`
 

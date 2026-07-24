@@ -11,11 +11,11 @@ When all items are checked, the company is bootstrapped and the first heartbeat 
 These are performed by CC when creating the company:
 
 - [ ] Company created in Paperclip with the correct prefix (see `../../config/central-companies.json` or game company naming convention).
-- [ ] CEO agent slot configured with model `claude-opus-4-8`, adapter `claude_local`, auth `claude_ai_subscription_oauth`.
-- [ ] Worker agent slot configured with model `gpt-5.5`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, `dangerouslyBypassApprovalsAndSandbox: true`.
-- [ ] Researcher agent slot configured with model `gpt-5.5`, adapter `codex_local`, auth `chatgpt_subscription_oauth`.
-- [ ] Knowledge Keeper agent slot configured with model `claude-sonnet-latest`, adapter `claude_local`, auth `claude_ai_subscription_oauth`.
-- [ ] Reviewer agent slot configured with model `gpt-5.5`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, purpose note: `review-only; never self-review`.
+- [ ] CEO agent slot configured with model `claude-opus-4-7`, adapter `claude_local`, auth `claude_ai_subscription_oauth`.
+- [ ] Worker agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, `dangerouslyBypassApprovalsAndSandbox: true`.
+- [ ] Researcher agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`.
+- [ ] Knowledge Keeper agent slot configured with model `claude-sonnet-4-6`, adapter `claude_local`, auth `claude_ai_subscription_oauth`. (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu)
+- [ ] Reviewer agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, purpose note: `review-only; never self-review`.
 - [ ] All five agent slots verified in Paperclip company config.
 
 ---

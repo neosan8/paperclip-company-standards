@@ -12,7 +12,7 @@ The Reviewer's job is not to find reasons to block — it is to confirm that the
 
 See `../../config/models.json`: `reviewer` block.
 
-- Model: `gpt-5.5`
+- Model: `gpt-5.6-sol`
 - Adapter: `codex_local`
 - Auth: `chatgpt_subscription_oauth`
 - Purpose: `review-only; never self-review`

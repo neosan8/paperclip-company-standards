@@ -8,7 +8,7 @@ Mandatory in every Paperclip company (central and game companies alike).
 
 | Field | Value |
 |-------|-------|
-| Model | `gpt-5.5` |
+| Model | `gpt-5.6-sol` |
 | Adapter | `codex_local` |
 | Auth | ChatGPT subscription OAuth |
 | Heartbeat | OFF (on-demand only) |
