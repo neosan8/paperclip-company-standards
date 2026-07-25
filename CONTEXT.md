@@ -16,7 +16,7 @@ Agents and developers should read this file before any other doc in this repo. I
 
 ## Agent roles
 
-- **CEO** — orchestrator only. Never executes tasks directly. Creates sub-issues and delegates to workers. Model: claude-opus-4-7. If a CEO is seen writing code or running CLI commands itself, that is a bug.
+- **CEO** — orchestrator only. Never executes tasks directly. Creates sub-issues and delegates to workers. Model: claude-opus-5. If a CEO is seen writing code or running CLI commands itself, that is a bug.
 - **Worker** — executes tasks (code, research, file operations). Model: gpt-5.6-sol via Codex OAuth. Follows `/plan -> /goal -> $codex-review -> $review` workflow.
 - **Researcher** — per-company specialist. Finds gold standards, frontier patterns, sector best-practices for the company domain. Hands findings to Knowledge Keeper. Model: gpt-5.6-sol via Codex OAuth.
 - **Knowledge Keeper** — per-company specialist. Maintains the company-internal wiki/KB. Captures decisions. Sends weekly delta to central Knowledge. Model: claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu).

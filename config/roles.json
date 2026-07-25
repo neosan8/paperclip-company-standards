@@ -8,7 +8,7 @@
       "display": "CEO",
       "paperclip_api_role": "ceo",
       "purpose": "Orchestrates all work via sub-issues. Never executes directly.",
-      "model": "claude-opus-4-7",
+      "model": "claude-opus-5",
       "adapter": "claude_local",
       "auth": "claude_ai_subscription_oauth",
       "slots_per_company": 1,

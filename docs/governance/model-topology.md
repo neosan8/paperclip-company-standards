@@ -6,7 +6,7 @@ Prose explanation of canonical model assignments. Machine-readable values are in
 
 ## Role assignments
 
-### CEO — claude-opus-4-7
+### CEO — claude-opus-5
 
 The CEO is the highest-stakes reasoning role in any company. It reads complex briefs, decomposes ambiguous problems into structured sub-issues, and makes judgment calls about priority and scope. Opus is the only model in the studio with sufficient reasoning depth for this role.
 

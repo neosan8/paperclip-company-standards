@@ -7,12 +7,12 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ## v0.2.5 — 2026-07-24
 
-Model topology update per Atakan's directive, driven by two root causes: (1) the CEO and Codex agent model ids needed to move forward (CEO -> `claude-opus-4-7`, Worker/Researcher/Reviewer -> `gpt-5.6-sol`), and (2) the `claude-sonnet-latest` alias used for Knowledge Keeper is not a valid, pinned model id — this exact bug stalled Product Design for 5 weeks. Going forward, `-latest` aliases are banned; every role must reference an explicit, versioned model id.
+Model topology update per Atakan's directive, driven by two root causes: (1) the CEO and Codex agent model ids needed to move forward (CEO -> `claude-opus-5`, Worker/Researcher/Reviewer -> `gpt-5.6-sol`), and (2) the `claude-sonnet-latest` alias used for Knowledge Keeper is not a valid, pinned model id — this exact bug stalled Product Design for 5 weeks. Going forward, `-latest` aliases are banned; every role must reference an explicit, versioned model id. Reasoning effort is standardized to **high** for both CEO (Claude user-settings `effortLevel`) and Codex agents (`model_reasoning_effort = "high"` in `~/.codex/config.toml` — the only lever; adapterConfig has no effort key).
 
 ### 1. CEO model bump
 **Files:** `config/models.json`, `config/roles.json`, `CONTEXT.md`, `docs/ceo-bootstrap.md`, `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/governance/paperclip-version-policy.md`, `roles/_shared/CONTEXT.md`, `roles/ceo/README.md`, `templates/CEO_BOOTSTRAP.md`
 
-`claude-opus-4-8` → `claude-opus-4-7` everywhere the CEO model is referenced.
+`claude-opus-4-8` → `claude-opus-5` everywhere the CEO model is referenced.
 
 ### 2. Codex agent model bump (Worker, Researcher, Reviewer)
 **Files:** `config/models.json`, `config/roles.json`, `CONTEXT.md`, `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/specialists/researcher.md`, `docs/worker-bootstrap.md`, `roles/_shared/CONTEXT.md`, `roles/researcher/README.md`, `roles/reviewer/README.md`, `roles/worker/README.md`, `templates/CEO_BOOTSTRAP.md`

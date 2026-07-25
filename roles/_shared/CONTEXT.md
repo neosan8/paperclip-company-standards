@@ -26,7 +26,7 @@ Every Paperclip company — central and game — must contain exactly these five
 
 | Role | Purpose | Model |
 |------|---------|-------|
-| **CEO** | Orchestrates all work via sub-issues. Never executes directly. | claude-opus-4-7 |
+| **CEO** | Orchestrates all work via sub-issues. Never executes directly. | claude-opus-5 |
 | **Worker** | Executes tasks: code, files, research tasks delegated by CEO. | gpt-5.6-sol / Codex OAuth |
 | **Researcher** | Sector scans, frontier patterns, gold-standard vetting. Hands to Knowledge Keeper. | gpt-5.6-sol / Codex OAuth |
 | **Knowledge Keeper** | Company-internal KB curation, decision capture, weekly delta to Knowledge central. | claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |

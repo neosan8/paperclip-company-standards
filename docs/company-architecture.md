@@ -42,7 +42,7 @@ Each game company contains:
 
 | Agent | Role | Model |
 |-------|------|-------|
-| CEO | Orchestrates all work inside the game company | claude-opus-4-7 |
+| CEO | Orchestrates all work inside the game company | claude-opus-5 |
 | Worker | Executes tasks (code, research, file ops) | gpt-5.6-sol via Codex |
 | Researcher | Finds gold standards and frontier patterns for the game's domain | gpt-5.6-sol via Codex |
 | Knowledge Keeper | Maintains company-internal KB; weekly delta to Knowledge central | claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |

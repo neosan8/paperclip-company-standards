@@ -26,7 +26,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
 **API enum note:** The Paperclip API enforces a fixed role enum. Use the `paperclip_api_role` values from `config/roles.json` when calling `paperclip_create_agent` — not the spec display names. Key mappings: Worker → `engineer`, Knowledge Keeper → `pm`, Reviewer → `qa`. `self_review_prohibited` is not a platform field; embed it as instruction text in the Reviewer's capabilities.
 
 - [ ] Create **CEO** agent:
-  - Model: `claude-opus-4-7`
+  - Model: `claude-opus-5`
   - Adapter: `claude_local`
   - Auth: Claude.ai subscription OAuth
   - API role: `ceo`
