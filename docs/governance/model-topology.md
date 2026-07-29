@@ -42,16 +42,26 @@ Auth: ChatGPT subscription OAuth (same rule as Worker).
 
 Reasoning effort: **high**, from `~/.codex/config.toml` (same host-wide mechanism as Worker).
 
+### Reviewer — gpt-5.6-sol via Codex
+
+Reviewers audit work products before a CEO accepts them. The role needs careful reading and defect detection rather than generative depth, and it must be cheap enough to run on every deliverable — GPT-5.6-sol via Codex fits both.
+
+`self_review_prohibited` is not a platform field: the Paperclip API has no such flag. Embed "review-only; never self-review" as instruction text in the Reviewer's capabilities instead.
+
+Auth: ChatGPT subscription OAuth (same rule as Worker).
+
+Reasoning effort: **high**, from `~/.codex/config.toml` (same host-wide mechanism as Worker).
+
 ---
 
 ## Policy — reasoning effort is high for every role
 
-All four roles run at **high** reasoning effort. There are exactly two levers, both host-level:
+All **five** roles run at **high** reasoning effort. There are exactly two levers, both host-level:
 
-| Surface | File | Setting | Scope |
+| Surface | File | Setting | Roles covered |
 |---|---|---|---|
-| Claude (CEO, Knowledge Keeper) | `~/.claude/settings.json` | `"effortLevel": "high"` | inherited by all `claude_local` agents |
-| Codex (Worker, Researcher) | `~/.codex/config.toml` | `model_reasoning_effort = "high"` | host-wide, all `codex_local` agents |
+| Claude | `~/.claude/settings.json` | `"effortLevel": "high"` | CEO, Knowledge Keeper — all `claude_local` agents inherit it |
+| Codex | `~/.codex/config.toml` | `model_reasoning_effort = "high"` | Worker, Researcher, **Reviewer** — host-wide, all `codex_local` agents |
 
 **There is no per-agent effort setting.** `adapterConfig` has no effort key on either adapter. A new or rebuilt company inherits whatever the host is set to — so verifying these two files is a required provisioning step, not an optional one. See `docs/flows/new-company-checklist.md`.
 
