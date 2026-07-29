@@ -11,11 +11,11 @@ Configuration and behavioral contract for the Worker agent in any Paperclip comp
 | Model | `gpt-5.6-sol` |
 | Adapter | `codex_local` |
 | Auth | ChatGPT subscription OAuth |
-| Reasoning effort | **high** — `model_reasoning_effort = "high"` in `~/.codex/config.toml` |
+| Reasoning effort | **high** — `adapterConfig.modelReasoningEffort: "high"` |
 | `dangerouslyBypassApprovalsAndSandbox` | `true` |
 | API direct use | Forbidden |
 
-**Effort is host-wide, not per agent.** `~/.codex/config.toml` is the only lever — `adapterConfig` has no effort key, so the setting applies to every `codex_local` agent on the machine and cannot be overridden per worker. Verify it on the host before treating this worker as provisioned.
+**Effort is set per agent.** `codex_local` reads `adapterConfig.modelReasoningEffort`. Paperclip runs each codex agent in a managed per-agent `CODEX_HOME`, so `~/.codex/config.toml` is not read by company agents — a correctly configured host proves nothing about this worker. Verify the agent's own `adapterConfig`.
 
 **Critical:** Codex must auth via ChatGPT subscription, never OpenAI API. Using API keys costs real money per call. If Codex prompts for an API key, stop and fix the auth config.
 

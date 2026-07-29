@@ -12,7 +12,7 @@ The CEO is the highest-stakes reasoning role in any company. It reads complex br
 
 Auth: Claude.ai subscription OAuth. The Claude.ai subscription is the lowest-cost path to Opus without per-call API charges. Never use direct Anthropic API for production agents.
 
-Reasoning effort: **high**. Set `"effortLevel": "high"` in `~/.claude/settings.json`. `claude_local` agents inherit this from user settings — there is no per-agent effort field.
+Reasoning effort: **high** — set `adapterConfig.effort: "high"` on the agent (passed to the CLI as `--effort high`).
 
 ### Worker — gpt-5.6-sol via Codex
 
@@ -22,7 +22,7 @@ Codex must auth via ChatGPT subscription OAuth. OpenAI API keys are forbidden fo
 
 `dangerouslyBypassApprovalsAndSandbox: true` is required for workers to execute CLI commands and file operations without per-action approval prompts. This is intentional: the CEO is the approval layer, not the adapter.
 
-Reasoning effort: **high**. Set `model_reasoning_effort = "high"` in `~/.codex/config.toml`. This is the only lever — `adapterConfig` has no effort key, so the setting is host-wide and applies to every `codex_local` agent on that machine. Setting it per agent is not possible; do not attempt it.
+Reasoning effort: **high** — set `adapterConfig.modelReasoningEffort: "high"` on the agent. Note that Paperclip runs codex agents in a managed per-agent `CODEX_HOME`, so `~/.codex/config.toml` is not read by company agents.
 
 ### Knowledge Keeper — claude-sonnet-4-6
 
@@ -32,7 +32,7 @@ The Knowledge Keeper does structured reading, writing, and synthesis. It does no
 
 Auth: Claude.ai subscription OAuth (same subscription as CEO, different agent).
 
-Reasoning effort: **high**, inherited from `~/.claude/settings.json` (same mechanism as CEO).
+Reasoning effort: **high** — `adapterConfig.effort: "high"` (same mechanism as CEO).
 
 ### Researcher — gpt-5.6-sol via Codex
 
@@ -40,7 +40,7 @@ Researchers run structured search and synthesis workflows. The Codex workflow (`
 
 Auth: ChatGPT subscription OAuth (same rule as Worker).
 
-Reasoning effort: **high**, from `~/.codex/config.toml` (same host-wide mechanism as Worker).
+Reasoning effort: **high** — `adapterConfig.modelReasoningEffort: "high"` (same mechanism as Worker).
 
 ### Reviewer — gpt-5.6-sol via Codex
 
@@ -50,20 +50,24 @@ Reviewers audit work products before a CEO accepts them. The role needs careful 
 
 Auth: ChatGPT subscription OAuth (same rule as Worker).
 
-Reasoning effort: **high**, from `~/.codex/config.toml` (same host-wide mechanism as Worker).
+Reasoning effort: **high** — `adapterConfig.modelReasoningEffort: "high"` (same mechanism as Worker).
 
 ---
 
 ## Policy — reasoning effort is high for every role
 
-All **five** roles run at **high** reasoning effort. There are exactly two levers, both host-level:
+All **five** roles run at **high** reasoning effort. Effort is set **per agent, in `adapterConfig`** — this is the controlling surface for Paperclip-managed agents:
 
-| Surface | File | Setting | Roles covered |
+| Adapter | Field | Values | Roles |
 |---|---|---|---|
-| Claude | `~/.claude/settings.json` | `"effortLevel": "high"` | CEO, Knowledge Keeper — all `claude_local` agents inherit it |
-| Codex | `~/.codex/config.toml` | `model_reasoning_effort = "high"` | Worker, Researcher, **Reviewer** — host-wide, all `codex_local` agents |
+| `claude_local` | `adapterConfig.effort` | `low` \| `medium` \| `high` | CEO, Knowledge Keeper |
+| `codex_local` | `adapterConfig.modelReasoningEffort` | `low` \| `medium` \| `high` | Worker, Researcher, Reviewer |
 
-**There is no per-agent effort setting.** `adapterConfig` has no effort key on either adapter. A new or rebuilt company inherits whatever the host is set to — so verifying these two files is a required provisioning step, not an optional one. See `docs/flows/new-company-checklist.md`.
+`claude_local` passes the value to the CLI as `--effort`; `codex_local` applies `modelReasoningEffort` to the Codex session config.
+
+**Host config files do not control Paperclip agents.** `~/.claude/settings.json` and `~/.codex/config.toml` govern *host-run* agents only — a directly invoked Claude Code or Codex CLI session. Paperclip runs each codex agent in a **managed per-agent `CODEX_HOME`** under `instances/<id>/companies/<companyId>/agents/<agentId>/codex-home/`, and an explicit `CODEX_HOME` override must never point at `~/.codex` or the shared company codex-home.
+
+Setting the host files and assuming companies inherit them is the failure mode this section exists to prevent: agents keep running at default effort while the host looks correctly configured. **Verify `adapterConfig` on every agent.** See `docs/flows/new-company-checklist.md`.
 
 ---
 

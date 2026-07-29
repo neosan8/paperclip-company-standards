@@ -19,14 +19,14 @@ Atomic checklist CC runs every time a new Paperclip company is created. Complete
 
 ---
 
-## Verify host reasoning effort (do this first)
+## Reasoning effort — set per agent
 
-Reasoning effort is **high** for every role, and it is set host-wide — not per agent. A company provisioned on a host with default effort will silently run below standard, so verify both files before creating agents:
+Reasoning effort is **high** for every role, and it is set **per agent in `adapterConfig`** — not by host config files. Set it as each agent is created, and verify after:
 
-- [ ] `~/.claude/settings.json` contains `"effortLevel": "high"` — covers CEO and Knowledge Keeper (`claude_local` agents inherit it)
-- [ ] `~/.codex/config.toml` contains `model_reasoning_effort = "high"` — covers Worker, Researcher and Reviewer (`codex_local`)
+- [ ] CEO and Knowledge Keeper (`claude_local`): `adapterConfig.effort` = `"high"`
+- [ ] Worker, Researcher and Reviewer (`codex_local`): `adapterConfig.modelReasoningEffort` = `"high"`
 
-`adapterConfig` has no effort key on either adapter; there is no per-agent override. See `docs/governance/model-topology.md`.
+**Do not rely on `~/.claude/settings.json` or `~/.codex/config.toml`.** Those govern host-run CLI sessions only. Paperclip gives each codex agent a managed `CODEX_HOME` under `instances/<id>/companies/<companyId>/agents/<agentId>/codex-home/`, so a correctly configured host tells you nothing about what the company's agents are running. See `docs/governance/model-topology.md`.
 
 ---
 
