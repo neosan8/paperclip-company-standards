@@ -66,4 +66,6 @@ git push origin v0.1.0
 
 ## Current version
 
-`v0.1.0` — initial scaffold. 13 central companies. Mandatory stack. 4 standard agents per company (CEO, Worker, Knowledge Keeper, Researcher). OAuth-only policy.
+`v0.2.2` — latest tag on `main`. 13 central companies. Mandatory stack. **5** standard agents per company (CEO, Worker, Researcher, Knowledge Keeper, Reviewer — Reviewer became mandatory in v0.2.0). OAuth-only policy.
+
+`v0.3.0` is in review (PR #11): model topology update and the reasoning-effort standard.
