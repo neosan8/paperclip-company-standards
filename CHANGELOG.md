@@ -24,6 +24,13 @@ Model topology update per Atakan's directive, driven by two root causes: (1) the
 
 `claude-sonnet-latest` → `claude-sonnet-4-6`, with an explicit note attached at every occurrence: "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)". The `-latest` alias is not a valid model id and must never be used for a production agent slot again.
 
+### 4. Clarify MAJOR vs MINOR in the version policy
+**File:** `docs/governance/paperclip-version-policy.md`
+
+The MAJOR heading said "bump major when a change would require every running company to reconfigure its agents" — which describes this release too, contradicting its own examples (all of which are provider-family, adapter, role-removal or auth-policy changes) and contradicting `model-topology.md`, where a same-family model move is minor. As written, the repo mandated two different release classes for the same change.
+
+Rewritten so the criterion is **breakage, not effort**: both major and minor touch every company (validation issues vs adoption issues), so "must be reconfigured" cannot be the discriminator. The test is whether the old config still functions. Same-family model moves and new required `adapterConfig` settings are explicitly minor.
+
 **Note on versioning:** this release is a **minor** bump, not a patch. `paperclip-version-policy.md` reserves patch for clarifications that do not change behavior, and `model-topology.md` classifies a same-family model move as minor. This change alters model behavior for **all five** roles — CEO, Worker, Researcher, Knowledge Keeper and Reviewer — and standardizes reasoning effort, so it requires the minor process: adoption issues in every active company, tracked by Knowledge until all are compliant.
 
 It was originally drafted as `v0.2.5` (the next free slot after the existing `v0.2.4` entry of 2026-06-15, Knowledge company never-archived guard), and the git branch was named `v0.2.4-model-topology` before either number was settled. Both were wrong for a behavior change; the release was reclassified to `v0.3.0` on 2026-07-29. The branch name is a working label only and is not canonical — `config/models.json`, this changelog, and the PR title all read `0.3.0`.
