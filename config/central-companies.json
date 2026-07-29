@@ -1,9 +1,9 @@
 {
   "version": "0.2.1",
-  "description": "13 central Paperclip companies (template/standards tier). As of v0.2.0 every company has 5 agent slots: CEO + Worker + Researcher + Knowledge Keeper + Reviewer.",
+  "description": "13 central Paperclip companies (template/standards tier): 12 active, 1 archived (CRE). As of v0.2.0 every company has 5 canonical agent slots: CEO + Worker + Researcher + Knowledge Keeper + Reviewer. Live companies may carry additional specialist agents beyond these five — adoption and compliance work targets the canonical five only.",
   "agent_slots_per_company": 5,
   "agent_slot_note": "Every company (central and game) must have exactly 5 agent slots. See config/roles.json and docs/company-architecture.md.",
-  "_warning": "UUIDs verified from paperclip_list_companies audit 2026-06-02. Re-verify if companies are recreated or migrated.",
+  "_warning": "UUIDs and company status verified against a live Paperclip DB backup 2026-07-29. Knowledge (KNO) is active and must remain so — see the never-archived guard in docs/flows/new-company-checklist.md. Creatives (CRE) is archived by decision. Re-verify if companies are recreated or migrated.",
   "companies": [
     {
       "name": "Market",
@@ -83,8 +83,6 @@
       "name": "Knowledge",
       "prefix": "KNO",
       "uuid": "7f52a957-8c37-4309-892b-d74a89b7da5d",
-      "_archived": true,
-      "_archived_note": "Archived as of 2026-06-02 audit. Per Atakan Q-Audit-2: unarchive during Phase B bulk-fix.",
       "role": "Hermes review gate; owns this standards repo; weekly aggregation of per-company KBs",
       "outside_production_swarm": true
     }

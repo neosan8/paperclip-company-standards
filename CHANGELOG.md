@@ -31,6 +31,19 @@ The MAJOR heading said "bump major when a change would require every running com
 
 Rewritten so the criterion is **breakage, not effort**: both major and minor touch every company (validation issues vs adoption issues), so "must be reconfigured" cannot be the discriminator. The test is whether the old config still functions. Same-family model moves and new required `adapterConfig` settings are explicitly minor.
 
+### 5. Correct Knowledge company status in the registry
+**File:** `config/central-companies.json`
+
+`Knowledge (KNO)` carried `_archived: true` from the 2026-06-02 audit. Verified against a live
+Paperclip DB backup on 2026-07-29: **KNO is active**; Creatives (CRE) is genuinely archived. The
+stale flag contradicted this repo's own never-archived guard and would have broken the v0.3.0
+adoption process, which requires Knowledge to track compliance across companies — cross-company
+calls to an archived company return HTTP 403.
+
+Active company count is **12** (13 central, less CRE). The registry description now also records
+that live companies may carry specialist agents beyond the five canonical slots; adoption targets
+the canonical five only.
+
 **Note on versioning:** this release is a **minor** bump, not a patch. `paperclip-version-policy.md` reserves patch for clarifications that do not change behavior, and `model-topology.md` classifies a same-family model move as minor. This change alters model behavior for **all five** roles — CEO, Worker, Researcher, Knowledge Keeper and Reviewer — and standardizes reasoning effort, so it requires the minor process: adoption issues in every active company, tracked by Knowledge until all are compliant.
 
 It was originally drafted as `v0.2.5` (the next free slot after the existing `v0.2.4` entry of 2026-06-15, Knowledge company never-archived guard), and the git branch was named `v0.2.4-model-topology` before either number was settled. Both were wrong for a behavior change; the release was reclassified to `v0.3.0` on 2026-07-29. The branch name is a working label only and is not canonical — `config/models.json`, this changelog, and the PR title all read `0.3.0`.
