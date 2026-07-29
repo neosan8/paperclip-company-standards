@@ -11,7 +11,10 @@ Configuration and behavioral contract for the CEO agent in any Paperclip company
 | Model | `claude-opus-5` |
 | Adapter | `claude_local` |
 | Auth | Claude.ai subscription OAuth |
+| Reasoning effort | **high** — `"effortLevel": "high"` in `~/.claude/settings.json` |
 | API direct use | Forbidden |
+
+**Effort is host-wide, not per agent.** `claude_local` agents inherit `effortLevel` from user settings; `adapterConfig` has no effort key. Verify `~/.claude/settings.json` on the host before treating this CEO as provisioned.
 
 ---
 

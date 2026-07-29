@@ -1,5 +1,5 @@
 {
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Canonical model assignments per agent role across Paperclip companies.",
   "ceo": {
     "model": "claude-opus-5",

@@ -19,6 +19,17 @@ Atomic checklist CC runs every time a new Paperclip company is created. Complete
 
 ---
 
+## Verify host reasoning effort (do this first)
+
+Reasoning effort is **high** for every role, and it is set host-wide — not per agent. A company provisioned on a host with default effort will silently run below standard, so verify both files before creating agents:
+
+- [ ] `~/.claude/settings.json` contains `"effortLevel": "high"` — covers CEO and Knowledge Keeper (`claude_local` agents inherit it)
+- [ ] `~/.codex/config.toml` contains `model_reasoning_effort = "high"` — covers Worker and Researcher (`codex_local`)
+
+`adapterConfig` has no effort key on either adapter; there is no per-agent override. See `docs/governance/model-topology.md`.
+
+---
+
 ## Create all 5 standard agents
 
 Reference `config/models.json` and `config/roles.json` for all model, adapter, and role values. As of v0.2.0, five agent slots are mandatory per company (including the Reviewer).

@@ -11,6 +11,7 @@ When all items are checked, the company is bootstrapped and the first heartbeat 
 These are performed by CC when creating the company:
 
 - [ ] Company created in Paperclip with the correct prefix (see `../../config/central-companies.json` or game company naming convention).
+- [ ] Host reasoning effort verified **before** creating agents: `"effortLevel": "high"` in `~/.claude/settings.json` and `model_reasoning_effort = "high"` in `~/.codex/config.toml`. Effort is host-wide — `adapterConfig` has no effort key, so there is no per-agent override.
 - [ ] CEO agent slot configured with model `claude-opus-5`, adapter `claude_local`, auth `claude_ai_subscription_oauth`.
 - [ ] Worker agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, `dangerouslyBypassApprovalsAndSandbox: true`.
 - [ ] Researcher agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`.

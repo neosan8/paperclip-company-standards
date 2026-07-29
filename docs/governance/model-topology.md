@@ -12,6 +12,8 @@ The CEO is the highest-stakes reasoning role in any company. It reads complex br
 
 Auth: Claude.ai subscription OAuth. The Claude.ai subscription is the lowest-cost path to Opus without per-call API charges. Never use direct Anthropic API for production agents.
 
+Reasoning effort: **high**. Set `"effortLevel": "high"` in `~/.claude/settings.json`. `claude_local` agents inherit this from user settings — there is no per-agent effort field.
+
 ### Worker — gpt-5.6-sol via Codex
 
 Workers execute concrete tasks: code, file ops, research synthesis, CLI commands. GPT-5.6-sol via Codex CLI provides strong code execution, tool use, and fast iteration at subscription cost.
@@ -19,6 +21,8 @@ Workers execute concrete tasks: code, file ops, research synthesis, CLI commands
 Codex must auth via ChatGPT subscription OAuth. OpenAI API keys are forbidden for workers — each call would consume API credits at real cost. The ChatGPT subscription provides unlimited (rate-limited) Codex use.
 
 `dangerouslyBypassApprovalsAndSandbox: true` is required for workers to execute CLI commands and file operations without per-action approval prompts. This is intentional: the CEO is the approval layer, not the adapter.
+
+Reasoning effort: **high**. Set `model_reasoning_effort = "high"` in `~/.codex/config.toml`. This is the only lever — `adapterConfig` has no effort key, so the setting is host-wide and applies to every `codex_local` agent on that machine. Setting it per agent is not possible; do not attempt it.
 
 ### Knowledge Keeper — claude-sonnet-4-6
 
@@ -28,11 +32,28 @@ The Knowledge Keeper does structured reading, writing, and synthesis. It does no
 
 Auth: Claude.ai subscription OAuth (same subscription as CEO, different agent).
 
+Reasoning effort: **high**, inherited from `~/.claude/settings.json` (same mechanism as CEO).
+
 ### Researcher — gpt-5.6-sol via Codex
 
 Researchers run structured search and synthesis workflows. The Codex workflow (`/plan -> /goal -> $codex-review -> $review`) is well-suited to research tasks: define scope, execute, self-check, ship. GPT-5.6-sol handles this competently.
 
 Auth: ChatGPT subscription OAuth (same rule as Worker).
+
+Reasoning effort: **high**, from `~/.codex/config.toml` (same host-wide mechanism as Worker).
+
+---
+
+## Policy — reasoning effort is high for every role
+
+All four roles run at **high** reasoning effort. There are exactly two levers, both host-level:
+
+| Surface | File | Setting | Scope |
+|---|---|---|---|
+| Claude (CEO, Knowledge Keeper) | `~/.claude/settings.json` | `"effortLevel": "high"` | inherited by all `claude_local` agents |
+| Codex (Worker, Researcher) | `~/.codex/config.toml` | `model_reasoning_effort = "high"` | host-wide, all `codex_local` agents |
+
+**There is no per-agent effort setting.** `adapterConfig` has no effort key on either adapter. A new or rebuilt company inherits whatever the host is set to — so verifying these two files is a required provisioning step, not an optional one. See `docs/flows/new-company-checklist.md`.
 
 ---
 

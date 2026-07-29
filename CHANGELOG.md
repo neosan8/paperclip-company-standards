@@ -5,7 +5,7 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ---
 
-## v0.2.5 — 2026-07-24
+## v0.3.0 — 2026-07-29
 
 Model topology update per Atakan's directive, driven by two root causes: (1) the CEO and Codex agent model ids needed to move forward (CEO -> `claude-opus-5`, Worker/Researcher/Reviewer -> `gpt-5.6-sol`), and (2) the `claude-sonnet-latest` alias used for Knowledge Keeper is not a valid, pinned model id — this exact bug stalled Product Design for 5 weeks. Going forward, `-latest` aliases are banned; every role must reference an explicit, versioned model id. Reasoning effort is standardized to **high** for both CEO (Claude user-settings `effortLevel`) and Codex agents (`model_reasoning_effort = "high"` in `~/.codex/config.toml` — the only lever; adapterConfig has no effort key).
 
@@ -24,7 +24,9 @@ Model topology update per Atakan's directive, driven by two root causes: (1) the
 
 `claude-sonnet-latest` → `claude-sonnet-4-6`, with an explicit note attached at every occurrence: "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)". The `-latest` alias is not a valid model id and must never be used for a production agent slot again.
 
-**Note on versioning:** this changelog's top entry was already `v0.2.4` (2026-06-15, Knowledge company never-archived guard). This update is therefore filed as `v0.2.5`, not `v0.2.4` — the git branch/PR were requested as "v0.2.4-model-topology" but the changelog version number itself had to move to the next free slot to avoid colliding with the existing v0.2.4 entry below.
+**Note on versioning:** this release is a **minor** bump, not a patch. `paperclip-version-policy.md` reserves patch for clarifications that do not change behavior, and `model-topology.md` classifies a same-family model move as minor. This change alters CEO, Worker, Researcher and Knowledge Keeper model behavior and standardizes reasoning effort, so it requires the minor process — including adoption issues in every active company, tracked by Knowledge until all are compliant.
+
+It was originally drafted as `v0.2.5` (the next free slot after the existing `v0.2.4` entry of 2026-06-15, Knowledge company never-archived guard), and the git branch was named `v0.2.4-model-topology` before either number was settled. Both were wrong for a behavior change; the release was reclassified to `v0.3.0` on 2026-07-29. The branch name is a working label only and is not canonical — `config/models.json`, this changelog, and the PR title all read `0.3.0`.
 
 ---
 
