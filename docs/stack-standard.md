@@ -2,6 +2,28 @@
 
 Every Paperclip company and every human team Claude Code install must have the following tools configured and validated. No exceptions.
 
+## Validate by running it, not by reading it
+
+```bash
+./scripts/validate-stack.sh        # summary
+./scripts/validate-stack.sh -v     # list every dead symlink
+```
+
+Exit code `0` = standard met, `1` = at least one required check failed.
+
+**Why this exists.** Until 2026-07-30 every "Validation check" below was prose — an instruction for a person to run something by hand. Nobody did. Measured on the reference machine that day:
+
+| | |
+|---|---|
+| `gstack` | required by this document, **never installed** |
+| `tokenjuice` | **broken for 2 weeks** — hook pinned to a node version that had been upgraded away |
+| 88 of 220 skills | **dead symlinks for 4 months** after another tool's workspace was cleaned |
+| healthd → phone alerts | **68 days undelivered**, failing silently |
+
+None of these reported an error. Every one of them looked fine from the outside, and the machine that *defines* this standard was failing it. A written standard cannot detect that; a script can. Run it after any upgrade, after onboarding a machine, and whenever an agent behaves oddly for no visible reason.
+
+**The failure mode to remember:** *automatic* and *working* are independent properties. Silence is not evidence of health.
+
 ---
 
 ## Required tools
@@ -78,8 +100,19 @@ Four rules:
 
 When creating a new company, after configuring all tools, the CEO's first issue must be:
 
-> "Validate tool stack: test gbrain query, graphify query, gstack autoplan, and confirm Obsidian vault access. Report pass/fail for each."
+> "Run `scripts/validate-stack.sh` from the standards repo. Paste the full output. Every required check must pass; fix anything marked ❌ and re-run until exit code is 0."
 
 This issue must close as `ship it` before any production work begins in the company.
 
+Requiring the output — not a summary — is deliberate. "I validated the stack" is exactly the kind of claim that went unchecked for four months.
+
 See `flows/new-company-checklist.md` for the full atomic checklist.
+
+## What the validator does not cover
+
+Stated so nobody reads a green result as more than it is:
+
+- It checks that a tool **runs**, not that it is configured correctly or that its output is useful.
+- It does not verify MCP servers, connectors, or plugin health.
+- It does not check Paperclip agent configuration (`adapterConfig`, effort, heartbeat) — see `docs/governance/model-topology.md`.
+- It runs on the machine it is invoked on. It says nothing about any other machine in the studio.
