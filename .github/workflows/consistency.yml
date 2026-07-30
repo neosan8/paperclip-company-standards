@@ -1,0 +1,90 @@
+name: consistency
+
+# Bu repo 12 Paperclip şirketinin okuduğu tek doğruluk kaynağı.
+# Buradaki sessiz bir tutarsızlık, 12 şirkete yanlış yapılandırma olarak dağılır.
+#
+# NEDEN VAR: 2026-07-29'da bu repoda 5 hata yapıldı ve 3'ü aynı sınıftandı —
+# aynı gerçeğin iki yerde tutulup ayrışması (docs↔CHANGELOG, PR başlığı↔içeriği,
+# hafıza↔kaynak kod). Hiçbiri hata vermedi; biri review'de yakalandı, diğerleri
+# merge olabilirdi. Bu workflow o sınıfı otomatikleştirilebilir kısmıyla kapatır.
+#
+# TASARIM İLKESİ: yalnızca nesnel olarak bozuk olan şeye FAIL ver.
+# İnsan kararı gereken sürüklenme UYARI olarak görünür ama build'i kırmaz —
+# yanlış kırmızı build, hiç kontrol olmamasından beterdir (görmezden gelinmeye alışılır).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # tag karşılaştırması için tüm geçmiş gerekli
+
+      # ── FAIL: JSON bozuksa ────────────────────────────────────────
+      # Bu repodaki her config'i ajanlar makine olarak okuyor.
+      # Bozuk JSON = şirket bootstrap'i sessizce yarım kalır.
+      - name: JSON geçerliliği
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            if ! jq -e . "$f" >/dev/null 2>&1; then
+              echo "::error file=$f::geçersiz JSON"
+              fail=1
+            fi
+          done < <(find . -name '*.json' -not -path './.git/*')
+          [ "$fail" -eq 0 ] && echo "✅ tüm JSON dosyaları geçerli"
+          exit $fail
+
+      # ── FAIL: shell script sözdizimi bozuksa ──────────────────────
+      - name: Shell sözdizimi
+        run: |
+          fail=0
+          shopt -s nullglob
+          for f in scripts/*.sh; do
+            if ! bash -n "$f" 2>/dev/null; then
+              echo "::error file=$f::sözdizimi hatası"
+              fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "✅ shell scriptleri geçerli"
+          exit $fail
+
+      # ── FAIL: config sürümü semver değilse ────────────────────────
+      - name: Sürüm alanları semver mi
+        run: |
+          fail=0
+          for f in config/*.json; do
+            v=$(jq -r '.version // empty' "$f")
+            [ -z "$v" ] && continue
+            if ! printf '%s' "$v" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "::error file=$f::version '$v' semver değil"
+              fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "✅ sürüm alanları geçerli"
+          exit $fail
+
+      # ── UYARI: CHANGELOG'da olup tag'i olmayan sürüm ──────────────
+      # En üstteki sürümün henüz tag'lenmemiş olması normaldir (yayın bekliyor).
+      # Ama BİRDEN FAZLA tag'siz sürüm birikmişse CHANGELOG gerçeği yansıtmıyor
+      # demektir. Tag atmak Atakan'ın onayına bağlı olduğu için build'i kırmıyoruz.
+      - name: CHANGELOG ↔ git tag sürüklenmesi
+        run: |
+          untagged=""
+          for v in $(grep -oE '^## v[0-9]+\.[0-9]+\.[0-9]+' CHANGELOG.md | sed 's/## //'); do
+            git rev-parse "$v" >/dev/null 2>&1 || untagged="$untagged $v"
+          done
+          count=$(printf '%s' "$untagged" | wc -w | tr -d ' ')
+          if [ "$count" -eq 0 ]; then
+            echo "✅ her CHANGELOG sürümünün tag'i var"
+          elif [ "$count" -eq 1 ]; then
+            echo "ℹ️  yayın bekleyen sürüm:$untagged (normal)"
+          else
+            echo "::warning::CHANGELOG'da $count tag'siz sürüm var:$untagged"
+            echo "CHANGELOG yayınlanmış gerçeği yansıtmıyor — tag atılmalı veya kayıt düzeltilmeli."
+          fi
