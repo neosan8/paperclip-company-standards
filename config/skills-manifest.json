@@ -6,7 +6,7 @@
     {
       "name": "autoreview",
       "source": "uinaf/agents",
-      "install": "skills.sh install uinaf/agents autoreview",
+      "install": "git clone https://github.com/uinaf/agents ~/code/uinaf-agents && cd ~/code/uinaf-agents && ./scripts/sync/sync.sh",
       "target_roles": [
         "worker",
         "reviewer"
@@ -16,7 +16,8 @@
       ],
       "purpose": "Structured second-model closeout after implementation. Run at every milestone. Explicitly not a builder self-check and not a multi-agent ship decision.",
       "version": "latest",
-      "verified_date": "2026-07-31"
+      "verified_date": "2026-07-31",
+      "install_note": "Installed by uinaf/agents' own manifest-driven sync, not per-skill. sync.sh installs every skill in scripts/sync/skills.json and refuses to run from a dirty checkout or a branch behind upstream."
     },
     {
       "name": "autoplan",
@@ -97,7 +98,7 @@
     {
       "name": "verify",
       "source": "uinaf/agents",
-      "install": "skills.sh install uinaf/agents verify",
+      "install": "git clone https://github.com/uinaf/agents ~/code/uinaf-agents && cd ~/code/uinaf-agents && ./scripts/sync/sync.sh",
       "target_roles": [
         "worker"
       ],
@@ -106,7 +107,8 @@
       ],
       "purpose": "Builder-owned self-check before independent review. Produces ready for review / needs more work / blocked \u2014 never a ship decision.",
       "version": "latest",
-      "verified_date": "2026-07-31"
+      "verified_date": "2026-07-31",
+      "install_note": "Installed by uinaf/agents' own manifest-driven sync, not per-skill. sync.sh installs every skill in scripts/sync/skills.json and refuses to run from a dirty checkout or a branch behind upstream."
     }
   ],
   "update_policy": {
