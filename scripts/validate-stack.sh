@@ -84,13 +84,22 @@ if [ -d "$HOME/.claude/skills/gstack" ]; then
   # Probe olarak `status` kullanılıyor — `--version` GEÇERLİ BİR KOMUT DEĞİL ve ilk
   # sürümde onu kullanıp aracı sağlamken "bozuk" raporlamıştım. Aracın kendi komut
   # listesine bakmadan CLI geleneği varsaymak, bugünün tekrar eden hatası.
+  #
+  # Ayrıca: browse çalıştığı dizine `.gstack/` yaratıyor. Denetleyici salt-okunur
+  # bir cwd'den çalışırsa (healthd zamanlanmış işi `/` içinden çalıştırıyor) probe
+  # `EROFS: read-only file system, mkdir '/.gstack'` ile düşüyor ve sağlam bir aracı
+  # bozuk raporluyor — aynı yanlış-negatifin ikinci hâli. Yan etki olarak, denetleyici
+  # hangi repodan çalıştırılırsa oraya `.gstack/` bırakıyordu.
+  # Çözüm: probe'u geçici, yazılabilir bir dizinden çalıştır ve arkasını topla.
   BROWSE="$HOME/.claude/skills/gstack/browse/dist/browse"
   if [ -x "$BROWSE" ]; then
-    if timeout 30 "$BROWSE" status 2>&1 | grep -q 'Status: healthy'; then
+    _probe_dir="$(mktemp -d)"
+    if (cd "$_probe_dir" && timeout 30 "$BROWSE" status 2>&1) | grep -q 'Status: healthy'; then
       ok "gstack browse — tarayıcı sağlıklı"
     else
       bad "gstack browse — tarayıcı ayağa kalkmıyor" "chromium eksikse: npx playwright install chromium-headless-shell"
     fi
+    rm -rf "$_probe_dir"
   else
     bad "gstack browse — binary yok" "$BROWSE"
   fi
