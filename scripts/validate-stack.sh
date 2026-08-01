@@ -144,22 +144,28 @@ head_ "3. Ölü skill bağlantıları"
 # 88 skill 4 ay boyunca ölü symlink'ti: hedef dizin (başka bir aracın çalışma alanı)
 # silinmişti. Skill'ler listede görünüyor, açılmıyordu.
 
-SKILLS_DIR="$HOME/.claude/skills"
-if [ ! -d "$SKILLS_DIR" ]; then
-  warn "skills dizini yok" "$SKILLS_DIR"
-else
+# 2026-07-31: codex dizini de tarnıyor. İlk sürüm yalnız ~/.claude/skills'e bakıyordu
+# ve ~/.codex/skills'te 20 ölü symlink aynı kökten (silinmiş workspace + upstream'de
+# adı değişen adapter skill'leri) aylarca görünmeden durdu. Bir denetleyicinin kapsamı,
+# denetlediği hatanın kapsamından dar olursa hatayı bulmuş sayılmaz.
+for SKILLS_DIR in "$HOME/.claude/skills" "$HOME/.codex/skills"; do
+  label="${SKILLS_DIR#$HOME/}"
+  if [ ! -d "$SKILLS_DIR" ]; then
+    warn "skills dizini yok" "$SKILLS_DIR"
+    continue
+  fi
   total=$(find "$SKILLS_DIR" -maxdepth 1 -mindepth 1 2>/dev/null | wc -l | tr -d ' ')
   dead=$(find "$SKILLS_DIR" -maxdepth 1 -mindepth 1 -type l ! -exec test -e {} \; -print 2>/dev/null | wc -l | tr -d ' ')
   if [ "$dead" -eq 0 ]; then
-    ok "$total skill · ölü bağlantı yok"
+    ok "$label — $total skill · ölü bağlantı yok"
   else
-    bad "$dead / $total skill ölü symlink" "hedefleri silinmiş — listede görünür, açılmaz"
+    bad "$label — $dead / $total skill ölü symlink" "hedefleri silinmiş — listede görünür, açılmaz"
     if [ "$VERBOSE" -eq 1 ]; then
       find "$SKILLS_DIR" -maxdepth 1 -mindepth 1 -type l ! -exec test -e {} \; -print 2>/dev/null \
         | head -10 | sed 's|^|       · |'
     fi
   fi
-fi
+done
 
 # ─────────────────────────────────────────────────────────────
 head_ "4. Bilgi tabanı erişimi"
