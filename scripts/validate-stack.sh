@@ -99,6 +99,11 @@ if [ -d "$HOME/.claude/skills/gstack" ]; then
     else
       bad "gstack browse — tarayıcı ayağa kalkmıyor" "chromium eksikse: npx playwright install chromium-headless-shell"
     fi
+    # Sunucuyu KAPAT. `browse status` arka planda bir sunucu bırakıyor ve o
+    # sunucu ppid=1 ile öksüz kalıyor. Kontrol başarısızken healthd onu 60sn'de
+    # bir yeniden deniyor; 31 öksüz sunucu ve 1.2 GB RAM böyle birikti.
+    # Ölçüm yapan bir kontrol, ölçtüğü sistemi kirletmemeli.
+    ( cd "$_probe_dir" && timeout 15 "$BROWSE" stop >/dev/null 2>&1 ) || true
     rm -rf "$_probe_dir"
   else
     bad "gstack browse — binary yok" "$BROWSE"
