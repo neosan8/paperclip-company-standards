@@ -173,6 +173,54 @@ for SKILLS_DIR in "$HOME/.claude/skills" "$HOME/.codex/skills"; do
 done
 
 # ─────────────────────────────────────────────────────────────
+head_ "3b. Skill frontmatter geçerliliği"
+# 2026-08-03: ölü symlink kontrolü yetmiyormuş. `npx skills list` benim
+# denetleyicimin GÖREMEDİĞİ iki bozuk skill buldu:
+#   install/SKILL.md   — frontmatter hiç yok (deprecated, yerine setup geçmiş)
+#   clawvault/SKILL.md — description alanında tırnaksız "Use when: ..." → YAML kırılıyor
+# İkisi de dizinde duruyor, symlink olarak sağlam, ve yüklenmiyor.
+# Var olmak yüklenmek değildir — bu, ölü symlink'in bir kat daha sessiz hâli.
+#
+# Ayrıca kapsam genişletildi: ~/.agents/skills bugüne kadar hiç taranmamıştı
+# ve içinde 31 Temmuz'da emekli ilan ettiğim skill'ler duruyordu.
+
+if python3 -c 'import yaml' 2>/dev/null; then
+  bad_fm=0; total_fm=0
+  for SD in "$HOME/.claude/skills" "$HOME/.codex/skills" "$HOME/.agents/skills"; do
+    [ -d "$SD" ] || continue
+    while IFS= read -r f; do
+      total_fm=$((total_fm+1))
+      python3 - "$f" <<'PYEOF' || bad_fm=$((bad_fm+1))
+import sys, yaml
+p = sys.argv[1]
+try:
+    t = open(p, encoding='utf-8', errors='replace').read()
+except Exception:
+    sys.exit(1)
+if not t.startswith('---'):
+    sys.exit(1)
+end = t.find('\n---', 3)
+if end == -1:
+    sys.exit(1)
+try:
+    d = yaml.safe_load(t[3:end])
+except Exception:
+    sys.exit(1)
+if not isinstance(d, dict) or not d.get('name') or not d.get('description'):
+    sys.exit(1)
+PYEOF
+    done < <(find "$SD" -maxdepth 2 -name 'SKILL.md' 2>/dev/null)
+  done
+  if [ "$bad_fm" -eq 0 ]; then
+    ok "$total_fm skill · frontmatter geçerli"
+  else
+    bad "$bad_fm / $total_fm skill bozuk frontmatter" "dizinde var, yüklenmiyor — ölü symlink'ten daha sessiz"
+  fi
+else
+  warn "frontmatter kontrolü atlandı" "pyyaml yok"
+fi
+
+# ─────────────────────────────────────────────────────────────
 head_ "4. Bilgi tabanı erişimi"
 # Standart vault'u zorunlu kılıyor ama yolun gerçekten açıldığını kimse doğrulamıyordu.
 
