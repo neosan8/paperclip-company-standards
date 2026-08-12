@@ -1,32 +1,62 @@
 {
-  "version": "0.1.0",
-  "description": "Required tools for every Paperclip company AND every human team Claude Code install.",
+  "version": "0.2.0",
+  "description": "Required tools for every Paperclip company AND every human team Claude Code install. Checked by scripts/validate-stack.sh — the `probe` field is what that script runs.",
+  "validator": "scripts/validate-stack.sh",
   "tools": [
     {
       "name": "LLM Wiki + Obsidian",
       "purpose": "second brain (Karpathy pattern)",
-      "vault": "~/Docs/paperclipcompanies/_knowledge-base/"
+      "vault": "~/Docs/paperclipcompanies/_knowledge-base/",
+      "probe": "directory exists and contains at least one .md note",
+      "required": true
     },
     {
       "name": "gbrain",
+      "command": "gbrain",
       "purpose": "semantic search; brain-first lookup",
-      "note": "macOS 26.3+ use bun wrapper on src/cli.ts"
+      "probe": "gbrain --help",
+      "note": "macOS 26.3+ use bun wrapper on src/cli.ts",
+      "required": true
     },
     {
       "name": "gstack",
-      "purpose": "QA real-browser verification, AI slop detection, autoplan patterns"
+      "command": "gstack",
+      "purpose": "QA real-browser verification, AI slop detection, autoplan patterns",
+      "probe": "gstack --help",
+      "required": true
     },
     {
       "name": "graphify",
-      "purpose": "GRAPH_REPORT.md reference; graph before grep"
+      "command": "graphify",
+      "purpose": "GRAPH_REPORT.md reference; graph before grep",
+      "probe": "graphify --help",
+      "required": true
     },
     {
       "name": "Karpathy discipline",
-      "purpose": "Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution"
+      "purpose": "Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution",
+      "probe": "CLAUDE.md mentions Karpathy",
+      "required": true
     },
     {
       "name": "TokenJuice",
-      "purpose": "token-efficient tool wrappers; bash compaction"
+      "command": "tokenjuice",
+      "purpose": "token-efficient tool wrappers; bash compaction",
+      "probe": "tokenjuice --version",
+      "note": "install globally (npm i -g tokenjuice) and reference it by a version-independent path — a hook pinned to a specific node version breaks silently when that version is upgraded away",
+      "required": true
+    }
+  ],
+  "integrity_checks": [
+    {
+      "name": "hook integrity",
+      "what": "every command referenced by hooks in ~/.claude/settings.json resolves to an executable",
+      "why": "a hook pointing at a deleted path fails silently on every trigger; observed broken for 2 weeks on the reference machine"
+    },
+    {
+      "name": "dead skill symlinks",
+      "what": "no entry in ~/.claude/skills is a symlink to a missing target",
+      "why": "88 of 220 skills were dead for 4 months after another tool's workspace was cleaned; they still appeared in listings"
     }
   ]
 }
