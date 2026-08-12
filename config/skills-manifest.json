@@ -1,44 +1,34 @@
 {
   "version": "0.2.0",
   "description": "Enumeration of all skills used across role packs. Source repo, target roles, and version tracked here.",
-  "last_updated": "2026-06-02",
+  "last_updated": "2026-07-31",
   "skills": [
-    {
-      "name": "codex-review",
-      "source": "uinaf/codex-review",
-      "install": "skills.sh install uinaf/codex-review",
-      "target_roles": ["worker", "reviewer"],
-      "provides": ["$codex-review", "$review"],
-      "purpose": "Advisory mid-execution self-check ($codex-review) and final gate check ($review).",
-      "version": "latest",
-      "verified_date": "2026-06-02"
-    },
     {
       "name": "autoreview",
       "source": "uinaf/agents",
-      "install": "skills.sh install uinaf/autoreview",
-      "target_roles": ["reviewer"],
-      "provides": ["autoreview"],
-      "purpose": "Branch-diff advisory review. Never self-review own changes.",
+      "install": "git clone https://github.com/uinaf/agents ~/code/uinaf-agents && cd ~/code/uinaf-agents && ./scripts/sync/sync.sh",
+      "target_roles": [
+        "worker",
+        "reviewer"
+      ],
+      "provides": [
+        "autoreview"
+      ],
+      "purpose": "Structured second-model closeout after implementation. Run at every milestone. Explicitly not a builder self-check and not a multi-agent ship decision.",
       "version": "latest",
-      "verified_date": "2026-06-02"
-    },
-    {
-      "name": "review-gang",
-      "source": "uinaf/agents",
-      "install": "skills.sh install uinaf/review-gang",
-      "target_roles": ["reviewer"],
-      "provides": ["review-gang"],
-      "purpose": "Parallel multi-persona review (correctness, karpathy, security, performance, a11y).",
-      "version": "latest",
-      "verified_date": "2026-06-02"
+      "verified_date": "2026-07-31",
+      "install_note": "Installed by uinaf/agents' own manifest-driven sync, not per-skill. sync.sh installs every skill in scripts/sync/skills.json and refuses to run from a dirty checkout or a branch behind upstream."
     },
     {
       "name": "autoplan",
       "source": "studio-standard",
       "install": "included in CEO role pack AGENTS.md via sync-bootstrap.sh",
-      "target_roles": ["ceo"],
-      "provides": ["autoplan"],
+      "target_roles": [
+        "ceo"
+      ],
+      "provides": [
+        "autoplan"
+      ],
       "purpose": "Decompose goals into ordered sub-issues before work begins.",
       "version": "0.1.0",
       "verified_date": "2026-06-02"
@@ -47,8 +37,12 @@
       "name": "gstack-qa",
       "source": "gstack",
       "install": "see docs/stack-standard.md",
-      "target_roles": ["worker"],
-      "provides": ["gstack-qa"],
+      "target_roles": [
+        "worker"
+      ],
+      "provides": [
+        "gstack-qa"
+      ],
       "purpose": "Real-browser QA verification for UI and WebGL changes.",
       "version": "latest",
       "verified_date": "2026-06-02"
@@ -57,8 +51,15 @@
       "name": "tokenjuice",
       "source": "studio-standard",
       "install": "see docs/stack-standard.md",
-      "target_roles": ["worker", "researcher", "knowledge_keeper", "reviewer"],
-      "provides": ["tokenjuice wrap"],
+      "target_roles": [
+        "worker",
+        "researcher",
+        "knowledge_keeper",
+        "reviewer"
+      ],
+      "provides": [
+        "tokenjuice wrap"
+      ],
       "purpose": "Token-efficient bash output wrappers.",
       "version": "latest",
       "verified_date": "2026-06-02"
@@ -67,8 +68,14 @@
       "name": "graphify",
       "source": "studio-standard",
       "install": "see docs/stack-standard.md",
-      "target_roles": ["ceo", "worker", "knowledge_keeper"],
-      "provides": ["graphify"],
+      "target_roles": [
+        "ceo",
+        "worker",
+        "knowledge_keeper"
+      ],
+      "provides": [
+        "graphify"
+      ],
       "purpose": "Knowledge graph; GRAPH_REPORT.md generation.",
       "version": "latest",
       "verified_date": "2026-06-02"
@@ -76,12 +83,32 @@
     {
       "name": "paper-search",
       "source": "mcp__claude_ai_Hugging_Face",
-      "install": "MCP plugin — available if Hugging Face MCP is connected",
-      "target_roles": ["researcher"],
-      "provides": ["paper_search", "hf_doc_search"],
+      "install": "MCP plugin \u2014 available if Hugging Face MCP is connected",
+      "target_roles": [
+        "researcher"
+      ],
+      "provides": [
+        "paper_search",
+        "hf_doc_search"
+      ],
       "purpose": "Find relevant ML/AI papers and HuggingFace docs for research briefs.",
       "version": "latest",
       "verified_date": "2026-06-02"
+    },
+    {
+      "name": "verify",
+      "source": "uinaf/agents",
+      "install": "git clone https://github.com/uinaf/agents ~/code/uinaf-agents && cd ~/code/uinaf-agents && ./scripts/sync/sync.sh",
+      "target_roles": [
+        "worker"
+      ],
+      "provides": [
+        "verify"
+      ],
+      "purpose": "Builder-owned self-check before independent review. Produces ready for review / needs more work / blocked \u2014 never a ship decision.",
+      "version": "latest",
+      "verified_date": "2026-07-31",
+      "install_note": "Installed by uinaf/agents' own manifest-driven sync, not per-skill. sync.sh installs every skill in scripts/sync/skills.json and refuses to run from a dirty checkout or a branch behind upstream."
     }
   ],
   "update_policy": {
