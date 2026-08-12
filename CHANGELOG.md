@@ -5,6 +5,51 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ---
 
+## v0.3.0 — 2026-07-29
+
+Model topology update per Atakan's directive, driven by two root causes: (1) the CEO and Codex agent model ids needed to move forward (CEO -> `claude-opus-5`, Worker/Researcher/Reviewer -> `gpt-5.6-sol`), and (2) the `claude-sonnet-latest` alias used for Knowledge Keeper is not a valid, pinned model id — this exact bug stalled Product Design for 5 weeks. Going forward, `-latest` aliases are banned; every role must reference an explicit, versioned model id. Reasoning effort is standardized to **high** for all five roles, set **per agent** in `adapterConfig` — `effort` for `claude_local` (CEO, Knowledge Keeper), `modelReasoningEffort` for `codex_local` (Worker, Researcher, Reviewer). Host config files (`~/.claude/settings.json`, `~/.codex/config.toml`) govern host-run CLI sessions only; Paperclip gives each codex agent a managed `CODEX_HOME`, so they do not control company agents.
+
+### 1. CEO model bump
+**Files:** `config/models.json`, `config/roles.json`, `CONTEXT.md`, `docs/ceo-bootstrap.md`, `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/governance/paperclip-version-policy.md`, `roles/_shared/CONTEXT.md`, `roles/ceo/README.md`, `templates/CEO_BOOTSTRAP.md`
+
+`claude-opus-4-8` → `claude-opus-5` everywhere the CEO model is referenced.
+
+### 2. Codex agent model bump (Worker, Researcher, Reviewer)
+**Files:** `config/models.json`, `config/roles.json`, `CONTEXT.md`, `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/specialists/researcher.md`, `docs/worker-bootstrap.md`, `roles/_shared/CONTEXT.md`, `roles/researcher/README.md`, `roles/reviewer/README.md`, `roles/worker/README.md`, `templates/CEO_BOOTSTRAP.md`
+
+`gpt-5.5` → `gpt-5.6-sol` everywhere the Worker, Researcher, or Reviewer model is referenced.
+
+### 3. Ban `claude-sonnet-latest`; pin Knowledge Keeper to `claude-sonnet-4-6`
+**Files:** `config/models.json`, `config/roles.json`, `CONTEXT.md`, `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/specialists/knowledge-keeper.md`, `roles/_shared/CONTEXT.md`, `roles/knowledge-keeper/README.md`, `templates/CEO_BOOTSTRAP.md`
+
+`claude-sonnet-latest` → `claude-sonnet-4-6`, with an explicit note attached at every occurrence: "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)". The `-latest` alias is not a valid model id and must never be used for a production agent slot again.
+
+### 4. Clarify MAJOR vs MINOR in the version policy
+**File:** `docs/governance/paperclip-version-policy.md`
+
+The MAJOR heading said "bump major when a change would require every running company to reconfigure its agents" — which describes this release too, contradicting its own examples (all of which are provider-family, adapter, role-removal or auth-policy changes) and contradicting `model-topology.md`, where a same-family model move is minor. As written, the repo mandated two different release classes for the same change.
+
+Rewritten so the criterion is **breakage, not effort**: both major and minor touch every company (validation issues vs adoption issues), so "must be reconfigured" cannot be the discriminator. The test is whether the old config still functions. Same-family model moves and new required `adapterConfig` settings are explicitly minor.
+
+### 5. Correct Knowledge company status in the registry
+**File:** `config/central-companies.json`
+
+`Knowledge (KNO)` carried `_archived: true` from the 2026-06-02 audit. Verified against a live
+Paperclip DB backup on 2026-07-29: **KNO is active**; Creatives (CRE) is genuinely archived. The
+stale flag contradicted this repo's own never-archived guard and would have broken the v0.3.0
+adoption process, which requires Knowledge to track compliance across companies — cross-company
+calls to an archived company return HTTP 403.
+
+Active company count is **12** (13 central, less CRE). The registry description now also records
+that live companies may carry specialist agents beyond the five canonical slots; adoption targets
+the canonical five only.
+
+**Note on versioning:** this release is a **minor** bump, not a patch. `paperclip-version-policy.md` reserves patch for clarifications that do not change behavior, and `model-topology.md` classifies a same-family model move as minor. This change alters model behavior for **all five** roles — CEO, Worker, Researcher, Knowledge Keeper and Reviewer — and standardizes reasoning effort, so it requires the minor process: adoption issues in every active company, tracked by Knowledge until all are compliant.
+
+It was originally drafted as `v0.2.5` (the next free slot after the existing `v0.2.4` entry of 2026-06-15, Knowledge company never-archived guard), and the git branch was named `v0.2.4-model-topology` before either number was settled. Both were wrong for a behavior change; the release was reclassified to `v0.3.0` on 2026-07-29. The branch name is a working label only and is not canonical — `config/models.json`, this changelog, and the PR title all read `0.3.0`.
+
+---
+
 ## v0.2.4 — 2026-06-15
 
 Knowledge company never-archived guard + Wiki Feed Protocol 403 escalation rule. Root cause: cross-company Knowledge ingest bug surfaced 2026-06-15 from accidental Knowledge archive during the Animation + Analytics company bootstrap. All production companies POST their weekly delta to the Knowledge company issues endpoint; when Knowledge is archived, the Paperclip API returns HTTP 403 with message `Agent key cannot access another company`. Agents misread this as a permissions failure and retried indefinitely.

@@ -42,11 +42,11 @@ Each game company contains:
 
 | Agent | Role | Model |
 |-------|------|-------|
-| CEO | Orchestrates all work inside the game company | claude-opus-4-8 |
-| Worker | Executes tasks (code, research, file ops) | gpt-5.5 via Codex |
-| Researcher | Finds gold standards and frontier patterns for the game's domain | gpt-5.5 via Codex |
-| Knowledge Keeper | Maintains company-internal KB; weekly delta to Knowledge central | claude-sonnet-latest |
-| Reviewer | Independent quality gate; reviews all deliverables before CEO reports done | gpt-5.5 via Codex |
+| CEO | Orchestrates all work inside the game company | claude-opus-5 |
+| Worker | Executes tasks (code, research, file ops) | gpt-5.6-sol via Codex |
+| Researcher | Finds gold standards and frontier patterns for the game's domain | gpt-5.6-sol via Codex |
+| Knowledge Keeper | Maintains company-internal KB; weekly delta to Knowledge central | claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |
+| Reviewer | Independent quality gate; reviews all deliverables before CEO reports done | gpt-5.6-sol via Codex |
 
 The Reviewer is a mandatory 5th slot as of v0.2.0. No company (central or game) is considered bootstrapped without an active Reviewer agent. See `../standards/reviewer-pattern.md` for the full gate flow.
 

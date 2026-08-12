@@ -19,6 +19,17 @@ Atomic checklist CC runs every time a new Paperclip company is created. Complete
 
 ---
 
+## Reasoning effort — set per agent
+
+Reasoning effort is **high** for every role, and it is set **per agent in `adapterConfig`** — not by host config files. Set it as each agent is created, and verify after:
+
+- [ ] CEO and Knowledge Keeper (`claude_local`): `adapterConfig.effort` = `"high"`
+- [ ] Worker, Researcher and Reviewer (`codex_local`): `adapterConfig.modelReasoningEffort` = `"high"`
+
+**Do not rely on `~/.claude/settings.json` or `~/.codex/config.toml`.** Those govern host-run CLI sessions only. Paperclip gives each codex agent a managed `CODEX_HOME` under `instances/<id>/companies/<companyId>/agents/<agentId>/codex-home/`, so a correctly configured host tells you nothing about what the company's agents are running. See `docs/governance/model-topology.md`.
+
+---
+
 ## Create all 5 standard agents
 
 Reference `config/models.json` and `config/roles.json` for all model, adapter, and role values. As of v0.2.0, five agent slots are mandatory per company (including the Reviewer).
@@ -26,14 +37,14 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
 **API enum note:** The Paperclip API enforces a fixed role enum. Use the `paperclip_api_role` values from `config/roles.json` when calling `paperclip_create_agent` — not the spec display names. Key mappings: Worker → `engineer`, Knowledge Keeper → `pm`, Reviewer → `qa`. `self_review_prohibited` is not a platform field; embed it as instruction text in the Reviewer's capabilities.
 
 - [ ] Create **CEO** agent:
-  - Model: `claude-opus-4-8`
+  - Model: `claude-opus-5`
   - Adapter: `claude_local`
   - Auth: Claude.ai subscription OAuth
   - API role: `ceo`
   - AGENTS.md: include gbrain/graphify syntax, vault path, this standards repo URL, orchestrator-only rule.
 
 - [ ] Create **Worker** agent:
-  - Model: `gpt-5.5`
+  - Model: `gpt-5.6-sol`
   - Adapter: `codex_local`
   - Auth: ChatGPT subscription OAuth
   - API role: `engineer` (spec name is Worker; API enum is engineer)
@@ -42,7 +53,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - Skills: install `uinaf/codex-review`.
 
 - [ ] Create **Knowledge Keeper** agent:
-  - Model: `claude-sonnet-latest`
+  - Model: `claude-sonnet-4-6` (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu)
   - Adapter: `claude_local`
   - Auth: Claude.ai subscription OAuth
   - API role: `pm` (spec name is Knowledge Keeper; API enum is pm)
@@ -50,7 +61,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - AGENTS.md: include vault conventions, weekly delta format.
 
 - [ ] Create **Researcher** agent:
-  - Model: `gpt-5.5`
+  - Model: `gpt-5.6-sol`
   - Adapter: `codex_local`
   - Auth: ChatGPT subscription OAuth
   - API role: `researcher`
@@ -58,7 +69,7 @@ Reference `config/models.json` and `config/roles.json` for all model, adapter, a
   - AGENTS.md: include research workflow, output format, brain-first rule.
 
 - [ ] Create **Reviewer** agent (mandatory as of v0.2.0):
-  - Model: `gpt-5.5`
+  - Model: `gpt-5.6-sol`
   - Adapter: `codex_local`
   - Auth: ChatGPT subscription OAuth
   - API role: `qa`

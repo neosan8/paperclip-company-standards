@@ -8,7 +8,7 @@ Mandatory in every Paperclip company (central and game companies alike).
 
 | Field | Value |
 |-------|-------|
-| Model | `claude-sonnet-latest` |
+| Model | `claude-sonnet-4-6` (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |
 | Adapter | `claude_local` |
 | Auth | Claude.ai subscription OAuth |
 | Heartbeat | Low-frequency scheduled (daily) or on-demand |

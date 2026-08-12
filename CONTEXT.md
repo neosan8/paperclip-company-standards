@@ -16,11 +16,11 @@ Agents and developers should read this file before any other doc in this repo. I
 
 ## Agent roles
 
-- **CEO** — orchestrator only. Never executes tasks directly. Creates sub-issues and delegates to workers. Model: claude-opus-4-8. If a CEO is seen writing code or running CLI commands itself, that is a bug.
-- **Worker** — executes tasks (code, research, file operations). Model: gpt-5.5 via Codex OAuth. Follows `/plan -> /goal -> $codex-review -> $review` workflow.
-- **Researcher** — per-company specialist. Finds gold standards, frontier patterns, sector best-practices for the company domain. Hands findings to Knowledge Keeper. Model: gpt-5.5 via Codex OAuth.
-- **Knowledge Keeper** — per-company specialist. Maintains the company-internal wiki/KB. Captures decisions. Sends weekly delta to central Knowledge. Model: claude-sonnet-latest.
-- **Reviewer** — per-company specialist. Independent quality gate. Reviews all Worker deliverables before CEO reports Done. Issues a verdict (`ship it` / `needs review` / `blocked`). Never reviews own work. Model: gpt-5.5 via Codex OAuth. Mandatory 5th slot as of v0.2.0.
+- **CEO** — orchestrator only. Never executes tasks directly. Creates sub-issues and delegates to workers. Model: claude-opus-5. If a CEO is seen writing code or running CLI commands itself, that is a bug.
+- **Worker** — executes tasks (code, research, file operations). Model: gpt-5.6-sol via Codex OAuth. Follows `/plan -> /goal -> $codex-review -> $review` workflow.
+- **Researcher** — per-company specialist. Finds gold standards, frontier patterns, sector best-practices for the company domain. Hands findings to Knowledge Keeper. Model: gpt-5.6-sol via Codex OAuth.
+- **Knowledge Keeper** — per-company specialist. Maintains the company-internal wiki/KB. Captures decisions. Sends weekly delta to central Knowledge. Model: claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu).
+- **Reviewer** — per-company specialist. Independent quality gate. Reviews all Worker deliverables before CEO reports Done. Issues a verdict (`ship it` / `needs review` / `blocked`). Never reviews own work. Model: gpt-5.6-sol via Codex OAuth. Mandatory 5th slot as of v0.2.0.
 
 ## Role pack
 

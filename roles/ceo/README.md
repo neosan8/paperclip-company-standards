@@ -10,7 +10,7 @@ The CEO never executes tasks directly. If a CEO is found writing code, running C
 
 See `../../config/models.json`: `ceo` block.
 
-- Model: `claude-opus-4-8`
+- Model: `claude-opus-5`
 - Adapter: `claude_local`
 - Auth: `claude_ai_subscription_oauth`
 

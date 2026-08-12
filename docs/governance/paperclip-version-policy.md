@@ -8,13 +8,22 @@ This repo uses semantic versioning (`MAJOR.MINOR.PATCH`). Tags on `main` are the
 
 ### MAJOR (x.0.0) — breaking model topology change
 
-Bump major when a change would require every running company to reconfigure its agents.
+Bump major when a change **breaks existing company configs** — that is, a company running the previous version stops working correctly until it is reconfigured.
 
 Examples:
-- Switching CEO model from `claude-opus-4-8` to a different provider/model family.
+- Switching CEO model from `claude-opus-5` to a different provider/model family.
 - Changing the mandatory adapter (e.g. `claude_local` -> something else).
 - Removing a mandatory agent role (e.g. eliminating Knowledge Keeper as a requirement).
 - Changing the OAuth-only rule (e.g. permitting direct API keys for a role).
+
+**The test is breakage, not effort.** Both major and minor require touching every active company — major through validation issues, minor through adoption issues. "Every company must be reconfigured" therefore does **not** by itself imply major. Ask instead: does the old config still function?
+
+- Old config errors, or references something invalid → **major**.
+- Old config still runs, just no longer matches the standard → **minor**.
+
+A same-family model move (`claude-opus-4-7` → `claude-opus-5`, `gpt-5.5` → `gpt-5.6-sol`) is **minor**: the previous id remains valid, so nothing breaks. This matches `model-topology.md` ("new model in same family: minor bump"). Adding or changing a required `adapterConfig` setting such as reasoning effort is likewise **minor** — an agent without it still runs, at a non-standard value.
+
+Pinning a role away from a broken id is also minor when the standard is the fix rather than the break: `claude-sonnet-latest` → `claude-sonnet-4-6` (v0.3.0) corrected an already-invalid id; the change repaired configs rather than invalidating them.
 
 **Process for major bump:**
 1. Branch off `main` (`spec/<topic>` or `fix/<topic>`), open PR targeting `main`; CC + Knowledge CEO review.
@@ -66,4 +75,6 @@ git push origin v0.1.0
 
 ## Current version
 
-`v0.1.0` — initial scaffold. 13 central companies. Mandatory stack. 4 standard agents per company (CEO, Worker, Knowledge Keeper, Researcher). OAuth-only policy.
+`v0.2.2` — latest tag on `main`. 13 central companies. Mandatory stack. **5** standard agents per company (CEO, Worker, Researcher, Knowledge Keeper, Reviewer — Reviewer became mandatory in v0.2.0). OAuth-only policy.
+
+`v0.3.0` is in review (PR #11): model topology update and the reasoning-effort standard.
