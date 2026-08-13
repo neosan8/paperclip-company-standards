@@ -16,6 +16,8 @@ Two gaps found by comparing this repo against [`aronprins/codex-loop`](https://g
 
 **Workers had nowhere to record what they learned.** Fresh context per issue is deliberate, but it meant a worker's finding on issue 40 was unavailable to the worker on issue 41 — the same wrong assumption made, corrected and forgotten repeatedly. Git history records what changed, never what had to be found out first. Workers now append to `progress.txt` with a stable `## Codebase Patterns` section, and read it before starting.
 
+**Conflict avoidance added from [`aronprins/claude-loop`](https://github.com/aronprins/claude-loop)**, the sibling repo. Everything above isolates conflict; this avoids it, which is the cheaper half. Put dependency installation in the first scaffolding unit so wave-mates do not fight over lockfiles; prefer additive patterns (a new file per route, auto-discovered) over edits to one shared registry; declare `dependsOn` honestly, since an omitted dependency does not make work parallel, only makes the collision arrive later with less explanation; and have workers report a `mergeRisk` when they had no choice but to touch a shared file. Stage 1 GUI kit production had already validated this — five artists on one Figma frame were split into one artist per region — but the lesson stayed in that project instead of the standard.
+
 codex-loop was **not installed as a skill**: it duplicates orchestration a Paperclip CEO already performs, and at 24 stars with no pushes since 22 June it is not a dependency worth taking. The pattern is recorded here so it survives independently of that repo — the same reasoning that would have prevented `config/skills-manifest.json` listing two skills that had been retired upstream.
 
 ---
