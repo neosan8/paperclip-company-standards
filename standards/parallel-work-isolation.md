@@ -55,6 +55,21 @@ Falling back to "group by equal priority" assumes same-priority units are indepe
 
 **Sequential is the default.** Parallel is opt-in, and only when the user asks for it. Most work does not need it, and the failure modes are more expensive than the time saved.
 
+## Design the work so conflicts do not arise
+
+Everything above *isolates* conflict. This section is about *avoiding* it, and it is the cheaper half — an isolated conflict still has to be merged by someone.
+
+Parallelism is only as good as the dependency graph and the file hygiene underneath it. When decomposing work into units:
+
+- **Put all dependency installation in the first scaffolding unit.** Otherwise wave-mates fight over lockfiles, and a lockfile conflict is the least interesting merge anyone will do that day.
+- **Prefer additive patterns over edits to a shared central file.** A new file per route, per screen, per config entry — auto-discovered — instead of every unit appending to one registry. Two units adding two files never conflict; two units editing one file always might.
+- **Declare `dependsOn` honestly.** An omitted dependency does not make work parallel, it makes the collision arrive later and with less explanation.
+- **Have workers report a `mergeRisk`** when they had no choice but to edit a shared file. It converts a silent future conflict into a known one, and it tells the CEO which units to merge first.
+
+**We have already validated this without writing it down.** Stage 1 GUI kit production originally put five Codex artists on one Figma frame; the fix was splitting the page into regions with one artist per region — exactly the additive pattern above. The lesson stayed in that project instead of in the standard, which is why it is here now.
+
+*(Section added 2026-08-13 from [`aronprins/claude-loop`](https://github.com/aronprins/claude-loop), the sibling of the repo the rest of this document came from. It was the one idea in it that its Codex counterpart did not already carry.)*
+
 ## Cost
 
 A worktree costs disk and setup time per worker. Use parallel mode when units are genuinely independent and the work is long enough to pay for the isolation — not to make a three-unit job look busy.
