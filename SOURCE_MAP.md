@@ -45,7 +45,7 @@ Recommended read order for any agent or developer picking up this repo.
 17. `roles/_shared/DEFINITION-OF-DONE.md` — DoD checklist: Worker self-check + Reviewer verification
 18. `roles/_shared/PROJECT-INVENTORY.md` — template: CEO reads before delegating each heartbeat
 19. `roles/ceo/` — CEO role pack: README, skills, heartbeat (12-step), tools, SOUL, autoreview-invocation
-20. `roles/worker/` — Worker role pack: README, skills, heartbeat (Step 8 DoD mandatory), tools
+20. `roles/worker/` — Worker role pack: README, skills, heartbeat (Step 8 DoD mandatory), tools, durable-learning
 21. `roles/researcher/` — Researcher role pack: README, skills, research-pattern, handoff-to-keeper, tools
 22. `roles/knowledge-keeper/` — Keeper role pack: README, skills, wiki-pattern, weekly-aggregation-handoff, tools
 23. `roles/reviewer/` — Reviewer role pack: README, skills (autoreview + review-gang), review-pattern, verdict-format, tools
@@ -62,6 +62,7 @@ Recommended read order for any agent or developer picking up this repo.
 28. `standards/approval-wake-protocol.md` — PAPERCLIP_APPROVAL_ID handling; checkout-before-work; 409 rule
 29. `standards/cc-paperclip-communication-protocol.md` — canonical CC-to-CEO-only rule; stack diagram; SFX-2 lesson
 30. `standards/worker-skills-catalog.md` — cross-role index of all skills, sources, target roles
+30a. `standards/parallel-work-isolation.md` — one worktree per concurrent worker; shared runtime state is CEO-owned; dependency waves with a concurrency cap. Sequential is the default
 
 ## 11. Machine-readable config (canonical values)
 

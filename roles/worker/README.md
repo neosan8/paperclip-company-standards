@@ -36,6 +36,7 @@ See `../../config/models.json`: `worker` block.
 | `skills.md` | Codex CLI workflow, plan-goal-review cycle |
 | `heartbeat.md` | Worker heartbeat with mandatory Step 5 self-check |
 | `tools.md` | Codex CLI, gbrain, graphify, gstack QA |
+| `durable-learning.md` | What to record in `progress.txt` so the next fresh context is not naive |
 
 ## Anti-patterns
 

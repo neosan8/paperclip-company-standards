@@ -5,6 +5,21 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ---
 
+## Unreleased
+
+### Parallel work isolation and worker durable learning
+**Files:** `standards/parallel-work-isolation.md` (new), `roles/worker/durable-learning.md` (new), `roles/worker/README.md`, `SOURCE_MAP.md`
+
+Two gaps found by comparing this repo against [`aronprins/codex-loop`](https://github.com/aronprins/codex-loop) (MIT, read 2026-08-13). Measured, not assumed: before this change `worktree` and `learning` each appeared in **zero** files here.
+
+**Parallel work had no isolation model.** Concurrent workers were already running — five Codex artists writing the same Figma frame during Stage 1 GUI kit production — and collisions were handled by noticing them. The standard is now one `git worktree` per concurrent worker, merge-and-verify barrier between waves, dependency waves via `dependsOn` with a default concurrency cap of 4, and sequential execution as the default. The load-bearing rule is ownership of shared state: **only the CEO writes shared runtime files**, once per wave after the barrier. Worktrees stop workers colliding in source; single ownership stops them colliding in state, which is the failure neither worker can detect because each one's own write succeeds.
+
+**Workers had nowhere to record what they learned.** Fresh context per issue is deliberate, but it meant a worker's finding on issue 40 was unavailable to the worker on issue 41 — the same wrong assumption made, corrected and forgotten repeatedly. Git history records what changed, never what had to be found out first. Workers now append to `progress.txt` with a stable `## Codebase Patterns` section, and read it before starting.
+
+codex-loop was **not installed as a skill**: it duplicates orchestration a Paperclip CEO already performs, and at 24 stars with no pushes since 22 June it is not a dependency worth taking. The pattern is recorded here so it survives independently of that repo — the same reasoning that would have prevented `config/skills-manifest.json` listing two skills that had been retired upstream.
+
+---
+
 ## v0.3.0 — 2026-07-29
 
 Model topology update per Atakan's directive, driven by two root causes: (1) the CEO and Codex agent model ids needed to move forward (CEO -> `claude-opus-5`, Worker/Researcher/Reviewer -> `gpt-5.6-sol`), and (2) the `claude-sonnet-latest` alias used for Knowledge Keeper is not a valid, pinned model id — this exact bug stalled Product Design for 5 weeks. Going forward, `-latest` aliases are banned; every role must reference an explicit, versioned model id. Reasoning effort is standardized to **high** for all five roles, set **per agent** in `adapterConfig` — `effort` for `claude_local` (CEO, Knowledge Keeper), `modelReasoningEffort` for `codex_local` (Worker, Researcher, Reviewer). Host config files (`~/.claude/settings.json`, `~/.codex/config.toml`) govern host-run CLI sessions only; Paperclip gives each codex agent a managed `CODEX_HOME`, so they do not control company agents.
