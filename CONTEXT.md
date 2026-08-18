@@ -85,4 +85,4 @@ Every company and every human team CC install must have:
 - [neosan8/template-stage-0-kit](https://github.com/neosan8/template-stage-0-kit) — HTML game template (Stage 0, L1-L100)
 - [neosan8/template-stage-1-kit](https://github.com/neosan8/template-stage-1-kit) — Unity Android template (Stage 1+)
 - [neosan8/template-gui-kit](https://github.com/neosan8/template-gui-kit) — Figma GUI Kit (Codex Template GUI Kit v0.2)
-- [neosan8/giant-aicado-os](https://github.com/neosan8/giant-aicado-os) — Studio operating doctrine, pipeline, and roles
+- [neosan8/game-market](https://github.com/neosan8/game-market) — `docs/giant-aicado/STUDIO_OS_V2.md`, the canonical studio operating model
