@@ -1,5 +1,7 @@
 # Researcher Role — Overview
 
+Optional specialist on the Grok Bot game-company path. Not a standing required slot.
+
 ## Purpose
 
 The Researcher finds gold standards, frontier patterns, and sector best-practices relevant to the company's domain. It does not execute product work. It produces research briefs and hands them to the Knowledge Keeper.
@@ -8,11 +10,11 @@ The Researcher is an intelligence function, not an execution function. A Researc
 
 ## Model assignment
 
-See `../../config/models.json`: `researcher` block.
+See `../../config/models.json`: `optional_specialists.researcher` on the Grok path (not a standing slot). Legacy ids: `legacy_five_slot`.
 
-- Model: `gpt-5.6-sol`
-- Adapter: `codex_local`
-- Auth: `chatgpt_subscription_oauth`
+- Model (if hired by a Grok seat): `auto` on Cursor
+- Adapter (if hired by a Grok seat): `cursor` / `cursor-local`
+- API role: `researcher`
 
 ## Responsibilities
 

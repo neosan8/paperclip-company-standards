@@ -7,6 +7,23 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ## Unreleased
 
+### Grok Bot primary profile (3-slot Cursor)
+**Files:** `config/models.json`, `config/roles.json`, `config/central-companies.json`, `docs/operator-stack.md` (new), `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/stack-standard.md`, `docs/known-issues.md`, `AGENTS.md`, `CONTEXT.md`, `SOURCE_MAP.md`, `README.md`, `standards/cc-paperclip-communication-protocol.md`, `scripts/validate-grok-profile.sh` (new), plus bootstrap/role pointers so they do not silently keep Claude/Codex as the hire path
+
+Neo (Atakan) 2026-09-14: this repo is what Grok Bot seats receive. The primary company is one game company with **CEO + Worker + Reviewer** on Paperclip Cursor Local (`adapterType` `cursor`; `cursor-local` on Linux Grok Bot workers), model `auto` unless Neo pins a concrete Cursor id. Concrete ids beat aliases. `latest` stays forbidden. Unverified model strings stay forbidden.
+
+Researcher and Knowledge Keeper are optional specialists, not standing required slots. Grok seats do not bootstrap the 13-central layer and do not adopt cross-company routing. The five-slot Claude/Codex topology and the 13-central registry remain, marked legacy / Knowledge-central portfolio, so that ownership is not erased.
+
+Operator stack: MCP (`neosan8/paperclip-mcp`, `PAPERCLIP_URL=http://127.0.0.1:3100`, health first, CRUD only) → `npx paperclipai … --json` for wake/approvals/checkout/budgets/secrets/whoami → browser never default. Docs source is https://docs.paperclip.ing (`paperclipai/paperclip-docs`). `run-paperclip` and `paperclip-vision` are not Grok runtime. Hosted GHA is not a spawn gate. Heartbeat stays off until needed. Board-deputy (the Grok Bot seat) talks only to the CEO.
+
+API role mapping for hire: Worker→`engineer`, Reviewer→`qa`, CEO→`ceo`. `reviewer_must_exist` stays true.
+
+KI-PS-1 superseded for Grok seats (3-slot). KI-PS-9 opened: if Cursor CLI rejects `auto`, escalate to Neo — do not invent a replacement id.
+
+`scripts/validate-grok-profile.sh` checks the machine-readable invariants (primary profile, Cursor adapters, 3 required slots, Reviewer required, centrals not a Grok bootstrap target). The consistency workflow runs it.
+
+---
+
 ### Parallel work isolation and worker durable learning
 **Files:** `standards/parallel-work-isolation.md` (new), `roles/worker/durable-learning.md` (new), `roles/worker/README.md`, `SOURCE_MAP.md`
 

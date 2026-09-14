@@ -1,170 +1,126 @@
 # New Company Checklist
 
-Atomic checklist CC runs every time a new Paperclip company is created. Complete every step in order. Do not mark any step done unless it is verified.
+Atomic checklist a **Grok Bot seat** (board-deputy) runs when creating a Paperclip game company. Complete every step in order. Do not mark any step done unless it is verified.
+
+Operator layers (MCP primary, CLI fallback, browser never default): `docs/operator-stack.md`. Re-check [docs.paperclip.ing](https://docs.paperclip.ing) before a command family you have not used recently.
+
+**This is not a 13-central bootstrap.** One company per game. Required seats are CEO + Worker + Reviewer only. Do not recreate Layer-1 centrals. Do not hire Researcher or Knowledge Keeper unless there is a specific reason after the 3-slot loop works.
 
 ---
 
 ## Pre-creation
 
-- [ ] Confirm the company name, prefix, and role against `config/central-companies.json` (if central) or the game title (if game company).
-- [ ] Confirm the company does not already exist: run `paperclip_list_companies` and scan the output.
-- [ ] Confirm the company tier: central or game company.
+- [ ] Confirm the game title and that this is a **game company**, not a new central.
+- [ ] Confirm the company does not already exist: MCP `paperclip_health` first, then `paperclip_list_companies`.
+- [ ] Confirm you will hire three required seats only (CEO, Worker, Reviewer).
+- [ ] Confirm adapters will be Cursor (`cursor`; `cursor-local` on Linux Grok Bot workers) and model `auto` unless Neo has pinned a concrete Cursor id. Never `latest`. Never invent an unverified model string. Values: `config/models.json`.
 
 ---
 
-## Create the company
+## Create the company (MCP)
 
-- [ ] Create the Paperclip company via `paperclip_create_company`.
-- [ ] Record the company UUID from the response. (Update `config/central-companies.json` if this is a central company, resolving KI-PS-3 for that entry.)
+- [ ] `paperclip_health` — instance at `PAPERCLIP_URL=http://127.0.0.1:3100` is up.
+- [ ] `paperclip_create_company` with the game title.
+- [ ] Record the company UUID from the response. Do **not** add it to `config/central-companies.json` (that file is the 13-central registry; Grok seats do not bootstrap that layer).
 
----
-
-## Reasoning effort — set per agent
-
-Reasoning effort is **high** for every role, and it is set **per agent in `adapterConfig`** — not by host config files. Set it as each agent is created, and verify after:
-
-- [ ] CEO and Knowledge Keeper (`claude_local`): `adapterConfig.effort` = `"high"`
-- [ ] Worker, Researcher and Reviewer (`codex_local`): `adapterConfig.modelReasoningEffort` = `"high"`
-
-**Do not rely on `~/.claude/settings.json` or `~/.codex/config.toml`.** Those govern host-run CLI sessions only. Paperclip gives each codex agent a managed `CODEX_HOME` under `instances/<id>/companies/<companyId>/agents/<agentId>/codex-home/`, so a correctly configured host tells you nothing about what the company's agents are running. See `docs/governance/model-topology.md`.
+CLI is not required for create. Browser is not the default.
 
 ---
 
-## Create all 5 standard agents
+## Hire the 3 required agents (MCP)
 
-Reference `config/models.json` and `config/roles.json` for all model, adapter, and role values. As of v0.2.0, five agent slots are mandatory per company (including the Reviewer).
+Reference `config/models.json` and `config/roles.json` for model, adapter, and API role values.
 
-**API enum note:** The Paperclip API enforces a fixed role enum. Use the `paperclip_api_role` values from `config/roles.json` when calling `paperclip_create_agent` — not the spec display names. Key mappings: Worker → `engineer`, Knowledge Keeper → `pm`, Reviewer → `qa`. `self_review_prohibited` is not a platform field; embed it as instruction text in the Reviewer's capabilities.
+**API enum:** use `paperclip_api_role` on `paperclip_create_agent`, not the spec display name.
 
-- [ ] Create **CEO** agent:
-  - Model: `claude-opus-5`
-  - Adapter: `claude_local`
-  - Auth: Claude.ai subscription OAuth
+| Spec role | API role | Adapter | Model |
+|-----------|----------|---------|-------|
+| CEO | `ceo` | `cursor` (`cursor-local` on Linux Grok Bot workers) | `auto` unless Neo pins |
+| Worker | `engineer` | same | same |
+| Reviewer | `qa` | same | same |
+
+`self_review_prohibited` is not a platform field. Embed `review-only; never self-review` in the Reviewer's capabilities text.
+
+- [ ] Create **CEO**:
   - API role: `ceo`
-  - AGENTS.md: include gbrain/graphify syntax, vault path, this standards repo URL, orchestrator-only rule.
+  - Adapter / model: Cursor lock above
+  - Heartbeat: OFF
+  - AGENTS.md / instructions: this standards repo URL, orchestrator-only rule, approval-wake, checkout/409, backlog-is-invisible-until-todo
+  - Run `standards/sync-bootstrap.sh --role=ceo --company=<slug>` if the company-scoped AGENTS.md is not yet written
 
-- [ ] Create **Worker** agent:
-  - Model: `gpt-5.6-sol`
-  - Adapter: `codex_local`
-  - Auth: ChatGPT subscription OAuth
-  - API role: `engineer` (spec name is Worker; API enum is engineer)
-  - `dangerouslyBypassApprovalsAndSandbox: true`
-  - AGENTS.md: include Codex workflow (`/plan -> /goal -> $codex-review -> $review`), brain-first rule.
-  - Skills: install `uinaf/codex-review`.
+- [ ] Create **Worker**:
+  - API role: `engineer`
+  - Adapter / model: Cursor lock above
+  - Heartbeat: OFF
+  - AGENTS.md: plan before execute; DoD self-check; do not self-close; wait for Reviewer
 
-- [ ] Create **Knowledge Keeper** agent:
-  - Model: `claude-sonnet-4-6` (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu)
-  - Adapter: `claude_local`
-  - Auth: Claude.ai subscription OAuth
-  - API role: `pm` (spec name is Knowledge Keeper; API enum is pm)
-  - Heartbeat: daily scheduled.
-  - AGENTS.md: include vault conventions, weekly delta format.
-
-- [ ] Create **Researcher** agent:
-  - Model: `gpt-5.6-sol`
-  - Adapter: `codex_local`
-  - Auth: ChatGPT subscription OAuth
-  - API role: `researcher`
-  - Heartbeat: OFF.
-  - AGENTS.md: include research workflow, output format, brain-first rule.
-
-- [ ] Create **Reviewer** agent (mandatory as of v0.2.0):
-  - Model: `gpt-5.6-sol`
-  - Adapter: `codex_local`
-  - Auth: ChatGPT subscription OAuth
+- [ ] Create **Reviewer** (required — `reviewer_must_exist` is true):
   - API role: `qa`
-  - Purpose note: `review-only; never self-review` (include in capabilities text — platform does not enforce)
-  - AGENTS.md: include review workflow, verdict format, self-review prohibition.
-  - Skills: install `uinaf/autoreview`, `uinaf/codex-review`, `uinaf/review-gang`.
+  - Adapter / model: Cursor lock above
+  - Heartbeat: OFF
+  - Capabilities text includes `review-only; never self-review`
+  - AGENTS.md: verdict format, self-review prohibition
+
+Do not set Claude/Codex adapters. Do not set `adapterConfig.effort` / `modelReasoningEffort` as if these were `claude_local` / `codex_local` agents. Cursor Local fields are `adapterConfig.model` (and `cwd` when you have a workspace path). Verified 2026-09-14: [Cursor Local](https://docs.paperclip.ing/reference/adapters/cursor-local/).
 
 ---
 
-## Configure tool stack
+## Wake, approvals, checkout, budgets (CLI, not MCP)
 
-Reference `config/required-tools.json` for tool list.
+MCP is CRUD only. For the following, use `npx paperclipai … --json`. Never `pnpm paperclipai`. Confirm the current subcommand on [docs.paperclip.ing](https://docs.paperclip.ing) (CLI reference) before running.
 
-- [ ] Confirm Obsidian vault is accessible at `~/Docs/paperclipcompanies/_knowledge-base/`.
-- [ ] Create company subfolder in vault: `_knowledge-base/<company-prefix>/`.
-- [ ] Confirm gbrain is available. If macOS 26.3+, confirm bun wrapper is configured.
-- [ ] Confirm gstack is available.
-- [ ] Confirm graphify is available.
-- [ ] Confirm TokenJuice is available.
+- [ ] `whoami` — you are acting as the board-deputy, not as a worker agent.
+- [ ] Budgets set before any wake (company and/or per-agent). A seat with no budget guard is not ready.
+- [ ] Heartbeat remains OFF. When work exists, flip the issue to `todo`, then wake the CEO via CLI. Idle is success when the queue is empty.
+- [ ] Approvals via CLI (`approval` family), not the browser.
+- [ ] Checkout via CLI (`issue checkout`). HTTP 409 = another owner; do not proceed.
+- [ ] Secrets via CLI if an adapter env needs a secret ref. Do not paste secrets into MCP create payloads.
 
----
-
-## Validate tool stack (first CEO issue)
-
-- [ ] Create an issue in the new company: "Validate tool stack: test gbrain query, graphify query, gstack autoplan, and confirm Obsidian vault access. Report pass/fail for each."
-- [ ] Flip issue state from `backlog` to `todo`.
-- [ ] Turn heartbeat ON.
-- [ ] Wait for issue to close with `ship it` verdict.
-- [ ] Turn heartbeat OFF.
+Hosted GitHub Actions is not a gate for this checklist.
 
 ---
 
-## Validate CEO-Worker delegation chain (second CEO issue)
+## First CEO issue — 3-slot loop
 
-- [ ] Create an issue: "Self-test: create a sample sub-issue, assign to Worker, verify Worker picks it up, close the loop. Confirm CEO-Worker delegation chain is functioning."
-- [ ] Flip to `todo`, turn heartbeat ON.
-- [ ] Wait for close with `ship it`.
-- [ ] Turn heartbeat OFF.
-
----
-
-## Register with Knowledge company
-
-- [ ] Notify the Knowledge company CEO: new company `<name>` (prefix `<PREFIX>`) is active. Provide company UUID.
-- [ ] Confirm Knowledge Keeper's first weekly delta target is set (next Monday or next scheduled window).
-- [ ] **Verify Knowledge company status is `active`.** The Knowledge company must remain `active` at all times. It is the ingest target for all production companies. Archiving the Knowledge company creates a silent fleet-wide blocker: the Paperclip API rejects cross-company API calls to archived companies with HTTP 403. CEOs and Routines must not change the Knowledge company status. If the Knowledge company needs to be paused for any reason, escalate to CC.
+- [ ] Create an issue assigned to the **CEO** (never to Worker or Reviewer): "Self-test: create a sample sub-issue, assign to Worker, wait for Reviewer verdict, close the loop."
+- [ ] Flip state from `backlog` to `todo`. Backlog is invisible.
+- [ ] CLI-wake the CEO. Do not enable a standing heartbeat.
+- [ ] Wait for Reviewer `ship it` and CEO close.
+- [ ] Confirm heartbeat/wake is off afterwards.
 
 ---
 
-## Researcher-first specialist provisioning sequence
+## Optional specialists (do not run on spawn)
 
-Before adding any specialist worker agents beyond the core 5, the company
-MUST complete this research-driven loop. This prevents premature specialization
-based on assumed needs rather than evidence.
+Researcher and Knowledge Keeper are **not** part of Grok spawn. Hire later only if the CEO has a documented reason. If hired: same Cursor lock; Researcher API role `researcher`; Knowledge Keeper API role `pm`.
 
-### Step A — VISION + SOUL
-CEO bootstrap first-issue produces:
-- `VISION.md` (per `templates/VISION.md` schema): mission, target outcome, target customer/consumer, growth strategy, org structure, CEO mandate, guiding principles, anti-patterns
-- `SOUL.md` (CEO identity, per `roles/ceo/SOUL.md` template)
+The research-driven specialist loop (VISION → research brief → wiki → roster decision) remains valid **after** the 3-slot company works, and only when you are adding specialists. It is not a reason to hire five seats on day one.
 
-### Step B — Researcher mission
-CEO opens a Researcher issue with subject: "Survey best-in-class organizations in <company-domain> for hybrid casual mobile games. Identify: org structure, roles, tooling, gold-standard outputs, common failure modes."
-Researcher produces a research brief at `~/Docs/paperclipcompanies/<company-name>/_knowledge-base/research/<domain>-best-in-class-orgs.md`.
+Do not notify or register with the Knowledge-central company as a spawn step. Weekly delta applies only if a Knowledge Keeper exists and that ingest path is in use. See `weekly-knowledge-aggregation.md`.
 
-### Step C — Knowledge Keeper synthesis
-Knowledge Keeper reads the Researcher brief, builds the company wiki at
-`~/Docs/paperclipcompanies/<company-name>/_knowledge-base/` covering:
-- domain vocabulary (canonical terms; cross-reference standards CONTEXT.md)
-- gold-standard org structure recommendation for this company specifically
-- specialist role recommendations with rationale (link back to research evidence)
-- tool stack additions specific to this domain (beyond the universal stack)
+---
 
-### Step D — Specialist roster decision
-CEO + Atakan + CC review the wiki recommendation. Decision goes into
-`docs/decisions/specialist-roster-v1.md` inside the company's repo (or
-equivalent location). No specialist agents are created before this decision.
+## Knowledge-central never-archived guard (do not operate that layer)
 
-### Step E — Specialist provisioning
-CEO creates specialist agents per the agreed roster. Each new specialist gets
-a capability brief referencing the wiki section that justifies their role.
-
-### Anti-patterns to avoid
-- Creating specialists before VISION.md exists ("guessing the team")
-- Creating specialists before Researcher brief ("guessing the gold standard")
-- Skipping Knowledge Keeper synthesis ("research → action without curation")
-- Using CC suggestions as the roster without Researcher evidence
+Grok seats do not change Knowledge company status. If a Grok-created company later grows a Keeper that posts to Knowledge, archiving Knowledge still creates a fleet-wide 403. Escalate; do not archive, unarchive, or recreate KNO from a game seat.
 
 ---
 
 ## Final verification
 
-- [ ] All 5 agents created and configured (CEO, Worker, Knowledge Keeper, Researcher, Reviewer).
-- [ ] Tool stack validated (pass on all 4 tools).
-- [ ] Delegation chain validated.
-- [ ] Knowledge company notified.
-- [ ] Company UUID recorded in `config/central-companies.json` (if central).
+- [ ] Exactly 3 required agents exist (CEO, Worker, Reviewer). No extra standing slots were created "because the old standard said five."
+- [ ] All three use the Cursor lock and model `auto` (or Neo's pinned id).
+- [ ] API roles are `ceo` / `engineer` / `qa`.
+- [ ] Heartbeat OFF. First loop closed with a Reviewer `ship it`.
+- [ ] Board-deputy talked only to the CEO.
+- [ ] 13-central registry was not edited. No Claude/Codex seats were hired.
 
 Company is ready for production work.
+
+---
+
+## Legacy appendix — five-slot Knowledge-central bootstrap
+
+Not the Grok path. Kept so the Knowledge-central portfolio is not silently erased.
+
+That portfolio hired five slots on Claude/Codex (`claude_local` / `codex_local`) with per-agent `adapterConfig.effort` / `modelReasoningEffort` = `high`, registered the company with Knowledge, and ran a Researcher-first specialist sequence before extra workers. Values: `config/models.json` `legacy_five_slot`. Tool-stack validation against `scripts/validate-stack.sh` applies to those Claude-host machines, not to Grok seat spawn.

@@ -54,6 +54,12 @@ jobs:
           [ "$fail" -eq 0 ] && echo "✅ shell scriptleri geçerli"
           exit $fail
 
+      # ── FAIL: Grok birincil profil JSON'da yoksa ──────────────────
+      # Bu repo Grok Bot koltuklarının okuduğu tek doğruluk kaynağı.
+      # Claude/Codex veya 5-slot yeniden birincil olursa spawn yanlış gider.
+      - name: Grok birincil profil
+        run: ./scripts/validate-grok-profile.sh
+
       # ── FAIL: config sürümü semver değilse ────────────────────────
       - name: Sürüm alanları semver mi
         run: |

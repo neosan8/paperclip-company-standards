@@ -1,6 +1,8 @@
 # Knowledge Keeper — Specialist Role
 
-Mandatory in every Paperclip company (central and game companies alike).
+**Optional** on the Grok Bot game-company path. Not a standing required slot. Do not hire one to recreate five-slot doctrine or the 13-central weekly ingest.
+
+Mandatory only in the legacy Knowledge-central five-slot portfolio.
 
 ---
 
@@ -8,10 +10,9 @@ Mandatory in every Paperclip company (central and game companies alike).
 
 | Field | Value |
 |-------|-------|
-| Model | `claude-sonnet-4-6` (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |
-| Adapter | `claude_local` |
-| Auth | Claude.ai subscription OAuth |
-| Heartbeat | Low-frequency scheduled (daily) or on-demand |
+| Model | If hired by a Grok seat: `auto` on Cursor (`config/models.json` `optional_specialists`). Legacy portfolio: `legacy_five_slot`. `latest` is forbidden in both. |
+| Adapter | Cursor lock on the Grok path. `claude_local` only in the legacy portfolio. |
+| Heartbeat | OFF until needed. Legacy portfolio used a low-frequency daily schedule. |
 
 ---
 

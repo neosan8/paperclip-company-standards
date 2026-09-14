@@ -8,7 +8,9 @@ No previous sessions found.
 
 # Working in paperclip-company-standards
 
-You are an agent making changes in the repo that thirteen Paperclip companies configure themselves from. This file tells you how to work here. Read it before editing.
+You are an agent making changes in the repo that **Grok Bot seats** (and the Knowledge-central portfolio) configure Paperclip companies from. This file tells you how to work here. Read it before editing.
+
+**Primary audience:** a Grok Bot seat creating one 3-slot Cursor game company (CEO + Worker + Reviewer). The 13-central / five-slot material is legacy for that seat — findable, not a spawn instruction.
 
 Treat these as **good defaults, not hard rules**. The person directing you can override anything here, and their intent wins.
 
@@ -34,7 +36,7 @@ The script never writes to this repo's own `AGENTS.md`, so editing this file is 
 
 The canonical standard for how a Paperclip company is built and run — roles, models, stack, flows, bootstrap configs, and the role packs distributed by `standards/sync-bootstrap.sh`.
 
-**Its output is not documentation. Its output is configuration.** Thirteen central companies plus one game company per active title read this repo and configure their agents from it. A wrong model id here does not produce a confusing paragraph; it produces agents that fail to start.
+**Its output is not documentation. Its output is configuration.** Grok Bot seats read this repo and hire CEO / Worker / Reviewer on Cursor. The Knowledge-central portfolio still lives here so it is not silently erased. A wrong model id here does not produce a confusing paragraph; it produces agents that fail to start.
 
 That has happened. `CONTEXT.md` records it in one line: a `latest` alias used as a model id was an invalid identifier and **stopped Product Design for five weeks**.
 
@@ -63,11 +65,11 @@ Before adding a fact, find where it already lives and edit that. When a fact gen
 - **SOURCE_MAP** — a new document needs an entry, in the right section.
 - **known-issues** — if the work resolves a `KI-PS-*`, mark it resolved with the date and the deciding authority.
 - **Both directions of a cross-reference** — if `docs/x.md` now points at `roles/y/README.md`, check whether `y` should point back.
-- **`validate-stack.sh` still passes**, and if the change adds a requirement, that the script actually tests it.
+- **`validate-stack.sh` still passes** when you are changing the Claude-host stack, and if the change adds a requirement, that the script actually tests it. Grok profile invariants are `scripts/validate-grok-profile.sh` (consistency workflow runs it).
 - **Consistency workflow green** — it runs on every push and catches the drift class this repo is prone to.
 
 ## A note on how we work
 
-This repo is read by machines that cannot ask a clarifying question. An ambiguity here does not become a message; it becomes thirteen companies configured slightly differently, discovered weeks later.
+This repo is read by machines that cannot ask a clarifying question. An ambiguity here does not become a message; it becomes Grok-created game companies (and any remaining central companies) configured slightly differently, discovered weeks later.
 
 So prefer the precise sentence over the elegant one, state what a value must be rather than what it should generally look like, and when something is genuinely undecided say so in `docs/known-issues.md` rather than writing a plausible-sounding rule that nobody has actually agreed.

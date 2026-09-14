@@ -6,10 +6,16 @@ Open questions and gaps tracked here. Check this file before making decisions th
 
 ## KI-PS-1 — Game-company internal structure tier
 
-**Status:** RESOLVED  
+**Status:** SUPERSEDED for Grok Bot seats; five-slot remains the Knowledge-central portfolio standard  
 **Opened:** 2026-06-02  
-**Closed:** 2026-06-02  
-**Resolution:** Atakan decision 2026-06-02 — all companies (central and game) use the full five-slot model: CEO + Worker + Researcher + Knowledge Keeper + Reviewer. No lean or full-mirror variants. See `docs/company-architecture.md` and `config/roles.json`.
+**Closed (five-slot):** 2026-06-02  
+**Superseded (Grok seats):** 2026-09-14 — Neo (Atakan)
+
+**2026-06-02 resolution:** all companies (central and game) in the Knowledge-central portfolio use the full five-slot model: CEO + Worker + Researcher + Knowledge Keeper + Reviewer. Lean (CEO + Worker only) was rejected for that portfolio.
+
+**2026-09-14 supersession:** Grok Bot seats create **3-slot Cursor** game companies: CEO + Worker + Reviewer. Researcher and Knowledge Keeper are optional specialists, not mandatory standing slots. Grok seats do not bootstrap the 13-central layer. See `docs/company-architecture.md` and `config/roles.json`.
+
+The five-slot resolution is not deleted. It is not the spawn path for Grok Bot seats.
 
 ---
 
@@ -66,7 +72,9 @@ Candidate mechanisms:
 
 **Resolution:** After v0.2.0 tag on main branch, CC bulk-creates Reviewer agent slots across all 13 central companies and existing game companies. Each Reviewer must run through the bootstrap activation checklist (`templates/CEO_BOOTSTRAP.md` Step 7). Estimated: 13+ Reviewer agents to create.
 
-**Impact:** Until resolved, all companies are operating with a 4-slot model. Worker Done reports cannot have a Reviewer verdict. CEOs must note this in their Done reports to CC.
+**Impact (Knowledge-central portfolio):** Until resolved, those companies are operating with a 4-slot model. Worker Done reports cannot have a Reviewer verdict. CEOs must note this in their Done reports to CC.
+
+**Grok Bot seats (2026-09-14):** not a Grok spawn task. Grok-created game companies hire Reviewer as one of the three required slots on day one (`reviewer_must_exist` stays true). Do not bulk-create Reviewer seats across the 13 centrals from a Grok game seat.
 
 ---
 
@@ -117,4 +125,18 @@ Candidate mechanisms:
 
 **Resolution:** CC wrote the CC-to-CEO-only rule into `~/CLAUDE.md` (loaded every CC session). `standards/cc-paperclip-communication-protocol.md` added in v0.2.2 so the Knowledge company can validate conformance. SFX-2 is retained as a historical record (task was already completed by Researcher); no retroactive cleanup needed.
 
-**Impact for future companies:** All CC-created issues must be assigned to the company CEO. CEO delegates to specialists via sub-issues.
+**Impact for future companies:** All board/deputy-created issues must be assigned to the company CEO. CEO delegates to specialists via sub-issues. The Grok Bot seat is the board-deputy; same rule.
+
+---
+
+## KI-PS-9 — Cursor `auto` may be rejected by some Cursor CLI versions
+
+**Status:** OPEN  
+**Opened:** 2026-09-14  
+**Owner:** Neo (Atakan)
+
+**Details:** Paperclip Cursor Local documents `auto` as the default model ([Cursor Local](https://docs.paperclip.ing/reference/adapters/cursor-local/), verified 2026-09-14). Some Cursor CLI versions have rejected `auto` (upstream `paperclipai/paperclip#1357`). The Grok seat standard remains `auto` until Neo pins a concrete Cursor model id.
+
+**Do not:** invent a replacement id, silently switch to `composer-2` or any other unverified string, or fall back to Claude/Codex adapters.
+
+**Workaround:** if hire or wake fails because `auto` is not accepted, stop and escalate to Neo. Concrete ids beat aliases only when Neo supplies the id.

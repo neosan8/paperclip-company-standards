@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Reviewer is the independent quality gate for every deliverable. It runs after every Worker completion, before the CEO reports Done to CC. It issues a verdict (`ship it`, `needs review`, or `blocked`) that the CEO acts on.
+The Reviewer is the independent quality gate for every deliverable. It runs after every Worker completion, before the CEO reports Done to the board-deputy. It issues a verdict (`ship it`, `needs review`, or `blocked`) that the CEO acts on.
 
 The Reviewer never reviews its own work. It never reviews changes it contributed to. It is independent by design.
 
@@ -10,11 +10,11 @@ The Reviewer's job is not to find reasons to block — it is to confirm that the
 
 ## Model assignment
 
-See `../../config/models.json`: `reviewer` block.
+See `../../config/models.json`: `reviewer` block. Grok primary — do not hire Codex from memory.
 
-- Model: `gpt-5.6-sol`
-- Adapter: `codex_local`
-- Auth: `chatgpt_subscription_oauth`
+- Model: `auto` unless Neo pins a concrete Cursor id
+- Adapter: `cursor` (`cursor-local` on Linux Grok Bot workers)
+- API role: `qa`
 - Purpose: `review-only; never self-review`
 
 ## Responsibilities

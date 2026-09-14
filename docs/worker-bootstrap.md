@@ -6,18 +6,18 @@ Configuration and behavioral contract for the Worker agent in any Paperclip comp
 
 ## Model config
 
+Values come from `config/models.json` `worker` (Grok primary). Do not copy a Codex id from memory.
+
 | Field | Value |
 |-------|-------|
-| Model | `gpt-5.6-sol` |
-| Adapter | `codex_local` |
-| Auth | ChatGPT subscription OAuth |
-| Reasoning effort | **high** — `adapterConfig.modelReasoningEffort: "high"` |
-| `dangerouslyBypassApprovalsAndSandbox` | `true` |
+| Model | `auto` unless Neo pins a concrete Cursor id |
+| Adapter | `cursor` (`cursor-local` on Linux Grok Bot workers) |
+| API role | `engineer` |
 | API direct use | Forbidden |
 
-**Effort is set per agent.** `codex_local` reads `adapterConfig.modelReasoningEffort`. Paperclip runs each codex agent in a managed per-agent `CODEX_HOME`, so `~/.codex/config.toml` is not read by company agents — a correctly configured host proves nothing about this worker. Verify the agent's own `adapterConfig`.
+Cursor Local fields: `adapterConfig.model` and `cwd` when a workspace path exists. Do not set `codex_local` `modelReasoningEffort` or `dangerouslyBypassApprovalsAndSandbox` on a Cursor worker.
 
-**Critical:** Codex must auth via ChatGPT subscription, never OpenAI API. Using API keys costs real money per call. If Codex prompts for an API key, stop and fix the auth config.
+Legacy Knowledge-central workers used `gpt-5.6-sol` / `codex_local` — see `config/models.json` `legacy_five_slot`. Not the Grok hire path.
 
 ---
 
@@ -29,9 +29,15 @@ Workers do not self-start. They pick up issues when the CEO assigns them and hea
 
 ---
 
-## Codex workflow (mandatory)
+## Plan-then-execute (mandatory)
 
-Every task the Worker executes must follow this sequence:
+Cursor workers plan before touching code, execute against the plan, self-check against the DoD, and wait for an independent Reviewer verdict. They do not self-close.
+
+The Codex slash-command sequence below is **legacy** for `codex_local` workers in the Knowledge-central portfolio. Do not install Codex skills to satisfy Grok spawn.
+
+### Legacy Codex workflow (`codex_local` workers only)
+
+Every task those workers execute followed this sequence:
 
 1. **`/plan`** — read the issue, think before coding, produce a structured plan with verifiable steps.
 2. **`/goal`** — execute against the plan step by step.
