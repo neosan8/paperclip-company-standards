@@ -12,8 +12,8 @@ One company per active game title. Required seats:
 
 | Agent | Role | API role | Adapter | Model |
 |-------|------|----------|---------|-------|
-| CEO | Orchestrates. Never executes. | `ceo` | `cursor` (`cursor-local` on Linux Grok Bot workers) | `auto` unless Neo pins a concrete Cursor id |
-| Worker | Executes tasks | `engineer` | same Cursor lock | same |
+| CEO | Idle of production; orchestrate only. Never implements. | `ceo` | `cursor` (`cursor-local` on Linux Grok Bot workers) | `auto` unless Neo pins a concrete Cursor id |
+| Worker | Produces (code, docs, art) | `engineer` | same Cursor lock | same |
 | Reviewer | Independent quality gate. Verdict before CEO reports Done. Never reviews own work. | `qa` | same Cursor lock | same |
 
 `reviewer_must_exist` remains true. No Grok-created game company is bootstrapped without an active Reviewer.

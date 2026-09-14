@@ -16,7 +16,7 @@ Heartbeat OFF is not this rule. Heartbeat OFF is the wake-loop setting when the 
 
 This was already implied as "CEO never executes." It is now the standing standard in the Grok primary path, not private agent memory. `roles/ceo/SOUL.md` is the source; other files point at it. `scripts/validate-grok-profile.sh` fails if the lock phrase is missing from those Grok-path files.
 
-Does not weaken Reviewer independence. Does not reintroduce five-slot as required.
+Does not weaken Reviewer independence. Does not reintroduce five-slot as required. Encoded only in this repo; giant-aicado is not updated here — the monorepo consumes this standard later.
 
 ### Grok Bot primary profile (3-slot Cursor)
 **Files:** `config/models.json`, `config/roles.json`, `config/central-companies.json`, `docs/operator-stack.md` (new), `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/stack-standard.md`, `docs/known-issues.md`, `AGENTS.md`, `CONTEXT.md`, `SOURCE_MAP.md`, `README.md`, `standards/cc-paperclip-communication-protocol.md`, `scripts/validate-grok-profile.sh` (new), plus bootstrap/role pointers so they do not silently keep Claude/Codex as the hire path
