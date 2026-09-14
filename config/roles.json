@@ -14,14 +14,16 @@
       "role": "ceo",
       "display": "CEO",
       "paperclip_api_role": "ceo",
-      "purpose": "Orchestrates all work via sub-issues. Never executes directly.",
+      "purpose": "Remain idle of production execution; orchestrate and distribute only. Never implement deliverables.",
       "model": "auto",
       "adapter": "cursor",
       "adapter_linux_grok_bot_worker": "cursor-local",
       "slots_per_company": 1,
       "required": true,
       "role_pack": "roles/ceo/",
-      "anti_self_execution": true
+      "anti_self_execution": true,
+      "idle_of_production_execution": true,
+      "idle_lock": "Neo / Atakan 2026-09-14; source roles/ceo/SOUL.md"
     },
     {
       "role": "worker",
@@ -83,6 +85,7 @@
     "api_direct_use_forbidden": true,
     "exception": "embedding endpoints only",
     "reviewer_must_exist": true,
-    "reviewer_verdict_required_before_done": true
+    "reviewer_verdict_required_before_done": true,
+    "ceo_idle_of_production_execution": true
   }
 }

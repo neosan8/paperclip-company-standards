@@ -19,7 +19,7 @@ Agents and developers should read this file before any other doc in this repo. I
 
 ## Agent roles
 
-- **CEO** — orchestrator only. Never executes tasks directly. Creates sub-issues and delegates to workers. Primary: Cursor Local, model `auto` unless Neo pins a concrete id. API role: `ceo`. If a CEO is seen writing code or running CLI commands itself, that is a bug.
+- **CEO** — remains idle of production execution; orchestrates and distributes only (locked Neo / Atakan 2026-09-14). Never implements deliverables (code, docs, art). Worker produces; Reviewer independently gates quality. Heartbeat OFF is not this rule. Source: `roles/ceo/SOUL.md`. Primary: Cursor Local, model `auto` unless Neo pins a concrete id. API role: `ceo`. If a CEO is seen writing code or running implementation CLI itself, that is a bug.
 - **Worker** — executes tasks (code, research, file operations). Primary: same Cursor lock. API role: `engineer`. Plans before executing; runs DoD self-check; does not self-close.
 - **Reviewer** — independent quality gate. Reviews all Worker deliverables before CEO reports Done. Issues a verdict (`ship it` / `needs review` / `blocked`). Never reviews own work. Primary: same Cursor lock. API role: `qa`. Required seat (`reviewer_must_exist` is true).
 - **Researcher** — optional specialist. Finds gold standards, frontier patterns, sector best-practices. Hands findings to Knowledge Keeper when that specialist exists. Not a standing slot on the Grok path. API role: `researcher`.
@@ -53,6 +53,7 @@ Machine-readable assignments: `config/models.json`, `config/roles.json`. Histori
 - **Heartbeat task-driven policy** — heartbeat is OFF by default. The deputy turns it ON when work is queued. The deputy turns it OFF when the queue drains. Night-shift time-boxed windows are allowed.
 - A CEO starting an unprompted heartbeat loop with no work in queue is a misconfiguration.
 - Idle is success when the queue is empty.
+- Heartbeat OFF / queue-empty idle is not the CEO production-idle lock. The CEO remains idle of production execution even when awake. Source: `roles/ceo/SOUL.md`.
 - New issues sit in `backlog` until flipped to `todo`. Backlog is invisible.
 
 ## Auth policy (HARD)

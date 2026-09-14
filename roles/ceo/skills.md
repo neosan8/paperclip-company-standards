@@ -37,6 +37,8 @@ Skills available to the CEO role. All orchestration-focused; no execution skills
 
 **Purpose:** Detect and block CEO self-execution before it happens.
 
+**Locked Neo / Atakan 2026-09-14:** remain idle of production execution; orchestrate and distribute only. Heartbeat OFF is not this rule. Source: `SOUL.md`.
+
 Before performing any action, the CEO checks: "Is this something a Worker/Researcher/Keeper/Reviewer should do?"
 
 If yes → create a sub-issue and assign it. Do not do it yourself.

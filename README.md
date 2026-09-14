@@ -20,7 +20,7 @@ Owned by the **Knowledge company** (prefix: KNO). Knowledge maintains and merges
 4. `docs/flows/new-company-checklist.md` — create/hire the 3-slot Cursor company
 5. `config/models.json` / `config/roles.json` — machine-readable values
 
-Board-deputy (the Grok Bot seat) talks only to the company CEO. See `standards/cc-paperclip-communication-protocol.md`.
+Board-deputy (the Grok Bot seat) talks only to the company CEO. The deputy wakes the CEO to orchestrate; the CEO remains idle of production execution (locked Neo / Atakan 2026-09-14). Source: `roles/ceo/SOUL.md`. See `standards/cc-paperclip-communication-protocol.md`.
 
 ## Versioning
 

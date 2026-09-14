@@ -27,7 +27,7 @@ Grok game companies require three slots. Researcher and Knowledge Keeper are opt
 
 | Role | Required on Grok path? | Purpose | API role | Model (Grok primary) |
 |------|------------------------|---------|----------|----------------------|
-| **CEO** | yes | Orchestrates all work via sub-issues. Never executes directly. | `ceo` | `auto` on Cursor |
+| **CEO** | yes | Idle of production execution; orchestrates and distributes only (Neo / Atakan 2026-09-14). Never implements. Source: `../ceo/SOUL.md`. | `ceo` | `auto` on Cursor |
 | **Worker** | yes | Executes tasks: code, files, research tasks delegated by CEO. | `engineer` | `auto` on Cursor |
 | **Reviewer** | yes | Independent quality gate. Reviews all deliverables before CEO reports done to the deputy. Never reviews own work. | `qa` | `auto` on Cursor |
 | **Researcher** | no | Sector scans, frontier patterns, gold-standard vetting. | `researcher` | same Cursor lock if hired |

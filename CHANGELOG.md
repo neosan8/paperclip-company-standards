@@ -7,6 +7,17 @@ Versions follow the `YYYY.patch` internal scheme; changes are grouped by version
 
 ## Unreleased
 
+### CEO idle of production (orchestrate only)
+**Files:** `roles/ceo/SOUL.md` (source), `roles/ceo/README.md`, `roles/ceo/skills.md`, `roles/ceo/heartbeat.md`, `roles/_shared/CONTEXT.md`, `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/ceo-bootstrap.md`, `docs/operator-stack.md`, `standards/cc-paperclip-communication-protocol.md`, `templates/CEO_BOOTSTRAP.md`, `config/roles.json`, `scripts/validate-grok-profile.sh`, `AGENTS.md`, `CONTEXT.md`, `SOURCE_MAP.md`, `README.md`
+
+Neo / Atakan 2026-09-14 locked: every Grok Bot seat company (including CANDY) keeps the CEO **idle of production execution**. The CEO only orchestrates and distributes work. Worker produces (code, docs, art). Reviewer independently gates quality. The CEO does not write or produce deliverables.
+
+Heartbeat OFF is not this rule. Heartbeat OFF is the wake-loop setting when the queue is empty. Idle of production work is the behavioral rule even when the CEO is awake: the board-deputy wakes the CEO to orchestrate; the CEO creates sub-issues for Worker and Reviewer.
+
+This was already implied as "CEO never executes." It is now the standing standard in the Grok primary path, not private agent memory. `roles/ceo/SOUL.md` is the source; other files point at it. `scripts/validate-grok-profile.sh` fails if the lock phrase is missing from those Grok-path files.
+
+Does not weaken Reviewer independence. Does not reintroduce five-slot as required. Encoded only in this repo; giant-aicado is not updated here — the monorepo consumes this standard later.
+
 ### Grok Bot primary profile (3-slot Cursor)
 **Files:** `config/models.json`, `config/roles.json`, `config/central-companies.json`, `docs/operator-stack.md` (new), `docs/company-architecture.md`, `docs/flows/new-company-checklist.md`, `docs/governance/model-topology.md`, `docs/stack-standard.md`, `docs/known-issues.md`, `AGENTS.md`, `CONTEXT.md`, `SOURCE_MAP.md`, `README.md`, `standards/cc-paperclip-communication-protocol.md`, `scripts/validate-grok-profile.sh` (new), plus bootstrap/role pointers so they do not silently keep Claude/Codex as the hire path
 

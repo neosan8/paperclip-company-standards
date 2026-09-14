@@ -49,4 +49,4 @@ Giant-aicado operator lock lives in that repo (`studio/docs/flows/paperclip.md`)
 
 ## Still-valid doctrine
 
-CEO never executes. Reviewer is independent. Approval-wake first. Checkout before work; 409 means another owner — do not proceed. Backlog is invisible until flipped to `todo`. Idle is success when the queue is empty. One fact in one place. `latest` is not a model id.
+CEO remains idle of production execution and only orchestrates (locked Neo / Atakan 2026-09-14; source `roles/ceo/SOUL.md`). Heartbeat OFF is not that rule. Reviewer is independent. Approval-wake first. Checkout before work; 409 means another owner — do not proceed. Backlog is invisible until flipped to `todo`. Idle is success when the queue is empty. One fact in one place. `latest` is not a model id.
