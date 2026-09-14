@@ -88,10 +88,12 @@ Report format: see `SOUL.md` "What the CEO says when reporting to CC" section.
 
 ## Step 11 — Knowledge Keeper sync
 
-Check if Knowledge Keeper has pending decisions to capture (any closed issue this week that contains a decision or pattern worth preserving).
+If this company has no Knowledge Keeper (normal on the Grok 3-slot path), skip this step. Do not hire a Keeper from heartbeat.
+
+If a Keeper exists: check whether it has pending decisions to capture (any closed issue this week that contains a decision or pattern worth preserving).
 
 - If yes: create a Knowledge Keeper issue to capture the decision.
-- If the weekly delta to Knowledge central is overdue (more than 7 days since last send): create a Knowledge Keeper issue to prepare and send the delta.
+- If Knowledge-central ingest is in use and the weekly delta is overdue (more than 7 days since last send): create a Knowledge Keeper issue to prepare and send the delta. Do not recreate the 13-central layer to make this step possible.
 
 ## Step 12 — Heartbeat complete
 

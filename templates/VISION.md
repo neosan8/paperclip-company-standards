@@ -47,17 +47,17 @@ One sentence. What does Done look like for the current active sprint?
 
 ## 5. Org structure
 
-[REQUIRED] List the five agents currently configured for this company.
+[REQUIRED] List the agents currently configured for this company. Grok game companies require CEO, Worker, Reviewer. Researcher and Knowledge Keeper are optional.
 
 | Role | Agent handle | Status |
 |------|-------------|--------|
 | CEO | _handle_ | active / bootstrapping / missing |
 | Worker | _handle_ | active / bootstrapping / missing |
-| Researcher | _handle_ | active / bootstrapping / missing |
-| Knowledge Keeper | _handle_ | active / bootstrapping / missing |
 | Reviewer | _handle_ | active / bootstrapping / missing |
+| Researcher (optional) | _handle_ or N/A | active / bootstrapping / not hired |
+| Knowledge Keeper (optional) | _handle_ or N/A | active / bootstrapping / not hired |
 
-If any slot shows `missing`, opening a bootstrap issue is the CEO's first action.
+If a **required** slot shows `missing`, opening a bootstrap issue is the CEO's first action. Optional specialists showing `not hired` is correct on the Grok path.
 
 ---
 

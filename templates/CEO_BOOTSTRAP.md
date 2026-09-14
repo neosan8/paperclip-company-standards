@@ -10,14 +10,11 @@ When all items are checked, the company is bootstrapped and the first heartbeat 
 
 These are performed by CC when creating the company:
 
-- [ ] Company created in Paperclip with the correct prefix (see `../../config/central-companies.json` or game company naming convention).
-- [ ] Reasoning effort set to `high` on **every** agent via `adapterConfig` — `effort` for `claude_local`, `modelReasoningEffort` for `codex_local`. Host config files do not control Paperclip agents; verify each agent individually.
-- [ ] CEO agent slot configured with model `claude-opus-5`, adapter `claude_local`, auth `claude_ai_subscription_oauth`.
-- [ ] Worker agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, `dangerouslyBypassApprovalsAndSandbox: true`.
-- [ ] Researcher agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`.
-- [ ] Knowledge Keeper agent slot configured with model `claude-sonnet-4-6`, adapter `claude_local`, auth `claude_ai_subscription_oauth`. (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu)
-- [ ] Reviewer agent slot configured with model `gpt-5.6-sol`, adapter `codex_local`, auth `chatgpt_subscription_oauth`, purpose note: `review-only; never self-review`.
-- [ ] All five agent slots verified in Paperclip company config.
+- [ ] Company created in Paperclip as a **game company** (one per title). Do not create a new central. Operator path: `docs/operator-stack.md`.
+- [ ] CEO, Worker, Reviewer hired with the Cursor lock from `config/models.json` (model `auto` unless Neo pinned a concrete Cursor id; adapter `cursor` / `cursor-local` on Linux Grok Bot workers). API roles: `ceo` / `engineer` / `qa`.
+- [ ] Reviewer capabilities text includes `review-only; never self-review`.
+- [ ] Heartbeat OFF on all three. Researcher and Knowledge Keeper **not** hired unless already decided.
+- [ ] Three required slots verified. Do not require five.
 
 ---
 
@@ -38,7 +35,7 @@ Fill in all `[REQUIRED]` fields:
 - Mission (one sentence).
 - Target customer.
 - Sprint goal (for bootstrap: "Complete company setup and first issue delegation").
-- Org structure table with all five agent handles.
+- Org structure table with the three required agent handles (CEO, Worker, Reviewer). Optional specialists only if they exist.
 - CEO mandate.
 - Guiding principles (minimum 3).
 - Anti-patterns (minimum 3).
@@ -59,12 +56,10 @@ Commit: `ceo: create PROJECT-INVENTORY.md for <company-name> bootstrap (PREFIX-1
 Confirm each tool is installed and accessible for the company:
 
 - [ ] LLM Wiki / Obsidian: vault at `~/Docs/paperclipcompanies/_knowledge-base/` accessible.
-- [ ] gbrain: `gbrain query "test"` returns (no error).
-- [ ] gstack: `gstack --version` returns (no error).
-- [ ] graphify: `graphify status` returns (no error).
 - [ ] Karpathy discipline: in company AGENTS.md (copy the Karpathy section from `$STANDARDS_REPO/roles/_shared/CONTRIBUTING.md`).
+- [ ] Grok seats: do not block bootstrap on `gbrain` / `gstack` / `graphify`. Those are Claude-host tools (`docs/stack-standard.md`). If the vault path exists, record it; if not, continue.
 
-If any tool is missing: create a setup issue; do not proceed to Step 5 until all tools verified.
+If the vault path is required for this company and missing: create a setup issue. Do not hire five slots to fix a missing tool.
 
 ### Step 5 — Create company KB folder
 
@@ -94,13 +89,13 @@ Confirm output: `~/Docs/paperclipcompanies/<company-slug>/AGENTS.md` written. Se
 Create one Paperclip issue per remaining agent slot that needs activation:
 
 - `[bootstrap] Activate Worker agent for <company-name>` — assign to Worker
-- `[bootstrap] Activate Researcher agent for <company-name>` — assign to Researcher
-- `[bootstrap] Activate Knowledge Keeper agent for <company-name>` — assign to Knowledge Keeper
 - `[bootstrap] Activate Reviewer agent for <company-name>` — assign to Reviewer
 
-Each bootstrap issue has acceptance criteria: agent is running, has read its role pack, has confirmed tool access.
+Do not create Researcher or Knowledge Keeper bootstrap issues on Grok spawn.
 
-Flip all four issues to `todo`.
+Each bootstrap issue has acceptance criteria: agent is running, has read its role pack.
+
+Flip both issues to `todo`.
 
 ### Step 8 — Signal CC
 
@@ -108,8 +103,8 @@ Post a message to CC:
 ```
 <Company name> CEO bootstrap complete. VISION.md created. PROJECT-INVENTORY.md created.
 Tool stack verified: [list any gaps].
-Bootstrap issues created for Worker, Researcher, Knowledge Keeper, Reviewer.
-Ready to enable heartbeat.
+Bootstrap issues created for Worker and Reviewer.
+Heartbeat stays OFF until those issues are in todo and a wake is needed.
 ```
 
 ### Step 9 — First heartbeat
@@ -124,6 +119,6 @@ Run the first heartbeat following `../../roles/ceo/heartbeat.md`.
 - [ ] VISION.md exists in company root and all REQUIRED fields are filled.
 - [ ] PROJECT-INVENTORY.md exists in company root.
 - [ ] KB folder exists at correct vault path.
-- [ ] All five agent slots are active in Paperclip.
-- [ ] Four bootstrap issues are in `todo` status.
+- [ ] Three required agent slots are active in Paperclip (CEO, Worker, Reviewer).
+- [ ] Two bootstrap issues are in `todo` status.
 - [ ] `sync-bootstrap.sh` ran without errors.

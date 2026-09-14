@@ -75,6 +75,6 @@ git push origin v0.1.0
 
 ## Current version
 
-`v0.2.2` — latest tag on `main`. 13 central companies. Mandatory stack. **5** standard agents per company (CEO, Worker, Researcher, Knowledge Keeper, Reviewer — Reviewer became mandatory in v0.2.0). OAuth-only policy.
+Latest tag on `main` is still `v0.2.2`. `v0.3.0` is in CHANGELOG (Claude/Codex model pins) and is untagged.
 
-`v0.3.0` is in review (PR #11): model topology update and the reasoning-effort standard.
+**Next profile (Unreleased / Grok primary):** Grok Bot seats hire 3 required Cursor agents (CEO, Worker, Reviewer). Five-slot Claude/Codex and the 13-central layer are the Knowledge-central portfolio, not the spawn path. Machine-readable file versions: `config/models.json` and `config/roles.json` are `1.0.0`. See CHANGELOG Unreleased.

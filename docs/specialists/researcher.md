@@ -1,6 +1,8 @@
 # Researcher — Specialist Role
 
-Mandatory in every Paperclip company (central and game companies alike).
+**Optional** on the Grok Bot game-company path. Not a standing required slot. Hire only after the 3-slot Cursor company works and the CEO has a reason.
+
+Mandatory only in the legacy Knowledge-central five-slot portfolio.
 
 ---
 
@@ -8,9 +10,8 @@ Mandatory in every Paperclip company (central and game companies alike).
 
 | Field | Value |
 |-------|-------|
-| Model | `gpt-5.6-sol` |
-| Adapter | `codex_local` |
-| Auth | ChatGPT subscription OAuth |
+| Model | If hired by a Grok seat: `auto` on Cursor (`config/models.json` `optional_specialists`). Legacy portfolio: `legacy_five_slot`. |
+| Adapter | Cursor lock on the Grok path. `codex_local` only in the legacy portfolio. |
 | Heartbeat | OFF (on-demand only) |
 
 ---

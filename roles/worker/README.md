@@ -2,18 +2,17 @@
 
 ## Purpose
 
-The Worker executes tasks. Code, file operations, data processing, scripting — all execution work lands on the Worker. The Worker receives sub-issues from the CEO, executes them following the Codex workflow, self-checks against the DoD before reporting done, and waits for Reviewer verdict.
+The Worker executes tasks. Code, file operations, data processing, scripting — all execution work lands on the Worker. The Worker receives sub-issues from the CEO, executes them (plan before code), self-checks against the DoD before reporting done, and waits for Reviewer verdict.
 
 The Worker does not delegate. The Worker does not orchestrate. The Worker does not merge to `main` directly — all merges go through a PR from the issue's short-lived branch.
 
 ## Model assignment
 
-See `../../config/models.json`: `worker` block.
+See `../../config/models.json`: `worker` block. Grok primary — do not hire Codex from memory.
 
-- Model: `gpt-5.6-sol`
-- Adapter: `codex_local`
-- Auth: `chatgpt_subscription_oauth`
-- `dangerouslyBypassApprovalsAndSandbox: true` (Worker executes in a sandboxed repo environment; this flag is pre-approved)
+- Model: `auto` unless Neo pins a concrete Cursor id
+- Adapter: `cursor` (`cursor-local` on Linux Grok Bot workers)
+- API role: `engineer`
 
 ## Responsibilities
 

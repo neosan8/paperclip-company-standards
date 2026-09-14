@@ -1,6 +1,6 @@
 {
   "version": "0.2.0",
-  "description": "Required tools for every Paperclip company AND every human team Claude Code install. Checked by scripts/validate-stack.sh — the `probe` field is what that script runs.",
+  "description": "Required tools for Knowledge-central / human-team Claude Code installs. Not a Grok Bot seat spawn gate. Checked by scripts/validate-stack.sh — the `probe` field is what that script runs. Grok operator stack is docs/operator-stack.md.",
   "validator": "scripts/validate-stack.sh",
   "tools": [
     {

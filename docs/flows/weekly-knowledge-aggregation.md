@@ -2,6 +2,8 @@
 
 Playbook for the weekly CC-run (or designated subagent) process that pulls per-company KB deltas and merges them into the central Studio Wiki.
 
+**Grok Bot game companies:** skip this playbook until a Knowledge Keeper exists and Knowledge-central ingest is in use. Do not hire a Keeper solely to satisfy this weekly loop. Grok seats do not recreate the 13-central layer.
+
 ---
 
 ## Frequency

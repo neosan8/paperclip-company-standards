@@ -51,7 +51,7 @@ Never run a heartbeat loop when there are no issues in `todo` or `in-progress`. 
 
 ### 6. Closing issues without Reviewer verdict
 
-This is the most common failure mode. The issue feels done. The Worker says it is done. The CEO is in a hurry. The Reviewer step gets skipped. Then something broken ships, or Neosan finds a placeholder, or a link is dead. The Reviewer exists precisely to catch the things the Worker and CEO both missed. Skip it and the entire five-agent model collapses to three.
+This is the most common failure mode. The issue feels done. The Worker says it is done. The CEO is in a hurry. The Reviewer step gets skipped. Then something broken ships, or Neosan finds a placeholder, or a link is dead. The Reviewer exists precisely to catch the things the Worker and CEO both missed. Skip it and the company has no independent gate — CEO and Worker agreeing is not a Reviewer verdict.
 
 ---
 

@@ -1,6 +1,12 @@
 # Stack Standard
 
-Every Paperclip company and every human team Claude Code install must have the following tools configured and validated. No exceptions.
+**Grok Bot seats:** the operator stack is MCP + CLI, not this Claude-host tool list. Read `docs/operator-stack.md` first. Hosted GitHub Actions is not a spawn gate. `scripts/validate-stack.sh` is the Claude-host checker; a red result on a Grok worker does not block creating a 3-slot Cursor company.
+
+The tools below remain required for Knowledge-central / human-team Claude Code machines. They are not a Grok spawn checklist.
+
+---
+
+Every Knowledge-central Paperclip company and every human team Claude Code install must have the following tools configured and validated.
 
 ## Validate by running it, not by reading it
 
@@ -98,15 +104,17 @@ Four rules:
 
 ## Validation at company creation
 
-When creating a new company, after configuring all tools, the CEO's first issue must be:
+**Grok Bot game companies:** do not block spawn on this script. The first CEO issue is the 3-slot delegation loop in `flows/new-company-checklist.md`.
+
+**Knowledge-central / Claude-host companies:** after configuring all tools, the CEO's first issue must be:
 
 > "Run `scripts/validate-stack.sh` from the standards repo. Paste the full output. Every required check must pass; fix anything marked ❌ and re-run until exit code is 0."
 
-This issue must close as `ship it` before any production work begins in the company.
+This issue must close as `ship it` before any production work begins in that portfolio.
 
 Requiring the output — not a summary — is deliberate. "I validated the stack" is exactly the kind of claim that went unchecked for four months.
 
-See `flows/new-company-checklist.md` for the full atomic checklist.
+See `flows/new-company-checklist.md` for the Grok spawn checklist. The Claude-host path is the legacy appendix there.
 
 ## What the validator does not cover
 
@@ -114,5 +122,7 @@ Stated so nobody reads a green result as more than it is:
 
 - It checks that a tool **runs**, not that it is configured correctly or that its output is useful.
 - It does not verify MCP servers, connectors, or plugin health.
-- It does not check Paperclip agent configuration (`adapterConfig`, effort, heartbeat) — see `docs/governance/model-topology.md`.
+- It does not check Paperclip agent configuration (`adapterConfig`, model, heartbeat) — see `docs/governance/model-topology.md`.
+- It does not check the Grok primary profile. That is `scripts/validate-grok-profile.sh` (also run from the consistency workflow).
 - It runs on the machine it is invoked on. It says nothing about any other machine in the studio.
+- It is not a Grok Bot seat spawn gate.

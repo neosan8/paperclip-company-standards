@@ -1,9 +1,11 @@
 {
-  "version": "0.2.1",
-  "description": "13 central Paperclip companies (template/standards tier): 12 active, 1 archived (CRE). As of v0.2.0 every company has 5 canonical agent slots: CEO + Worker + Researcher + Knowledge Keeper + Reviewer. Live companies may carry additional specialist agents beyond these five — adoption and compliance work targets the canonical five only.",
+  "version": "0.3.0",
+  "description": "Registry of the 13-central Knowledge-central portfolio (template/standards tier): 12 active, 1 archived (CRE). This layer is legacy for Grok Bot seats. Grok Bot seats do not bootstrap, recreate, or route across these 13 companies. Historical five-slot note below applies to this portfolio only.",
+  "grok_bot_seats_bootstrap_this_layer": false,
+  "grok_bot_note": "Grok Bot seats create one game company per title with 3 required slots (CEO + Worker + Reviewer). They must not recreate the 13-central layer or adopt cross-company routing. This registry remains so Knowledge-central ownership is not erased.",
   "agent_slots_per_company": 5,
-  "agent_slot_note": "Every company must have exactly five CANONICAL agent slots: CEO, Worker, Researcher, Knowledge Keeper, Reviewer. Additional specialist agent records are permitted and are common in live companies (observed 6-16 records). Compliance and adoption work targets the canonical five only, resolved per company via a role -> agent ID inventory. See config/roles.json and docs/company-architecture.md.",
-  "_warning": "UUIDs and company status verified against a live Paperclip DB backup 2026-07-29. Knowledge (KNO) is active and must remain so — see the never-archived guard in docs/flows/new-company-checklist.md. Creatives (CRE) is archived by decision. Re-verify if companies are recreated or migrated.",
+  "agent_slot_note": "Knowledge-central portfolio only: five CANONICAL agent slots (CEO, Worker, Researcher, Knowledge Keeper, Reviewer). Not the Grok Bot spawn path. Grok game companies use 3 required slots — see config/roles.json. Additional specialist agent records are permitted in this portfolio (observed 6-16 records). Compliance work for this portfolio targets the canonical five only.",
+  "_warning": "UUIDs and company status verified against a live Paperclip DB backup 2026-07-29. Knowledge (KNO) is active and must remain so — see the never-archived guard in docs/flows/new-company-checklist.md. Creatives (CRE) is archived by decision. Re-verify if companies are recreated or migrated. Grok Bot seats still must not archive, recreate, or route through this layer.",
   "companies": [
     {
       "name": "Market",

@@ -1,36 +1,87 @@
 {
-  "version": "0.3.0",
-  "description": "Canonical model assignments per agent role across Paperclip companies.",
+  "version": "1.0.0",
+  "description": "Canonical model assignments. Primary profile is grok_bot_game: CEO, Worker, and Reviewer on Paperclip Cursor Local with model auto. Concrete model IDs beat aliases. Never use latest. Never invent unverified model strings. Neo may replace auto with a concrete Cursor model id. The legacy five-slot Claude/Codex assignments live under legacy_five_slot and are not used by Grok Bot seats.",
+  "primary_profile": "grok_bot_game",
+  "verified": {
+    "date": "2026-09-14",
+    "source": "https://docs.paperclip.ing/reference/adapters/cursor-local/",
+    "source_repo": "paperclipai/paperclip-docs"
+  },
   "ceo": {
-    "model": "claude-opus-5",
-    "adapter": "claude_local",
-    "auth": "claude_ai_subscription_oauth"
+    "model": "auto",
+    "adapter": "cursor",
+    "adapter_linux_grok_bot_worker": "cursor-local",
+    "note": "Paperclip adapterType is cursor (Cursor Local). On Linux Grok Bot workers use cursor-local. Model auto unless Neo pins a concrete Cursor id. Concrete ids beat aliases. latest is forbidden."
   },
   "worker": {
-    "model": "gpt-5.6-sol",
-    "adapter": "codex_local",
-    "auth": "chatgpt_subscription_oauth",
-    "dangerouslyBypassApprovalsAndSandbox": true
-  },
-  "knowledge_keeper": {
-    "model": "claude-sonnet-4-6",
-    "model_note": "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)",
-    "adapter": "claude_local",
-    "auth": "claude_ai_subscription_oauth"
-  },
-  "researcher": {
-    "model": "gpt-5.6-sol",
-    "adapter": "codex_local",
-    "auth": "chatgpt_subscription_oauth"
+    "model": "auto",
+    "adapter": "cursor",
+    "adapter_linux_grok_bot_worker": "cursor-local",
+    "note": "Same Cursor lock as CEO. Model auto unless Neo pins a concrete Cursor id."
   },
   "reviewer": {
-    "model": "gpt-5.6-sol",
-    "adapter": "codex_local",
-    "auth": "chatgpt_subscription_oauth",
+    "model": "auto",
+    "adapter": "cursor",
+    "adapter_linux_grok_bot_worker": "cursor-local",
     "purpose": "review-only; never self-review",
-    "self_review_prohibited": true
+    "self_review_prohibited": true,
+    "note": "Same Cursor lock as CEO. Independent quality gate. Never reviews own work."
+  },
+  "optional_specialists": {
+    "note": "Researcher and Knowledge Keeper are optional specialists for Grok-created game companies, not standing required slots. If hired, use the same Cursor lock unless Neo specifies otherwise.",
+    "researcher": {
+      "model": "auto",
+      "adapter": "cursor",
+      "adapter_linux_grok_bot_worker": "cursor-local",
+      "standing_slot": false
+    },
+    "knowledge_keeper": {
+      "model": "auto",
+      "adapter": "cursor",
+      "adapter_linux_grok_bot_worker": "cursor-local",
+      "standing_slot": false,
+      "model_note": "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)"
+    }
+  },
+  "legacy_five_slot": {
+    "status": "legacy_knowledge_central_portfolio",
+    "used_by_grok_bot_seats": false,
+    "note": "Historical Claude/Codex topology from the exhausted-subscription era. Kept so Knowledge-central ownership is not erased. Grok Bot seats must not recreate this topology or the 13-central layer.",
+    "ceo": {
+      "model": "claude-opus-5",
+      "adapter": "claude_local",
+      "auth": "claude_ai_subscription_oauth"
+    },
+    "worker": {
+      "model": "gpt-5.6-sol",
+      "adapter": "codex_local",
+      "auth": "chatgpt_subscription_oauth",
+      "dangerouslyBypassApprovalsAndSandbox": true
+    },
+    "knowledge_keeper": {
+      "model": "claude-sonnet-4-6",
+      "model_note": "latest takma adı kullanılmaz (geçersiz model id, PD'yi 5 hafta durdurdu)",
+      "adapter": "claude_local",
+      "auth": "claude_ai_subscription_oauth"
+    },
+    "researcher": {
+      "model": "gpt-5.6-sol",
+      "adapter": "codex_local",
+      "auth": "chatgpt_subscription_oauth"
+    },
+    "reviewer": {
+      "model": "gpt-5.6-sol",
+      "adapter": "codex_local",
+      "auth": "chatgpt_subscription_oauth",
+      "purpose": "review-only; never self-review",
+      "self_review_prohibited": true
+    }
   },
   "policy": {
+    "never_use_latest_alias": true,
+    "concrete_model_ids_beat_aliases": true,
+    "unverified_model_strings_forbidden": true,
+    "preferred_unspecified_model": "auto",
     "api_direct_use_forbidden": true,
     "exception": "embedding endpoints only"
   }

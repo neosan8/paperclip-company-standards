@@ -13,26 +13,27 @@ Flag ambiguities by opening an issue in the standards repo rather than resolving
 | **Giant Aicado** | AI-native mobile game studio. Pipeline: idea → GDD → HTML template → Unity build → ship. |
 | **Giant Avocado** | Human Unity dev + art team inside the studio (Dogukan, Burc, Osman). |
 | **Paperclip** | Agent orchestration platform. Provides company, issue, heartbeat, approval, and tool APIs. |
-| **Central company** | One of 13 permanent Paperclip companies that own template-level functions (Market, Dev, Art, Knowledge, etc.). Never deleted. |
-| **Game company** | One Paperclip company per active game title (e.g. Balloon Flow Studio). Consumes central company outputs. |
-| **CC** | Claude Code — the terminal CLI agent (@Claude_Noesan8x_bot). Coordinates and delegates; never executes heavy work itself. |
+| **Central company** | Legacy Knowledge-central portfolio: one of 13 standing companies (Market, Dev, Art, Knowledge, etc.). Grok Bot seats do not bootstrap this layer. |
+| **Game company** | One Paperclip company per active game title. Primary path for Grok Bot seats. |
+| **Grok Bot seat** | Board-deputy that creates/runs game companies. Talks only to the CEO. |
+| **CC** | Historical name for the board-deputy (Claude Code / Chief of Staff). On the Grok path the deputy is the Grok Bot seat. |
 | **Neosan** | @Neosan8_bot — OpenClaw CEO agent. Governance and publishing authority. |
 
 ---
 
-## The five agent roles
+## Agent roles
 
-Every Paperclip company — central and game — must contain exactly these five agent slots.
+Grok game companies require three slots. Researcher and Knowledge Keeper are optional specialists. The five-slot table is the Knowledge-central portfolio only.
 
-| Role | Purpose | Model |
-|------|---------|-------|
-| **CEO** | Orchestrates all work via sub-issues. Never executes directly. | claude-opus-5 |
-| **Worker** | Executes tasks: code, files, research tasks delegated by CEO. | gpt-5.6-sol / Codex OAuth |
-| **Researcher** | Sector scans, frontier patterns, gold-standard vetting. Hands to Knowledge Keeper. | gpt-5.6-sol / Codex OAuth |
-| **Knowledge Keeper** | Company-internal KB curation, decision capture, weekly delta to Knowledge central. | claude-sonnet-4-6 (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu) |
-| **Reviewer** | Independent quality gate. Reviews all deliverables before CEO reports done to CC. Never reviews own work. | gpt-5.6-sol / Codex OAuth |
+| Role | Required on Grok path? | Purpose | API role | Model (Grok primary) |
+|------|------------------------|---------|----------|----------------------|
+| **CEO** | yes | Orchestrates all work via sub-issues. Never executes directly. | `ceo` | `auto` on Cursor |
+| **Worker** | yes | Executes tasks: code, files, research tasks delegated by CEO. | `engineer` | `auto` on Cursor |
+| **Reviewer** | yes | Independent quality gate. Reviews all deliverables before CEO reports done to the deputy. Never reviews own work. | `qa` | `auto` on Cursor |
+| **Researcher** | no | Sector scans, frontier patterns, gold-standard vetting. | `researcher` | same Cursor lock if hired |
+| **Knowledge Keeper** | no | Company-internal KB curation. Weekly delta only if Knowledge-central ingest is in use. | `pm` | same Cursor lock if hired |
 
-See `../../config/models.json` for machine-readable assignments.
+See `../../config/models.json` for machine-readable assignments. `latest` is forbidden. Historical Claude/Codex ids are under `legacy_five_slot`.
 
 ---
 
@@ -51,7 +52,7 @@ See `../../config/models.json` for machine-readable assignments.
 | **review-gang** | Parallel multi-persona review pattern. Multiple Reviewer instances each check a different dimension. |
 | **Source of truth** | GitHub (approved branches only). Notion and Obsidian are secondary mirrors. Agents never push unverified work to `main`. |
 | **Sync ladder** | The promotion path for knowledge: company KB → weekly delta → Knowledge central → shared vault. |
-| **OAuth-only rule** | All Claude models auth via Claude.ai subscription. All GPT/Codex models auth via ChatGPT subscription. Direct API keys forbidden. |
+| **OAuth-only rule** | Legacy five-slot: Claude via Claude.ai OAuth, GPT/Codex via ChatGPT OAuth. Grok primary: Cursor Local. Direct API keys forbidden in both. |
 | **Sync bootstrap** | `standards/sync-bootstrap.sh` — merges _shared + per-role docs into company-scoped `~/Docs/paperclipcompanies/<company>/AGENTS.md`. Never touches CC's host CLAUDE.md. |
 
 ---
@@ -60,6 +61,6 @@ See `../../config/models.json` for machine-readable assignments.
 
 The following terms have been used inconsistently in prior docs. Use the definitions above; do not revert to old usage.
 
-1. **"Reviewer" vs "review"** — "Reviewer" (capital R) = the dedicated fifth agent slot. "review" (lowercase) = any act of checking work. The Reviewer agent runs autoreview; so does $codex-review (which is a worker self-check, not the Reviewer agent).
+1. **"Reviewer" vs "review"** — "Reviewer" (capital R) = the dedicated required quality-gate slot. "review" (lowercase) = any act of checking work. The Reviewer agent runs autoreview; `$codex-review` is a legacy Codex worker self-check, not the Reviewer agent.
 2. **"done" vs "Done"** — "done" used loosely = work is finished. "Done" (capital D) as in DoD = work has passed the Definition of Done checklist.
 3. **"worker" vs "Worker"** — "Worker" (capital W) = the second agent slot. "worker" (lowercase) = any non-CEO agent doing execution work (generic).

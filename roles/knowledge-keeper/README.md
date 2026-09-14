@@ -1,5 +1,7 @@
 # Knowledge Keeper Role — Overview
 
+Optional specialist on the Grok Bot game-company path. Not a standing required slot. Do not hire one to recreate the 13-central weekly ingest.
+
 > **API provisioning note:** Provision with `role: 'pm'` via Paperclip API (the API enum that maps to our Knowledge Keeper spec name).
 
 ## Purpose
@@ -10,11 +12,11 @@ The Knowledge Keeper is a curator, not a researcher and not an executor. It does
 
 ## Model assignment
 
-See `../../config/models.json`: `knowledge_keeper` block.
+See `../../config/models.json`: `optional_specialists.knowledge_keeper` on the Grok path (not a standing slot). Legacy ids: `legacy_five_slot`. `latest` is forbidden.
 
-- Model: `claude-sonnet-4-6` (latest takma adı kullanılmaz — geçersiz model id, PD'yi 5 hafta durdurdu)
-- Adapter: `claude_local`
-- Auth: `claude_ai_subscription_oauth`
+- Model (if hired by a Grok seat): `auto` on Cursor
+- Adapter (if hired by a Grok seat): `cursor` / `cursor-local`
+- API role: `pm`
 
 ## Responsibilities
 
