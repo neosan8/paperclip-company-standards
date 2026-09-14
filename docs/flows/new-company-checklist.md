@@ -45,8 +45,9 @@ Reference `config/models.json` and `config/roles.json` for model, adapter, and A
   - API role: `ceo`
   - Adapter / model: Cursor lock above
   - Heartbeat: OFF
-  - AGENTS.md / instructions: this standards repo URL, orchestrator-only rule, approval-wake, checkout/409, backlog-is-invisible-until-todo
+  - AGENTS.md / instructions: this standards repo URL; **idle of production / orchestrate-only** (locked Neo / Atakan 2026-09-14 — capabilities and instructions MUST forbid self-execution; heartbeat OFF is not this rule); approval-wake; checkout/409; backlog-is-invisible-until-todo
   - Run `standards/sync-bootstrap.sh --role=ceo --company=<slug>` if the company-scoped AGENTS.md is not yet written
+  - Confirm the hire text says the CEO remains idle of production execution and only orchestrates; Worker produces; Reviewer independently gates quality. Source: `roles/ceo/SOUL.md`.
 
 - [ ] Create **Worker**:
   - API role: `engineer`
@@ -71,7 +72,7 @@ MCP is CRUD only. For the following, use `npx paperclipai … --json`. Never `pn
 
 - [ ] `whoami` — you are acting as the board-deputy, not as a worker agent.
 - [ ] Budgets set before any wake (company and/or per-agent). A seat with no budget guard is not ready.
-- [ ] Heartbeat remains OFF. When work exists, flip the issue to `todo`, then wake the CEO via CLI. Idle is success when the queue is empty.
+- [ ] Heartbeat remains OFF. When work exists, flip the issue to `todo`, then wake the CEO via CLI to **orchestrate** (create Worker / Reviewer sub-issues). Idle of production work is the CEO behavioral rule even while awake; heartbeat OFF is only the wake-loop setting. Queue-empty idle (no wake loop) is success when there is no work.
 - [ ] Approvals via CLI (`approval` family), not the browser.
 - [ ] Checkout via CLI (`issue checkout`). HTTP 409 = another owner; do not proceed.
 - [ ] Secrets via CLI if an adapter env needs a secret ref. Do not paste secrets into MCP create payloads.
@@ -112,7 +113,8 @@ Grok seats do not change Knowledge company status. If a Grok-created company lat
 - [ ] All three use the Cursor lock and model `auto` (or Neo's pinned id).
 - [ ] API roles are `ceo` / `engineer` / `qa`.
 - [ ] Heartbeat OFF. First loop closed with a Reviewer `ship it`.
-- [ ] Board-deputy talked only to the CEO.
+- [ ] CEO capabilities / instructions forbid self-execution and state idle of production / orchestrate only. Heartbeat OFF alone does not satisfy this check.
+- [ ] Board-deputy talked only to the CEO. The CEO created sub-issues for Worker and Reviewer; the CEO did not produce the deliverable.
 - [ ] 13-central registry was not edited. No Claude/Codex seats were hired.
 
 Company is ready for production work.

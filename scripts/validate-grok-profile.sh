@@ -82,6 +82,35 @@ check_eq "central-companies.grok_bot_seats_bootstrap_this_layer" "$bootstrap" "f
 legacy_used=$(jq -r '.legacy_five_slot.used_by_grok_bot_seats | tostring' "$MODELS")
 check_eq "models.legacy_five_slot.used_by_grok_bot_seats" "$legacy_used" "false"
 
+ceo_idle=$(jq -r '.roles[] | select(.role=="ceo") | .idle_of_production_execution | tostring' "$ROLES")
+check_eq "roles.ceo.idle_of_production_execution" "$ceo_idle" "true"
+
+policy_idle=$(jq -r '.policy.ceo_idle_of_production_execution | tostring' "$ROLES")
+check_eq "roles.policy.ceo_idle_of_production_execution" "$policy_idle" "true"
+
+# Standing Neo / Atakan 2026-09-14 lock must stay on the Grok primary path.
+# Phrase is the load-bearing wording; heartbeat OFF is not a substitute.
+require_phrase() {
+  local file="$1" phrase="$2"
+  if grep -qF "$phrase" "$REPO_ROOT/$file"; then
+    ok "$file contains '$phrase'"
+  else
+    bad "$file missing required phrase" "$phrase"
+  fi
+}
+
+for f in \
+  roles/ceo/SOUL.md \
+  roles/ceo/README.md \
+  docs/company-architecture.md \
+  docs/flows/new-company-checklist.md \
+  standards/cc-paperclip-communication-protocol.md \
+  CONTEXT.md \
+  AGENTS.md
+do
+  require_phrase "$f" "idle of production"
+done
+
 printf '\ngeçti: %d · başarısız: %d\n' "$PASS" "$FAIL"
 if [ "$FAIL" -gt 0 ]; then
   exit 1

@@ -12,6 +12,7 @@ These are performed by CC when creating the company:
 
 - [ ] Company created in Paperclip as a **game company** (one per title). Do not create a new central. Operator path: `docs/operator-stack.md`.
 - [ ] CEO, Worker, Reviewer hired with the Cursor lock from `config/models.json` (model `auto` unless Neo pinned a concrete Cursor id; adapter `cursor` / `cursor-local` on Linux Grok Bot workers). API roles: `ceo` / `engineer` / `qa`.
+- [ ] CEO capabilities / instructions forbid self-execution and state **idle of production / orchestrate only** (locked Neo / Atakan 2026-09-14). Heartbeat OFF is not that rule.
 - [ ] Reviewer capabilities text includes `review-only; never self-review`.
 - [ ] Heartbeat OFF on all three. Researcher and Knowledge Keeper **not** hired unless already decided.
 - [ ] Three required slots verified. Do not require five.
@@ -20,7 +21,7 @@ These are performed by CC when creating the company:
 
 ## First-boot (CEO performs, in order)
 
-> Bootstrap exception: Steps 2 and 3 below require the CEO to create and commit files directly. This is the only situation where direct file writes are permitted for the CEO. After bootstrap is complete, all file operations must be delegated to Workers. See `../../roles/ceo/skills.md` delegation-guard section.
+> Bootstrap exception: Steps 2 and 3 below require the CEO to create and commit constitution files (`VISION.md`, `PROJECT-INVENTORY.md`) directly. This is the only situation where direct file writes are permitted for the CEO. It is not a license to produce game code, docs, or art. After Step 3, the locked Neo / Atakan 2026-09-14 rule applies: remain idle of production execution and only orchestrate. See `../../roles/ceo/SOUL.md` and `../../roles/ceo/skills.md` delegation-guard.
 
 ### Step 1 — Handle PAPERCLIP_APPROVAL_ID
 

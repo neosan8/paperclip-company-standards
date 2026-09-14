@@ -18,15 +18,15 @@ Recommended read order for any agent or developer picking up this repo.
 ## 3. Grok primary path (foundation)
 
 5. `docs/operator-stack.md` — MCP primary, CLI fallback, browser never default, docs.paperclip.ing
-6. `docs/company-architecture.md` — 3-slot Cursor game company first; 13-central / five-slot marked legacy
-7. `docs/flows/new-company-checklist.md` — MCP-first create/hire; CLI for wake/approvals/checkout/budgets
+6. `docs/company-architecture.md` — 3-slot Cursor game company first; CEO idle of production on that profile (Neo / Atakan 2026-09-14); 13-central / five-slot marked legacy
+7. `docs/flows/new-company-checklist.md` — MCP-first create/hire; CEO hire must forbid self-execution (heartbeat OFF is not that rule); CLI for wake/approvals/checkout/budgets
 8. `docs/governance/model-topology.md` — Cursor lock supersedes Claude/Codex for Grok-created companies
 9. `config/models.json` — canonical model assignments (primary + `legacy_five_slot`)
 10. `config/roles.json` — 3 required slots; optional specialists; API role mapping
 
 ## 4. Agent bootstrap configs
 
-11. `docs/ceo-bootstrap.md` — CEO behavioral contract; model/adapter from `config/models.json`
+11. `docs/ceo-bootstrap.md` — CEO behavioral contract (idle of production / orchestrate only); model/adapter from `config/models.json`
 12. `docs/worker-bootstrap.md` — Worker behavioral contract; model/adapter from `config/models.json`
 
 ## 5. Optional specialists (not Grok spawn)
@@ -49,7 +49,7 @@ Recommended read order for any agent or developer picking up this repo.
 19. `roles/_shared/CONTRIBUTING.md` — commit format, secrets rule, no-push-without-review
 20. `roles/_shared/DEFINITION-OF-DONE.md` — DoD checklist: Worker self-check + Reviewer verification
 21. `roles/_shared/PROJECT-INVENTORY.md` — template: CEO reads before delegating each heartbeat
-22. `roles/ceo/` — CEO role pack: README, skills, heartbeat (12-step), tools, SOUL, autoreview-invocation
+22. `roles/ceo/` — CEO role pack: README, skills, heartbeat (12-step), tools, SOUL (**idle of production / orchestrate only**, Neo / Atakan 2026-09-14; standing source), autoreview-invocation
 23. `roles/worker/` — Worker role pack: README, skills, heartbeat (Step 8 DoD mandatory), tools, durable-learning
 24. `roles/reviewer/` — Reviewer role pack: README, skills (autoreview + review-gang), review-pattern, verdict-format, tools
 25. `roles/researcher/` — optional specialist pack
@@ -58,14 +58,14 @@ Recommended read order for any agent or developer picking up this repo.
 ## 9. Templates
 
 27. `templates/VISION.md` — per-company constitution schema (CEO reads every heartbeat)
-28. `templates/CEO_BOOTSTRAP.md` — one-time per-company first-boot checklist
+28. `templates/CEO_BOOTSTRAP.md` — one-time per-company first-boot checklist; CEO hire must forbid self-execution
 
 ## 10. Standards
 
 29. `standards/reviewer-pattern.md` — end-to-end gate flow: worker done → reviewer → verdict → Done to deputy
 30. `standards/sync-bootstrap.sh` — idempotent merge to company-scoped AGENTS.md; never touches host CLAUDE.md
 31. `standards/approval-wake-protocol.md` — PAPERCLIP_APPROVAL_ID handling; checkout-before-work; 409 rule
-32. `standards/cc-paperclip-communication-protocol.md` — board-deputy-to-CEO-only; Grok Bot seat is the deputy
+32. `standards/cc-paperclip-communication-protocol.md` — board-deputy-to-CEO-only; deputy wakes CEO to orchestrate; CEO creates Worker/Reviewer sub-issues; Grok Bot seat is the deputy
 33. `standards/worker-skills-catalog.md` — cross-role index of all skills, sources, target roles
 34. `standards/parallel-work-isolation.md` — one worktree per concurrent worker; shared runtime state is CEO-owned; dependency waves with a concurrency cap. Sequential is the default
 

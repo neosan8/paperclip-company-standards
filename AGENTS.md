@@ -12,6 +12,8 @@ You are an agent making changes in the repo that **Grok Bot seats** (and the Kno
 
 **Primary audience:** a Grok Bot seat creating one 3-slot Cursor game company (CEO + Worker + Reviewer). The 13-central / five-slot material is legacy for that seat — findable, not a spawn instruction.
 
+**CEO idle lock (Neo / Atakan 2026-09-14):** every Grok Bot seat company keeps the CEO idle of production execution — orchestrate and distribute only; Worker produces; Reviewer independently gates quality. Heartbeat OFF is not that rule. Source: [`roles/ceo/SOUL.md`](./roles/ceo/SOUL.md).
+
 Treat these as **good defaults, not hard rules**. The person directing you can override anything here, and their intent wins.
 
 ## Read these two first

@@ -18,6 +18,8 @@ One company per active game title. Required seats:
 
 `reviewer_must_exist` remains true. No Grok-created game company is bootstrapped without an active Reviewer.
 
+**Locked Neo / Atakan 2026-09-14:** On this required 3-slot profile the CEO MUST remain idle of production execution and only orchestrate and distribute work. The CEO does not write or produce deliverables. Worker produces. Reviewer independently gates quality. Heartbeat OFF is not this rule. Source: `roles/ceo/SOUL.md`.
+
 Optional specialists (hire only when the CEO has a reason, not to recreate five-slot doctrine):
 
 | Agent | Role | API role | Standing slot? |

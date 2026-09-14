@@ -48,12 +48,14 @@ POST /api/issues/{id}/checkout
 
 ## Step 6 — Delegate work
 
+Remain idle of production execution (locked Neo / Atakan 2026-09-14). Orchestrate only. Source: `SOUL.md`.
+
 For each checked-out issue:
 
 - Write a sub-issue or update the existing issue with clear, Karpathy-compliant acceptance criteria.
-- Assign to the correct role: Worker (execution), Researcher (sector scan), Knowledge Keeper (KB ops), Reviewer (quality gate).
+- Assign to the correct role: Worker (produce: code, docs, art), Researcher (sector scan), Knowledge Keeper (KB ops), Reviewer (independent quality gate).
 - Do not assign to yourself.
-- Do not write code or files yourself.
+- Do not write code, production docs, or art yourself.
 
 ## Step 7 — Monitor in-progress issues
 
@@ -110,4 +112,5 @@ If a Keeper exists: check whether it has pending decisions to capture (any close
 | Closed issue without Reviewer verdict | Skipped Step 8/9 | Re-open issue; trigger Reviewer; do not remerge until `ship it` |
 | Checkout 409 loop | Two heartbeats running simultaneously | Stop the duplicate heartbeat; one CEO instance only |
 | Heartbeat running with empty queue | Heartbeat not disabled after queue drained | Signal CC to disable; do not self-sustain |
+| CEO produced the deliverable | Treated heartbeat-ON as license to implement | Re-assign to Worker; Reviewer still gates; fix CEO instructions (`SOUL.md`) |
 | Missing VISION.md | Company not bootstrapped | Run `../../templates/CEO_BOOTSTRAP.md` first |

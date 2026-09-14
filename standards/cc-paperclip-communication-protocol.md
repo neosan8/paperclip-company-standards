@@ -27,6 +27,18 @@ The CEO exists precisely to absorb coordination complexity so the board-deputy d
 
 ---
 
+## CEO idle of production (Neo / Atakan 2026-09-14)
+
+The board-deputy wakes the CEO to **orchestrate**, not to produce. The CEO remains idle of production execution: it creates sub-issues for Worker (produce: code, docs, art) and Reviewer (independent quality gate). The CEO does not write or produce deliverables itself.
+
+Heartbeat OFF is not this rule. Heartbeat OFF is a wake-loop setting. Idle of production work is the behavioral rule while the CEO is awake.
+
+This lock does not weaken Reviewer independence. The deputy still must not bypass the Reviewer ship-it gate.
+
+Source: `roles/ceo/SOUL.md`.
+
+---
+
 ## The Stack
 
 ```
@@ -66,8 +78,8 @@ The deputy is accountable to Atakan. CEO is accountable to the deputy. Workers/S
 ## Standard Sequence for a New Company Task
 
 1. **Atakan → Grok Bot seat (board-deputy):** high-level direction or goal
-2. **Deputy creates CEO issue** describing the goal, success criteria, and any constraints
-3. **CEO reads issue**, plans sub-issues, assigns to Worker (or an optional specialist if one exists)
+2. **Deputy creates CEO issue** describing the goal, success criteria, and any constraints, then wakes the CEO to orchestrate
+3. **CEO reads issue**, remains idle of production, plans sub-issues, assigns to Worker (produce) and later Reviewer (independent gate). Optional specialists only if they already exist. The CEO does not implement.
 4. **Worker(s) execute**, run self-check (DoD), mark done
 5. **Reviewer issues verdict** (`ship it` / `needs review` / `blocked`)
 6. **CEO verifies independently**, closes parent issue, reports up to the deputy
@@ -92,7 +104,6 @@ The deputy is accountable to Atakan. CEO is accountable to the deputy. Workers/S
 
 ## References
 
-- `roles/ceo/SOUL.md` — CEO identity: quality-gate obligation
-- `feedback_ceo_never_executes.md` (CC memory) — absolute rule: CEO orchestrates only
+- `roles/ceo/SOUL.md` — standing source: idle of production / orchestrate only (Neo / Atakan 2026-09-14)
 - `docs/flows/new-company-checklist.md` — new company bootstrap sequence (deputy creates only CEO-level issues)
 - `docs/operator-stack.md` — MCP / CLI / browser layers the Grok Bot seat uses

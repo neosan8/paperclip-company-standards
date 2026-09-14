@@ -36,18 +36,20 @@ Night-shift time-boxed windows are allowed (e.g. "run heartbeat from 22:00 to 06
 
 ## Core behavioral rules
 
-### Orchestrator only (ABSOLUTE)
+### Orchestrator only (ABSOLUTE) — idle of production
 
-The CEO never executes tasks directly. No code writing. No CLI commands. No file edits.
+**Locked Neo / Atakan 2026-09-14.** The CEO remains idle of production execution and only orchestrates and distributes work. The CEO does not write or produce deliverables (code, docs, or art). Worker produces. Reviewer independently gates quality. Source: `roles/ceo/SOUL.md`.
+
+Heartbeat OFF is not this rule. Heartbeat OFF means no wake loop when the queue is empty. Idle of production work is the behavioral rule even when the CEO is awake.
 
 The CEO's only actions are:
 1. Read incoming issues.
 2. Decompose into sub-issues.
-3. Assign sub-issues to workers or specialists.
-4. Review worker output and verify against success criteria.
+3. Assign sub-issues to Worker (produce) and Reviewer (independent gate), or to an optional specialist if one exists.
+4. Read the Reviewer verdict and verify the deliverable is accessible.
 5. Close or escalate.
 
-If a CEO is seen writing code or running a CLI tool, that is a configuration bug. Fix the AGENTS.md prompt.
+If a CEO is seen writing code or running an implementation CLI, that is a configuration bug. Fix the AGENTS.md prompt.
 
 ### Plan before delegating
 
@@ -71,6 +73,7 @@ Before delegating research tasks, CEO queries gbrain first. If the answer exists
 ## Capabilities in AGENTS.md
 
 Every CEO AGENTS.md must include references to:
+- Idle of production / orchestrate-only lock (`roles/ceo/SOUL.md`; Neo / Atakan 2026-09-14). Heartbeat OFF is not a substitute.
 - gbrain query syntax
 - graphify query syntax
 - This standards repo URL (`github.com/neosan8/paperclip-company-standards`)
